@@ -1,206 +1,298 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ninety Nine</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ninety Nine</title>
 
-  <!-- PWA (preparado para futuro) -->
-  <meta name="theme-color" content="#f5c400" />
+<meta name="theme-color" content="#f5c400">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-    body {
-      background: #f5c400;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+body {
+  background: #f5c400;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+}
 
-    /* CONTENEDOR GENERAL */
-    .screen {
-      display: none;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+/* ===== SCREENS ===== */
+.screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
 
-    .active {
-      display: flex;
-    }
+.active {
+  display: flex;
+}
 
-    /* LOGIN */
-    #login h1 {
-      font-size: 48px;
-      font-weight: bold;
-      color: black;
-      margin-bottom: 10px;
-    }
+/* ===== GO ===== */
+#goScreen {
+  justify-content: center;
+  align-items: center;
+}
 
-    #login p {
-      font-size: 18px;
-      margin-bottom: 30px;
-      color: black;
-    }
+.go-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: white;
+  color: #f5c400;
+  font-size: 48px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 1.5s infinite;
+}
 
-    .login-btn {
-      width: 260px;
-      padding: 14px;
-      margin: 8px 0;
-      border-radius: 30px;
-      border: 2px solid white;
-      background: transparent;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 
-    /* JUEGO */
-    #game {
-      width: 100%;
-      height: 100%;
-      justify-content: space-between;
-    }
+/* ===== AD ===== */
+#adScreen {
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
 
-    #top {
-      margin-top: 40px;
-      text-align: center;
-      color: black;
-    }
+.ad-box {
+  background: white;
+  color: #f5c400;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 24px;
+}
 
-    #time {
-      font-size: 36px;
-      font-weight: bold;
-    }
+/* ===== GAME ===== */
+#game {
+  flex-direction: column;
+}
 
-    #info {
-      margin-top: 10px;
-      font-size: 18px;
-    }
+#top {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    #play {
-      display: flex;
-      width: 100%;
-      justify-content: space-around;
-      margin-bottom: 60px;
-    }
+#time {
+  font-size: 36px;
+}
 
-    .button {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 5px solid white;
-      font-size: 80px;
-      font-weight: bold;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
+#play {
+  flex: 1;
+  display: flex;
+}
 
-    #winner {
-      font-size: 32px;
-      font-weight: bold;
-      color: black;
-      margin-bottom: 30px;
-      display: none;
-    }
-  </style>
+.side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 5px solid white;
+  font-size: 80px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== WINNER ===== */
+#winner {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+#winnerText {
+  font-size: 42px;
+  font-weight: bold;
+  animation: pop 0.4s ease;
+}
+
+#finalResult {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== CONFETTI ===== */
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOGIN -->
-  <div id="login" class="screen active">
-    <h1>99% Ninety Nine</h1>
-    <p>El 99% de las ganancias vuelve a los usuarios</p>
+<!-- GO -->
+<div id="goScreen" class="screen active">
+  <div class="go-circle" onclick="startAd()">GO!</div>
+</div>
 
-    <button class="login-btn" onclick="login()">Google</button>
-    <button class="login-btn" onclick="login()">Apple</button>
-    <button class="login-btn" onclick="login()">Facebook</button>
-    <button class="login-btn" onclick="login()">Discord</button>
+<!-- AD -->
+<div id="adScreen" class="screen">
+  <div class="ad-box">
+    Publicidad<br>
+    <small>Comienza en <span id="adTime">5</span>s</small>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="game" class="screen">
+  <div id="top">
+    <div id="time">Tiempo: 15</div>
   </div>
 
-  <!-- GAME -->
-  <div id="game" class="screen">
-    <div id="top">
-      <div id="time">Tiempo: 15</div>
-      <div id="info">O 0% | X 0%</div>
-    </div>
-
-    <div id="play">
+  <div id="play">
+    <div class="side">
       <div class="button" onclick="vote('O')">O</div>
+    </div>
+    <div class="side">
       <div class="button" onclick="vote('X')">X</div>
     </div>
-
-    <div id="winner"></div>
   </div>
 
-  <script>
-    let time = 15;
-    let o = 0;
-    let x = 0;
-    let timer;
+  <div id="winner">
+    <div id="winnerText">WINNER</div>
+    <div id="finalResult"></div>
+  </div>
+</div>
 
-    function login() {
-      document.getElementById("login").classList.remove("active");
-      document.getElementById("game").classList.add("active");
-      startRound();
+<canvas id="confetti"></canvas>
+
+<script>
+/* ===== AD ===== */
+let adTime = 5;
+let adTimer;
+
+function startAd() {
+  document.getElementById("goScreen").classList.remove("active");
+  document.getElementById("adScreen").classList.add("active");
+  adTime = 5;
+  document.getElementById("adTime").textContent = adTime;
+
+  adTimer = setInterval(() => {
+    adTime--;
+    document.getElementById("adTime").textContent = adTime;
+    if (adTime === 0) {
+      clearInterval(adTimer);
+      startGame();
     }
+  }, 1000);
+}
 
-    function startRound() {
-      time = 15;
-      o = 0;
-      x = 0;
-      updateInfo();
-      document.getElementById("winner").style.display = "none";
+/* ===== GAME ===== */
+let time = 15;
+let o = 0;
+let x = 0;
+let timer;
 
-      timer = setInterval(() => {
-        time--;
-        document.getElementById("time").textContent = "Tiempo: " + time;
-        if (time === 0) endRound();
-      }, 1000);
-    }
+function startGame() {
+  document.getElementById("adScreen").classList.remove("active");
+  document.getElementById("game").classList.add("active");
+  startRound();
+}
 
-    function vote(v) {
-      if (v === "O") o++;
-      else x++;
-      updateInfo();
-    }
+function startRound() {
+  time = 15;
+  o = 0;
+  x = 0;
+  timer = setInterval(() => {
+    time--;
+    document.getElementById("time").textContent = "Tiempo: " + time;
+    if (time === 0) endRound();
+  }, 1000);
+}
 
-    function updateInfo() {
-      const total = o + x;
-      if (total === 0) {
-        document.getElementById("info").textContent = "O 0% | X 0%";
-        return;
-      }
-      const oPct = Math.round((o / total) * 100);
-      const xPct = 100 - oPct;
-      document.getElementById("info").textContent = `O ${oPct}% | X ${xPct}%`;
-    }
+function vote(v) {
+  if (v === "O") o++;
+  else x++;
+}
 
-    function endRound() {
-      clearInterval(timer);
-      const total = o + x;
-      if (total === 0) return;
+/* ===== END ===== */
+function endRound() {
+  clearInterval(timer);
+  const total = o + x || 1;
+  const oPct = Math.round((o / total) * 100);
+  const xPct = 100 - oPct;
 
-      const winner = o < x ? "O" : "X";
-      const winnerDiv = document.getElementById("winner");
-      winnerDiv.textContent = "Gana " + winner;
-      winnerDiv.style.display = "block";
-    }
-  </script>
+  document.getElementById("finalResult").textContent =
+    `O ${oPct}% | X ${xPct}%`;
+
+  document.getElementById("winner").style.display = "block";
+  startConfetti();
+}
+
+/* ===== CONFETTI ===== */
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let confettis = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function startConfetti() {
+  confettis = [];
+  for (let i = 0; i < 120; i++) {
+    confettis.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      r: Math.random() * 6 + 4,
+      d: Math.random() * 4 + 2,
+      color: `hsl(${Math.random() * 360},100%,50%)`
+    });
+  }
+  drawConfetti();
+}
+
+function drawConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confettis.forEach(c => {
+    ctx.beginPath();
+    ctx.fillStyle = c.color;
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fill();
+    c.y += c.d;
+    if (c.y < canvas.height) requestAnimationFrame(drawConfetti);
+  });
+}
+</script>
 
 </body>
 </html>
