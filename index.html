@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ninety Nine</title>
 
-<meta name="theme-color" content="#f5c400">
-
 <style>
 * {
   margin: 0;
@@ -19,7 +17,9 @@ body {
   background: #f5c400;
   color: white;
   height: 100vh;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ===== SCREENS ===== */
@@ -27,6 +27,9 @@ body {
   display: none;
   width: 100%;
   height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .active {
@@ -34,122 +37,89 @@ body {
 }
 
 /* ===== GO ===== */
-#goScreen {
-  justify-content: center;
-  align-items: center;
-}
-
-.go-circle {
-  width: 180px;
-  height: 180px;
+#goBtn {
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: white;
-  color: #f5c400;
-  font-size: 48px;
-  font-weight: bold;
+  border: 6px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
 }
 
 /* ===== AD ===== */
-#adScreen {
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-
-.ad-box {
-  background: white;
-  color: #f5c400;
-  padding: 40px;
-  border-radius: 20px;
+#ad {
+  font-size: 28px;
   text-align: center;
-  font-size: 24px;
 }
 
 /* ===== GAME ===== */
-#game {
-  flex-direction: column;
-}
-
 #top {
-  height: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 #time {
   font-size: 36px;
 }
 
-#play {
-  flex: 1;
-  display: flex;
-}
-
-.side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  border: 5px solid white;
-  font-size: 80px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ===== WINNER ===== */
-#winner {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  text-align: center;
-  display: none;
-}
-
-#winnerText {
-  font-size: 42px;
-  font-weight: bold;
-  animation: pop 0.4s ease;
-}
-
-#finalResult {
-  font-size: 22px;
+#info {
   margin-top: 10px;
+  font-size: 20px;
 }
 
-@keyframes pop {
-  0% { transform: scale(0.6); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+#play {
+  display: flex;
+  gap: 40px;
 }
 
-/* ===== CONFETTI ===== */
-#confetti {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 999;
+/* ===== BUTTONS ===== */
+.choice {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 6px solid white;
+  font-size: 72px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.choice.active {
+  opacity: 1;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Perfect circle O */
+#btnO {
+  border-radius: 50%;
+}
+
+/* ===== RESULT ===== */
+#winner {
+  margin-top: 30px;
+  font-size: 32px;
+  text-align: center;
+  position: relative;
+}
+
+/* Confetti (local) */
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(40px); opacity: 0; }
 }
 </style>
 </head>
@@ -157,78 +127,63 @@ body {
 <body>
 
 <!-- GO -->
-<div id="goScreen" class="screen active">
-  <div class="go-circle" onclick="startAd()">GO!</div>
+<div id="go" class="screen active">
+  <div id="goBtn" onclick="showAd()">GO!</div>
 </div>
 
 <!-- AD -->
 <div id="adScreen" class="screen">
-  <div class="ad-box">
-    Publicidad<br>
-    <small>Comienza en <span id="adTime">5</span>s</small>
-  </div>
+  <div id="ad">Publicidad<br><br>⏳ Esperá 5 segundos...</div>
 </div>
 
 <!-- GAME -->
 <div id="game" class="screen">
   <div id="top">
     <div id="time">Tiempo: 15</div>
+    <div id="info">O 0% | X 0%</div>
   </div>
 
   <div id="play">
-    <div class="side">
-      <div class="button" onclick="vote('O')">O</div>
-    </div>
-    <div class="side">
-      <div class="button" onclick="vote('X')">X</div>
-    </div>
+    <div id="btnO" class="choice" onclick="vote('O')">○</div>
+    <div id="btnX" class="choice" onclick="vote('X')">X</div>
   </div>
 
-  <div id="winner">
-    <div id="winnerText">WINNER</div>
-    <div id="finalResult"></div>
-  </div>
+  <div id="winner"></div>
 </div>
 
-<canvas id="confetti"></canvas>
-
 <script>
-/* ===== AD ===== */
-let adTime = 5;
-let adTimer;
-
-function startAd() {
-  document.getElementById("goScreen").classList.remove("active");
-  document.getElementById("adScreen").classList.add("active");
-  adTime = 5;
-  document.getElementById("adTime").textContent = adTime;
-
-  adTimer = setInterval(() => {
-    adTime--;
-    document.getElementById("adTime").textContent = adTime;
-    if (adTime === 0) {
-      clearInterval(adTimer);
-      startGame();
-    }
-  }, 1000);
-}
-
-/* ===== GAME ===== */
 let time = 15;
 let o = 0;
 let x = 0;
 let timer;
+let userVote = null;
+
+/* ===== FLOW ===== */
+function showAd() {
+  switchScreen("go", "adScreen");
+  setTimeout(startGame, 5000);
+}
 
 function startGame() {
-  document.getElementById("adScreen").classList.remove("active");
-  document.getElementById("game").classList.add("active");
+  switchScreen("adScreen", "game");
   startRound();
 }
 
+function switchScreen(hide, show) {
+  document.getElementById(hide).classList.remove("active");
+  document.getElementById(show).classList.add("active");
+}
+
+/* ===== GAME ===== */
 function startRound() {
   time = 15;
   o = 0;
   x = 0;
+  userVote = null;
+  document.getElementById("winner").innerHTML = "";
+  document.getElementById("btnO").classList.remove("active");
+  document.getElementById("btnX").classList.remove("active");
+
   timer = setInterval(() => {
     time--;
     document.getElementById("time").textContent = "Tiempo: " + time;
@@ -237,60 +192,62 @@ function startRound() {
 }
 
 function vote(v) {
+  if (time <= 0) return;
+  if (userVote === v) return;
+
+  if (userVote === "O") o--;
+  if (userVote === "X") x--;
+
   if (v === "O") o++;
-  else x++;
+  if (v === "X") x++;
+
+  userVote = v;
+
+  document.getElementById("btnO").classList.remove("active");
+  document.getElementById("btnX").classList.remove("active");
+
+  document.getElementById(v === "O" ? "btnO" : "btnX").classList.add("active");
+
+  updateInfo();
 }
 
-/* ===== END ===== */
-function endRound() {
-  clearInterval(timer);
-  const total = o + x || 1;
+function updateInfo() {
+  const total = o + x;
+  if (total === 0) return;
   const oPct = Math.round((o / total) * 100);
   const xPct = 100 - oPct;
-
-  document.getElementById("finalResult").textContent =
-    `O ${oPct}% | X ${xPct}%`;
-
-  document.getElementById("winner").style.display = "block";
-  startConfetti();
+  document.getElementById("info").textContent = `O ${oPct}% | X ${xPct}%`;
 }
 
-/* ===== CONFETTI ===== */
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-let confettis = [];
+function endRound() {
+  clearInterval(timer);
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const total = o + x;
+  if (total === 0) return;
+
+  const oPct = o / total;
+  const xPct = x / total;
+
+  const winner = oPct < xPct ? "O" : "X";
+  const pct = Math.round(Math.min(oPct, xPct) * 100);
+
+  document.getElementById("winner").innerHTML =
+    `WINNER<br>${winner}<br>${pct}%`;
+
+  spawnConfetti();
 }
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
 
-function startConfetti() {
-  confettis = [];
-  for (let i = 0; i < 120; i++) {
-    confettis.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * -canvas.height,
-      r: Math.random() * 6 + 4,
-      d: Math.random() * 4 + 2,
-      color: `hsl(${Math.random() * 360},100%,50%)`
-    });
+/* ===== CONFETTI LOCAL ===== */
+function spawnConfetti() {
+  const w = document.getElementById("winner");
+  for (let i = 0; i < 20; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "%";
+    c.style.top = "-10px";
+    w.appendChild(c);
+    setTimeout(() => c.remove(), 1000);
   }
-  drawConfetti();
-}
-
-function drawConfetti() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  confettis.forEach(c => {
-    ctx.beginPath();
-    ctx.fillStyle = c.color;
-    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
-    ctx.fill();
-    c.y += c.d;
-    if (c.y < canvas.height) requestAnimationFrame(drawConfetti);
-  });
 }
 </script>
 
