@@ -1,262 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ninety-Nine</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ninety-Nine</title>
 
-  <!-- Inter font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --yellow: #f5c400;
-      --yellow-soft: #ffd84d;
-      --black: #111;
-      --white: #fff;
-      --gray: rgba(0,0,0,0.35);
-    }
+<style>
+:root {
+  --yellow: #f2c400;
+  --white: #ffffff;
+  --black: #000000;
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: var(--yellow);
-      color: var(--black);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
+body {
+  margin: 0;
+  background: var(--yellow);
+  color: var(--black);
+  text-align: center;
+}
 
-    .app {
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-      position: relative;
-    }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-weight: 800;
+}
 
-    /* Top bar */
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
+main {
+  padding: 30px 20px;
+}
 
-    .brand {
-      font-size: 18px;
-    }
+/* GO SCREEN */
+#goScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
 
-    .menu {
-      font-size: 22px;
-      cursor: pointer;
-    }
+.go-btn {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  color: var(--white);
+  font-size: 40px;
+  font-weight: 800;
+  background: transparent;
+  cursor: pointer;
+}
 
-    /* GO screen */
-    .go-screen {
-      display: flex;
-      justify-content: center;
-      margin: 60px 0;
-    }
+/* AD */
+#adScreen {
+  display: none;
+  font-size: 24px;
+  font-weight: 600;
+}
 
-    .go-circle {
-      width: 160px;
-      height: 160px;
-      border: 4px solid var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-size: 42px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+/* GAME */
+#gameScreen {
+  display: none;
+}
 
-    /* Game */
-    .game {
-      display: none;
-      text-align: center;
-    }
+#timer {
+  font-size: 48px;
+  font-weight: 800;
+}
 
-    .timer {
-      font-size: 32px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
+.subtitle {
+  margin-top: 8px;
+  font-size: 16px;
+}
 
-    .percentages {
-      font-size: 14px;
-      margin-bottom: 30px;
-    }
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 360px;
+  margin: 30px auto;
+}
 
-    .numbers {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-bottom: 30px;
-    }
+.number {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-    .num {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 3px solid var(--white);
-      background: transparent;
-      font-size: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      color: var(--black);
-    }
+.number.selected {
+  background: var(--white);
+  color: var(--black);
+}
 
-    .num.active {
-      background: var(--white);
-      color: var(--black);
-    }
+/* RESULT */
+#result {
+  display: none;
+  margin-top: 30px;
+}
 
-    /* Winner */
-    .winner {
-      display: none;
-      margin-top: 30px;
-    }
+#winner {
+  font-size: 28px;
+  font-weight: 800;
+}
 
-    .winner h2 {
-      margin: 0;
-      font-size: 28px;
-    }
+.arrow {
+  font-size: 32px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-    .winner p {
-      margin: 6px 0;
-      font-size: 16px;
-    }
-
-    /* Arrow */
-    .arrow {
-      margin-top: 20px;
-      font-size: 26px;
-      cursor: pointer;
-    }
-
-    .details {
-      display: none;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-  </style>
+#details {
+  display: none;
+  margin-top: 20px;
+}
+</style>
 </head>
+
 <body>
 
-<div class="app">
+<header>
+  <div>Ninety-Nine</div>
+  <div>⋮</div>
+</header>
 
-  <div class="top">
-    <div class="brand">Ninety-Nine</div>
-    <div class="menu">⋮</div>
-  </div>
+<main>
 
   <!-- GO -->
-  <div class="go-screen" id="goScreen">
-    <div class="go-circle" id="goBtn">GO!</div>
+  <div id="goScreen">
+    <button class="go-btn" onclick="startAd()">GO!</button>
+  </div>
+
+  <!-- AD -->
+  <div id="adScreen">
+    Advertisement<br>
+    <span id="adTimer">5</span>
   </div>
 
   <!-- GAME -->
-  <div class="game" id="game">
-    <div class="timer">Time: <span id="time">10</span></div>
-    <div class="percentages" id="percents">0–9 voting…</div>
+  <div id="gameScreen">
+    <div id="timer">10</div>
+    <div class="subtitle">0–9 voting…</div>
 
     <div class="numbers" id="numbers"></div>
-
-    <div class="winner" id="winner">
-      <h2>WINNER</h2>
-      <p id="winnerNum"></p>
-      <p id="winnerPct"></p>
-
-      <div class="arrow" id="toggleDetails">↓</div>
-      <div class="details" id="details"></div>
-    </div>
   </div>
 
-</div>
+  <!-- RESULT -->
+  <div id="result">
+    <div id="winner">WINNER</div>
+    <div class="arrow" onclick="toggleDetails()">⬇️</div>
+    <div id="details"></div>
+  </div>
+
+</main>
 
 <script>
-  const goBtn = document.getElementById('goBtn');
-  const goScreen = document.getElementById('goScreen');
-  const game = document.getElementById('game');
-  const timeEl = document.getElementById('time');
-  const numbersEl = document.getElementById('numbers');
-  const winnerEl = document.getElementById('winner');
-  const winnerNum = document.getElementById('winnerNum');
-  const winnerPct = document.getElementById('winnerPct');
-  const details = document.getElementById('details');
-  const toggleDetails = document.getElementById('toggleDetails');
+let adTime = 5;
+let round = 1;
+let time = 10;
+let selected = null;
+let votes = Array(10).fill(0);
 
-  let selected = null;
-  let time = 10;
-  let timer;
+const goScreen = document.getElementById("goScreen");
+const adScreen = document.getElementById("adScreen");
+const gameScreen = document.getElementById("gameScreen");
+const result = document.getElementById("result");
+const timerEl = document.getElementById("timer");
+const numbersEl = document.getElementById("numbers");
 
-  // Create numbers
+function startAd() {
+  goScreen.style.display = "none";
+  adScreen.style.display = "block";
+  const adInterval = setInterval(() => {
+    adTime--;
+    document.getElementById("adTimer").innerText = adTime;
+    if (adTime === 0) {
+      clearInterval(adInterval);
+      adScreen.style.display = "none";
+      startGame();
+    }
+  }, 1000);
+}
+
+function startGame() {
+  gameScreen.style.display = "block";
+  createNumbers();
+  startTimer();
+}
+
+function createNumbers() {
+  numbersEl.innerHTML = "";
   for (let i = 0; i < 10; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'num';
-    btn.textContent = i;
-    btn.onclick = () => {
-      document.querySelectorAll('.num').forEach(n => n.classList.remove('active'));
-      if (selected === i) {
-        selected = null;
-      } else {
-        selected = i;
-        btn.classList.add('active');
-      }
-    };
-    numbersEl.appendChild(btn);
+    const div = document.createElement("div");
+    div.className = "number";
+    div.innerText = i;
+    div.onclick = () => selectNumber(i, div);
+    numbersEl.appendChild(div);
   }
+}
 
-  goBtn.onclick = () => {
-    goScreen.style.display = 'none';
-    game.style.display = 'block';
+function selectNumber(num, el) {
+  document.querySelectorAll(".number").forEach(n => n.classList.remove("selected"));
+  el.classList.add("selected");
+  selected = num;
+}
+
+function startTimer() {
+  timerEl.innerText = time;
+  const interval = setInterval(() => {
+    time--;
+    timerEl.innerText = time;
+    if (time === 0) {
+      clearInterval(interval);
+      endRound();
+    }
+  }, 1000);
+}
+
+function endRound() {
+  if (selected !== null) votes[selected]++;
+  round++;
+  if (round <= 3) {
+    time = 10;
+    selected = null;
     startTimer();
-  };
-
-  function startTimer() {
-    timer = setInterval(() => {
-      time--;
-      timeEl.textContent = time;
-      if (time === 0) {
-        clearInterval(timer);
-        finishRound();
-      }
-    }, 1000);
+  } else {
+    showResult();
   }
+}
 
-  function finishRound() {
-    // Fake percentages (frontend only)
-    const data = Array.from({length:10}, () => Math.floor(Math.random()*30));
-    if (selected !== null) data[selected] += 1;
+function showResult() {
+  gameScreen.style.display = "none";
+  result.style.display = "block";
 
-    const valid = data
-      .map((v,i)=>({v,i}))
-      .filter(x=>x.v>0);
+  const total = votes.reduce((a,b)=>a+b,0);
+  let min = Infinity;
+  let win = null;
 
-    const min = Math.min(...valid.map(x=>x.v));
-    const winners = valid.filter(x=>x.v===min);
+  votes.forEach((v,i)=>{
+    if (v > 0 && v < min) {
+      min = v;
+      win = i;
+    }
+  });
 
-    winnerEl.style.display = 'block';
-    winnerNum.textContent = winners.map(w=>w.i).join(', ');
-    winnerPct.textContent = `${min}%`;
+  document.getElementById("winner").innerText =
+    `WINNER\n${win}\n${Math.round((min/total)*100)}%`;
 
-    details.innerHTML = data
-      .map((v,i)=>`${i}: ${v}%`)
-      .join('<br>');
-  }
+  document.getElementById("details").innerHTML =
+    votes.map((v,i)=>`${i}: ${total ? Math.round((v/total)*100) : 0}%`).join("<br>");
+}
 
-  toggleDetails.onclick = () => {
-    details.style.display = details.style.display === 'block' ? 'none' : 'block';
-  };
+function toggleDetails() {
+  const d = document.getElementById("details");
+  d.style.display = d.style.display === "none" ? "block" : "none";
+}
 </script>
 
 </body>
