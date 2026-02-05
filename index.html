@@ -5,241 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ninety-Nine</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root{
-  --bg:#0e0f13;
-  --card:#161922;
-  --yellow:#f5c842;
-  --yellow-soft:#ffda66;
-  --text:#fff;
-  --muted:#9aa0aa;
-  --line:rgba(255,255,255,.1);
-}
-
-*{box-sizing:border-box;font-family:'Inter',sans-serif}
-
 body{
   margin:0;
-  background:var(--bg);
-  color:var(--text);
+  background:#f5c400;
+  font-family:Arial, Helvetica, sans-serif;
+  color:#000;
 }
 
 .app{
   max-width:420px;
   margin:auto;
-  min-height:100vh;
-  padding:16px;
-  display:flex;
-  flex-direction:column;
+  padding:20px;
+  text-align:center;
 }
 
-/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-}
-.logo{
-  font-size:28px;
-  font-weight:700;
-}
-.menu{
-  font-size:26px;
+  font-weight:bold;
 }
 
-/* POZO */
-.pot{
-  margin-top:8px;
-  font-size:22px;
-  color:var(--yellow);
+.round{
+  font-size:64px;
+  margin:30px 0 10px;
 }
 
-/* HOME */
-.screen{
-  flex:1;
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-.screen.active{display:flex}
-
-.go-ring{
-  width:210px;
-  height:210px;
-  border-radius:50%;
-  border:6px solid var(--yellow-soft);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:38px;
-  font-weight:700;
-  margin-bottom:20px;
+.subtitle{
+  font-size:16px;
+  opacity:.7;
 }
 
-.comments{
-  background:var(--card);
-  width:100%;
-  border-radius:14px;
-  padding:14px;
-  text-align:center;
-  font-size:14px;
-  color:var(--muted);
-}
-
-/* AD */
-.ad{
-  font-size:22px;
-  text-align:center;
-}
-.timer{
-  margin-top:12px;
-  font-size:28px;
-  color:var(--yellow);
-}
-
-/* NUMBERS */
-.selected{
-  display:flex;
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  margin-bottom:16px;
-}
-.selected div{
-  flex:1;
-  font-size:36px;
-  font-weight:700;
-  text-align:center;
-  padding:18px 0;
-  border-right:1px solid var(--line);
-}
-.selected div:last-child{border-right:none}
-
-.keypad{
+.grid{
+  margin-top:30px;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+  grid-template-columns:repeat(5,1fr);
+  gap:16px;
 }
-.key{
-  background:var(--card);
-  height:78px;
-  border-radius:18px;
+
+.btn{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border:3px solid #000;
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:32px;
+  justify-content:center;
+  font-size:22px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn.selected{
+  background:#000;
+  color:#f5c400;
+}
+
+.btn.disabled{
+  opacity:.3;
+  pointer-events:none;
 }
 
 .confirm{
-  margin-top:16px;
-  background:var(--yellow);
-  color:#000;
-  height:58px;
-  border-radius:18px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-weight:700;
+  margin-top:30px;
+  padding:14px;
+  background:#000;
+  color:#f5c400;
+  font-size:18px;
+  font-weight:bold;
+  border-radius:14px;
+  display:none;
 }
 
-/* RESULT */
+.confirm.show{
+  display:block;
+}
+
 .result{
-  font-size:26px;
-  color:var(--yellow);
-  font-weight:700;
+  font-size:32px;
+  font-weight:bold;
+  margin-top:40px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
-<div class="header">
-  <div class="logo">Ninety-Nine</div>
-  <div class="menu">⋮</div>
-</div>
-
-<div class="pot">$ 12.450</div>
-
-<!-- HOME -->
-<div id="home" class="screen active">
-  <div class="go-ring" onclick="startAd()">GO!</div>
-  <div class="comments">Comentarios de la comunidad</div>
-</div>
-
-<!-- AD -->
-<div id="ad" class="screen">
-  <div class="ad">Publicidad</div>
-  <div class="timer" id="adTimer">5</div>
-</div>
-
-<!-- NUMBERS -->
-<div id="numbers" class="screen">
-  <div class="selected">
-    <div id="n1">0</div>
-    <div id="n2">0</div>
-    <div id="n3">0</div>
+  <div class="header">
+    <div>Ninety-Nine</div>
+    <div>⋮</div>
   </div>
 
-  <div class="keypad">
-    <div class="key" onclick="pick(1)">1</div>
-    <div class="key" onclick="pick(2)">2</div>
-    <div class="key" onclick="pick(3)">3</div>
-    <div class="key" onclick="pick(4)">4</div>
-    <div class="key" onclick="pick(5)">5</div>
-    <div class="key" onclick="pick(6)">6</div>
-    <div class="key" onclick="pick(7)">7</div>
-    <div class="key" onclick="pick(8)">8</div>
-    <div class="key" onclick="pick(9)">9</div>
-    <div class="key" onclick="pick(0)">0</div>
-  </div>
+  <div class="round" id="round">8</div>
+  <div class="subtitle">Elige 1 número (0–9)</div>
 
-  <div class="confirm" onclick="showResult()">✓ OK</div>
-</div>
+  <div class="grid" id="grid"></div>
 
-<!-- RESULT -->
-<div id="result" class="screen">
-  <div class="result">WINNER 🎉</div>
-</div>
+  <div class="confirm" id="confirm" onclick="finish()">CONFIRMAR</div>
+
+  <div class="result" id="result"></div>
 
 </div>
 
 <script>
-let adTime=5;
-let index=0;
-let picks=[0,0,0];
+let selected = null;
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+const grid = document.getElementById("grid");
+const confirmBtn = document.getElementById("confirm");
+const result = document.getElementById("result");
+
+for(let i=0;i<=9;i++){
+  const b=document.createElement("div");
+  b.className="btn";
+  b.innerText=i;
+  b.onclick=()=>select(b,i);
+  grid.appendChild(b);
 }
 
-function startAd(){
-  show('ad');
-  adTime=5;
-  document.getElementById('adTimer').innerText=adTime;
-  let i=setInterval(()=>{
-    adTime--;
-    document.getElementById('adTimer').innerText=adTime;
-    if(adTime<=0){
-      clearInterval(i);
-      show('numbers');
-    }
-  },1000);
+function select(btn,value){
+  if(selected!==null)return;
+
+  selected=value;
+  btn.classList.add("selected");
+
+  document.querySelectorAll(".btn").forEach(b=>{
+    if(b!==btn) b.classList.add("disabled");
+  });
+
+  confirmBtn.classList.add("show");
 }
 
-function pick(n){
-  if(index>2)return;
-  picks[index]=n;
-  document.getElementById('n'+(index+1)).innerText=n;
-  index++;
-}
-
-function showResult(){
-  show('result');
+function finish(){
+  confirmBtn.style.display="none";
+  result.innerText="WINNER 🎉";
 }
 </script>
 
