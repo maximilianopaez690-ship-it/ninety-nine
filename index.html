@@ -1,254 +1,262 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ninety Nine</title>
+  <meta charset="UTF-8" />
+  <title>Ninety-Nine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-body {
-  background: #f5c400;
-  color: white;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  <style>
+    :root {
+      --yellow: #f5c400;
+      --yellow-soft: #ffd84d;
+      --black: #111;
+      --white: #fff;
+      --gray: rgba(0,0,0,0.35);
+    }
 
-/* ===== SCREENS ===== */
-.screen {
-  display: none;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
 
-.active {
-  display: flex;
-}
+    body {
+      margin: 0;
+      background: var(--yellow);
+      color: var(--black);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
 
-/* ===== GO ===== */
-#goBtn {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 6px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 48px;
-  font-weight: bold;
-  color: white;
-}
+    .app {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      position: relative;
+    }
 
-/* ===== AD ===== */
-#ad {
-  font-size: 28px;
-  text-align: center;
-}
+    /* Top bar */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
 
-/* ===== GAME ===== */
-#top {
-  margin-bottom: 20px;
-  text-align: center;
-}
+    .brand {
+      font-size: 18px;
+    }
 
-#time {
-  font-size: 36px;
-}
+    .menu {
+      font-size: 22px;
+      cursor: pointer;
+    }
 
-#info {
-  margin-top: 10px;
-  font-size: 20px;
-}
+    /* GO screen */
+    .go-screen {
+      display: flex;
+      justify-content: center;
+      margin: 60px 0;
+    }
 
-#play {
-  display: flex;
-  gap: 40px;
-}
+    .go-circle {
+      width: 160px;
+      height: 160px;
+      border: 4px solid var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 42px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-/* ===== BUTTONS ===== */
-.choice {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 6px solid white;
-  font-size: 72px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.5;
-}
+    /* Game */
+    .game {
+      display: none;
+      text-align: center;
+    }
 
-.choice.active {
-  opacity: 1;
-  background: rgba(255,255,255,0.2);
-}
+    .timer {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
 
-/* Perfect circle O */
-#btnO {
-  border-radius: 50%;
-}
+    .percentages {
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
 
-/* ===== RESULT ===== */
-#winner {
-  margin-top: 30px;
-  font-size: 32px;
-  text-align: center;
-  position: relative;
-}
+    .numbers {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 30px;
+    }
 
-/* Confetti (local) */
-.confetti {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: white;
-  animation: fall 1s linear infinite;
-}
+    .num {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid var(--white);
+      background: transparent;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--black);
+    }
 
-@keyframes fall {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(40px); opacity: 0; }
-}
-</style>
+    .num.active {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    /* Winner */
+    .winner {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .winner h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .winner p {
+      margin: 6px 0;
+      font-size: 16px;
+    }
+
+    /* Arrow */
+    .arrow {
+      margin-top: 20px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .details {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- GO -->
-<div id="go" class="screen active">
-  <div id="goBtn" onclick="showAd()">GO!</div>
-</div>
+<div class="app">
 
-<!-- AD -->
-<div id="adScreen" class="screen">
-  <div id="ad">Publicidad<br><br>⏳ Esperá 5 segundos...</div>
-</div>
-
-<!-- GAME -->
-<div id="game" class="screen">
-  <div id="top">
-    <div id="time">Tiempo: 15</div>
-    <div id="info">O 0% | X 0%</div>
+  <div class="top">
+    <div class="brand">Ninety-Nine</div>
+    <div class="menu">⋮</div>
   </div>
 
-  <div id="play">
-    <div id="btnO" class="choice" onclick="vote('O')">○</div>
-    <div id="btnX" class="choice" onclick="vote('X')">X</div>
+  <!-- GO -->
+  <div class="go-screen" id="goScreen">
+    <div class="go-circle" id="goBtn">GO!</div>
   </div>
 
-  <div id="winner"></div>
+  <!-- GAME -->
+  <div class="game" id="game">
+    <div class="timer">Time: <span id="time">10</span></div>
+    <div class="percentages" id="percents">0–9 voting…</div>
+
+    <div class="numbers" id="numbers"></div>
+
+    <div class="winner" id="winner">
+      <h2>WINNER</h2>
+      <p id="winnerNum"></p>
+      <p id="winnerPct"></p>
+
+      <div class="arrow" id="toggleDetails">↓</div>
+      <div class="details" id="details"></div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-let time = 15;
-let o = 0;
-let x = 0;
-let timer;
-let userVote = null;
+  const goBtn = document.getElementById('goBtn');
+  const goScreen = document.getElementById('goScreen');
+  const game = document.getElementById('game');
+  const timeEl = document.getElementById('time');
+  const numbersEl = document.getElementById('numbers');
+  const winnerEl = document.getElementById('winner');
+  const winnerNum = document.getElementById('winnerNum');
+  const winnerPct = document.getElementById('winnerPct');
+  const details = document.getElementById('details');
+  const toggleDetails = document.getElementById('toggleDetails');
 
-/* ===== FLOW ===== */
-function showAd() {
-  switchScreen("go", "adScreen");
-  setTimeout(startGame, 5000);
-}
+  let selected = null;
+  let time = 10;
+  let timer;
 
-function startGame() {
-  switchScreen("adScreen", "game");
-  startRound();
-}
-
-function switchScreen(hide, show) {
-  document.getElementById(hide).classList.remove("active");
-  document.getElementById(show).classList.add("active");
-}
-
-/* ===== GAME ===== */
-function startRound() {
-  time = 15;
-  o = 0;
-  x = 0;
-  userVote = null;
-  document.getElementById("winner").innerHTML = "";
-  document.getElementById("btnO").classList.remove("active");
-  document.getElementById("btnX").classList.remove("active");
-
-  timer = setInterval(() => {
-    time--;
-    document.getElementById("time").textContent = "Tiempo: " + time;
-    if (time === 0) endRound();
-  }, 1000);
-}
-
-function vote(v) {
-  if (time <= 0) return;
-  if (userVote === v) return;
-
-  if (userVote === "O") o--;
-  if (userVote === "X") x--;
-
-  if (v === "O") o++;
-  if (v === "X") x++;
-
-  userVote = v;
-
-  document.getElementById("btnO").classList.remove("active");
-  document.getElementById("btnX").classList.remove("active");
-
-  document.getElementById(v === "O" ? "btnO" : "btnX").classList.add("active");
-
-  updateInfo();
-}
-
-function updateInfo() {
-  const total = o + x;
-  if (total === 0) return;
-  const oPct = Math.round((o / total) * 100);
-  const xPct = 100 - oPct;
-  document.getElementById("info").textContent = `O ${oPct}% | X ${xPct}%`;
-}
-
-function endRound() {
-  clearInterval(timer);
-
-  const total = o + x;
-  if (total === 0) return;
-
-  const oPct = o / total;
-  const xPct = x / total;
-
-  const winner = oPct < xPct ? "O" : "X";
-  const pct = Math.round(Math.min(oPct, xPct) * 100);
-
-  document.getElementById("winner").innerHTML =
-    `WINNER<br>${winner}<br>${pct}%`;
-
-  spawnConfetti();
-}
-
-/* ===== CONFETTI LOCAL ===== */
-function spawnConfetti() {
-  const w = document.getElementById("winner");
-  for (let i = 0; i < 20; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random() * 100 + "%";
-    c.style.top = "-10px";
-    w.appendChild(c);
-    setTimeout(() => c.remove(), 1000);
+  // Create numbers
+  for (let i = 0; i < 10; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'num';
+    btn.textContent = i;
+    btn.onclick = () => {
+      document.querySelectorAll('.num').forEach(n => n.classList.remove('active'));
+      if (selected === i) {
+        selected = null;
+      } else {
+        selected = i;
+        btn.classList.add('active');
+      }
+    };
+    numbersEl.appendChild(btn);
   }
-}
+
+  goBtn.onclick = () => {
+    goScreen.style.display = 'none';
+    game.style.display = 'block';
+    startTimer();
+  };
+
+  function startTimer() {
+    timer = setInterval(() => {
+      time--;
+      timeEl.textContent = time;
+      if (time === 0) {
+        clearInterval(timer);
+        finishRound();
+      }
+    }, 1000);
+  }
+
+  function finishRound() {
+    // Fake percentages (frontend only)
+    const data = Array.from({length:10}, () => Math.floor(Math.random()*30));
+    if (selected !== null) data[selected] += 1;
+
+    const valid = data
+      .map((v,i)=>({v,i}))
+      .filter(x=>x.v>0);
+
+    const min = Math.min(...valid.map(x=>x.v));
+    const winners = valid.filter(x=>x.v===min);
+
+    winnerEl.style.display = 'block';
+    winnerNum.textContent = winners.map(w=>w.i).join(', ');
+    winnerPct.textContent = `${min}%`;
+
+    details.innerHTML = data
+      .map((v,i)=>`${i}: ${v}%`)
+      .join('<br>');
+  }
+
+  toggleDetails.onclick = () => {
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+  };
 </script>
 
 </body>
