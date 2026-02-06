@@ -1,224 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <title>Ninety-Nine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --black: #0b0b0b;
-      --yellow: #f5c400;
-      --gray: #9a9a9a;
-      --white: #ffffff;
+      --yellow: #FFD400;
+      --black: #000000;
     }
 
     * {
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
       margin: 0;
       background: var(--black);
-      color: var(--white);
-      min-height: 100vh;
+      color: white;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
+      height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
     }
 
     header {
-      width: 100%;
-      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     header h1 {
+      font-size: 28px;
+      font-weight: 800;
       margin: 0;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .menu {
-      font-size: 24px;
-      cursor: pointer;
     }
 
     .pot {
-      margin-top: 10px;
-      font-size: 36px;
-      font-weight: bold;
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: 600;
       color: var(--yellow);
     }
 
     .timer {
       margin-top: 6px;
       font-size: 14px;
-      color: var(--gray);
+      opacity: 0.8;
     }
 
     .go-container {
-      margin-top: 80px;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      border: 6px solid var(--yellow);
+      margin: 40px 0;
       display: flex;
       justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      animation: pulse 2.5s infinite;
     }
 
-    .go-container span {
-      font-size: 42px;
-      font-weight: bold;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-
-    .last-draw {
-      margin-top: 40px;
-      font-size: 13px;
-      color: var(--gray);
-    }
-
-    /* MODALS */
-
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .modal-content {
-      background: #111;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      width: 85%;
-      max-width: 400px;
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      color: var(--yellow);
-    }
-
-    .modal-content button {
-      margin-top: 20px;
-      padding: 14px 24px;
-      font-size: 16px;
-      border: none;
-      border-radius: 8px;
+    .go {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid white;
       background: var(--yellow);
-      color: #000;
+      color: black;
+      font-size: 28px;
+      font-weight: 800;
       cursor: pointer;
-      font-weight: bold;
     }
 
-    .modal-content p {
+    .choices {
+      display: none;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .choice {
+      width: 120px;
+      height: 120px;
+      font-size: 48px;
+      font-weight: 800;
+      border-radius: 16px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .choice.selected {
+      background: var(--yellow);
+      color: black;
+    }
+
+    .result {
+      display: none;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .winner {
+      color: var(--yellow);
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .stats {
+      margin-top: 10px;
       font-size: 14px;
-      color: var(--gray);
+      opacity: 0.85;
     }
   </style>
 </head>
-
 <body>
 
+<div class="app">
   <header>
     <h1>Ninety-Nine</h1>
-    <div class="menu">⋮</div>
+    <div>⋮</div>
   </header>
 
-  <div class="pot">$12.450</div>
-  <div class="timer">Next draw in 42:18</div>
+  <div class="pot">Pozo: $<span id="pot">0</span></div>
+  <div class="timer">Tiempo restante: <span id="time">05:00</span></div>
 
-  <div class="go-container" id="goBtn">
-    <span>GO!</span>
+  <div class="go-container">
+    <button class="go" id="goBtn">GO!</button>
   </div>
 
-  <div class="last-draw">
-    Last draw · 01:00 · $9.870
+  <div class="choices" id="choices">
+    <button class="choice" data-value="cara">⭕</button>
+    <button class="choice" data-value="x">❌</button>
   </div>
 
-  <!-- +18 MODAL -->
-  <div class="modal" id="ageModal">
-    <div class="modal-content">
-      <h2>+18</h2>
-      <p>You must be over 18 to participate.</p>
-      <button id="confirmAge">I’m over 18</button>
-    </div>
+  <div class="result" id="result">
+    <div class="winner" id="winnerText"></div>
+    <div class="stats" id="statsText"></div>
   </div>
+</div>
 
-  <!-- AD MODAL -->
-  <div class="modal" id="adModal">
-    <div class="modal-content">
-      <h2>Advertisement</h2>
-      <p>Your ticket is being generated…</p>
-      <p id="adTimer">5</p>
-    </div>
-  </div>
+<script>
+  let pot = 0;
+  let votes = { cara: 0, x: 0 };
+  let userChoice = null;
+  let roundTime = 300;
+  let timerInterval;
 
-  <!-- CONFIRM MODAL -->
-  <div class="modal" id="doneModal">
-    <div class="modal-content">
-      <h2>Done</h2>
-      <p>Your ticket has been registered.</p>
-      <button onclick="closeDone()">OK</button>
-    </div>
-  </div>
+  const potEl = document.getElementById('pot');
+  const timeEl = document.getElementById('time');
+  const goBtn = document.getElementById('goBtn');
+  const choicesEl = document.getElementById('choices');
+  const resultEl = document.getElementById('result');
+  const winnerText = document.getElementById('winnerText');
+  const statsText = document.getElementById('statsText');
 
-  <script>
-    const goBtn = document.getElementById("goBtn");
-    const ageModal = document.getElementById("ageModal");
-    const adModal = document.getElementById("adModal");
-    const doneModal = document.getElementById("doneModal");
-    const adTimer = document.getElementById("adTimer");
+  function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      roundTime--;
+      const min = String(Math.floor(roundTime / 60)).padStart(2, '0');
+      const sec = String(roundTime % 60).padStart(2, '0');
+      timeEl.textContent = `${min}:${sec}`;
 
-    goBtn.onclick = () => {
-      ageModal.style.display = "flex";
+      if (roundTime <= 0) {
+        clearInterval(timerInterval);
+        endRound();
+      }
+    }, 1000);
+  }
+
+  goBtn.onclick = () => {
+    pot += 100;
+    potEl.textContent = pot;
+    votes.cara += Math.random() > 0.5 ? 1 : 0;
+    votes.x += Math.random() > 0.5 ? 1 : 0;
+
+    goBtn.style.display = 'none';
+    choicesEl.style.display = 'flex';
+    startTimer();
+  };
+
+  document.querySelectorAll('.choice').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.choice').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      userChoice = btn.dataset.value;
+      votes[userChoice]++;
     };
+  });
 
-    document.getElementById("confirmAge").onclick = () => {
-      ageModal.style.display = "none";
-      startAd();
-    };
+  function endRound() {
+    choicesEl.style.display = 'none';
+    resultEl.style.display = 'block';
 
-    function startAd() {
-      adModal.style.display = "flex";
-      let time = 5;
-      adTimer.textContent = time;
+    const total = votes.cara + votes.x;
+    const caraPct = votes.cara / total;
+    const xPct = votes.x / total;
 
-      const interval = setInterval(() => {
-        time--;
-        adTimer.textContent = time;
-        if (time <= 0) {
-          clearInterval(interval);
-          adModal.style.display = "none";
-          doneModal.style.display = "flex";
-        }
-      }, 1000);
-    }
+    let winner;
+    if (caraPct < xPct) winner = '⭕';
+    else if (xPct < caraPct) winner = '❌';
+    else winner = 'Empate';
 
-    function closeDone() {
-      doneModal.style.display = "none";
-    }
-  </script>
+    winnerText.textContent = winner === 'Empate' ? 'EMPATE' : `WINNER ${winner}`;
+    statsText.textContent = `⭕ ${(caraPct*100).toFixed(1)}% | ❌ ${(xPct*100).toFixed(1)}%`;
+
+    setTimeout(resetGame, 5000);
+  }
+
+  function resetGame() {
+    votes = { cara: 0, x: 0 };
+    userChoice = null;
+    roundTime = 300;
+    resultEl.style.display = 'none';
+    goBtn.style.display = 'block';
+    timeEl.textContent = '05:00';
+  }
+</script>
 
 </body>
-    </html>
+</html>
