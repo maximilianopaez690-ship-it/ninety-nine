@@ -1,148 +1,229 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ninety-Nine</title>
 
 <style>
+:root{
+  --yellow:#FFD400;
+  --yellow-soft:#FFE066;
+  --black:#000;
+  --white:#fff;
+  --gray:#f2f2f2;
+}
+
+*{box-sizing:border-box;font-family:Inter, Arial, sans-serif;}
+
 body{
   margin:0;
-  background:#f5c400;
-  font-family:Arial, Helvetica, sans-serif;
-  color:#000;
+  background:var(--yellow);
+  color:var(--black);
 }
 
-.app{
-  max-width:420px;
-  margin:auto;
-  padding:20px;
-  text-align:center;
-}
-
-.header{
+/* HEADER */
+header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-weight:bold;
+  padding:16px;
 }
 
-.round{
-  font-size:64px;
-  margin:30px 0 10px;
+.logo{
+  font-size:28px;
+  font-weight:800;
+  color:white;
 }
 
-.subtitle{
-  font-size:16px;
-  opacity:.7;
+.menu{
+  font-size:24px;
+  color:white;
+  cursor:pointer;
 }
 
-.grid{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:16px;
+/* POT */
+.pot{
+  text-align:center;
+  margin-top:10px;
+  font-size:32px;
+  font-weight:700;
 }
 
-.btn{
-  width:60px;
-  height:60px;
+/* GO BUTTON */
+.go-container{
+  display:flex;
+  justify-content:center;
+  margin:40px 0;
+}
+
+.go-circle{
+  width:160px;
+  height:160px;
+  border:6px solid white;
   border-radius:50%;
-  border:3px solid #000;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:22px;
-  font-weight:bold;
+  font-size:42px;
+  font-weight:900;
+  color:white;
   cursor:pointer;
-  transition:.2s;
 }
 
-.btn.selected{
-  background:#000;
-  color:#f5c400;
+/* FORUM */
+.forum{
+  background:white;
+  border-radius:24px 24px 0 0;
+  padding:16px;
+  min-height:250px;
 }
 
-.btn.disabled{
-  opacity:.3;
-  pointer-events:none;
+.forum h3{
+  margin:0 0 8px 0;
 }
 
-.confirm{
-  margin-top:30px;
-  padding:14px;
-  background:#000;
-  color:#f5c400;
-  font-size:18px;
-  font-weight:bold;
-  border-radius:14px;
+.post{
+  background:var(--gray);
+  padding:10px;
+  border-radius:12px;
+  margin-bottom:8px;
+  font-size:14px;
+}
+
+/* MODALS */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
   display:none;
+  align-items:center;
+  justify-content:center;
 }
 
-.confirm.show{
-  display:block;
+.modal-content{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  max-width:300px;
+  text-align:center;
 }
 
-.result{
-  font-size:32px;
-  font-weight:bold;
-  margin-top:40px;
+.modal button{
+  margin-top:12px;
+  padding:10px 16px;
+  border:none;
+  border-radius:12px;
+  background:var(--yellow);
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* AD */
+#adTimer{
+  font-size:28px;
+  font-weight:800;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<header>
+  <div class="logo">Ninety-Nine</div>
+  <div class="menu">⋮</div>
+</header>
 
-  <div class="header">
-    <div>Ninety-Nine</div>
-    <div>⋮</div>
+<div class="pot">$ 1.245</div>
+
+<div class="go-container">
+  <div class="go-circle" onclick="startFlow()">GO!</div>
+</div>
+
+<div class="forum" id="forum">
+  <h3>Latest results</h3>
+</div>
+
+<!-- AGE MODAL -->
+<div class="modal" id="ageModal">
+  <div class="modal-content">
+    <h3>Before you play</h3>
+    <p>You must be over 18 to participate.</p>
+    <button onclick="acceptAge()">I am over 18</button>
   </div>
+</div>
 
-  <div class="round" id="round">8</div>
-  <div class="subtitle">Elige 1 número (0–9)</div>
-
-  <div class="grid" id="grid"></div>
-
-  <div class="confirm" id="confirm" onclick="finish()">CONFIRMAR</div>
-
-  <div class="result" id="result"></div>
-
+<!-- AD MODAL -->
+<div class="modal" id="adModal">
+  <div class="modal-content">
+    <p>Advertisement</p>
+    <div id="adTimer">5</div>
+  </div>
 </div>
 
 <script>
-let selected = null;
+let accepted = false;
+let tickets = [];
+let ticketId = 1;
 
-const grid = document.getElementById("grid");
-const confirmBtn = document.getElementById("confirm");
-const result = document.getElementById("result");
-
-for(let i=0;i<=9;i++){
-  const b=document.createElement("div");
-  b.className="btn";
-  b.innerText=i;
-  b.onclick=()=>select(b,i);
-  grid.appendChild(b);
+function startFlow(){
+  if(!accepted){
+    document.getElementById("ageModal").style.display="flex";
+  }else{
+    showAd();
+  }
 }
 
-function select(btn,value){
-  if(selected!==null)return;
-
-  selected=value;
-  btn.classList.add("selected");
-
-  document.querySelectorAll(".btn").forEach(b=>{
-    if(b!==btn) b.classList.add("disabled");
-  });
-
-  confirmBtn.classList.add("show");
+function acceptAge(){
+  accepted = true;
+  document.getElementById("ageModal").style.display="none";
+  showAd();
 }
 
-function finish(){
-  confirmBtn.style.display="none";
-  result.innerText="WINNER 🎉";
+function showAd(){
+  const ad = document.getElementById("adModal");
+  const timer = document.getElementById("adTimer");
+  let time = 5;
+  ad.style.display="flex";
+  timer.textContent = time;
+
+  const interval = setInterval(()=>{
+    time--;
+    timer.textContent = time;
+    if(time===0){
+      clearInterval(interval);
+      ad.style.display="none";
+      generateTicket();
+    }
+  },1000);
 }
+
+function generateTicket(){
+  const now = new Date();
+  const ticket = {
+    id: ticketId++,
+    time: now.toLocaleTimeString()
+  };
+  tickets.push(ticket);
+
+  addPost(`🎟 Ticket #${ticket.id} generated at ${ticket.time}`);
+}
+
+function addPost(text){
+  const forum = document.getElementById("forum");
+  const div = document.createElement("div");
+  div.className="post";
+  div.textContent=text;
+  forum.appendChild(div);
+}
+
+/* SIMULATED DRAW EVERY HOUR (for demo = 30s) */
+setInterval(()=>{
+  if(tickets.length===0) return;
+  const winner = tickets[Math.floor(Math.random()*tickets.length)];
+  addPost(`🏆 Winner: Ticket #${winner.id} (anonymous)`);
+  tickets = [];
+},30000);
 </script>
 
 </body>
