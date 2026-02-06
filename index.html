@@ -1,229 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ninety-Nine</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Ninety-Nine</title>
 
-  <!-- Tipografía -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+}
 
-  <style>
-    :root {
-      --yellow: #FFD400;
-      --black: #000000;
-    }
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
 
-    body {
-      margin: 0;
-      background: var(--black);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+header h1 {
+  margin: 0;
+  font-size: 22px;
+  color: #fff;
+}
 
-    .app {
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-    }
+#pot {
+  color: #ffd400;
+  font-size: 18px;
+}
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+#timer {
+  font-size: 18px;
+}
 
-    header h1 {
-      font-size: 28px;
-      font-weight: 800;
-      margin: 0;
-    }
+/* MAIN */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
 
-    .pot {
-      margin-top: 20px;
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--yellow);
-    }
+#goCircle {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  border: 4px solid #ffd400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
 
-    .timer {
-      margin-top: 6px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
+#choices {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
 
-    .go-container {
-      margin: 40px 0;
-      display: flex;
-      justify-content: center;
-    }
+.choice {
+  padding: 16px 36px;
+  font-size: 22px;
+  background: #ffd400;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+}
 
-    .go {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      border: 4px solid white;
-      background: var(--yellow);
-      color: black;
-      font-size: 28px;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.hidden {
+  display: none;
+}
 
-    .choices {
-      display: none;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-    }
+#status {
+  margin-top: 20px;
+  font-size: 16px;
+  opacity: 0.9;
+}
 
-    .choice {
-      width: 120px;
-      height: 120px;
-      font-size: 48px;
-      font-weight: 800;
-      border-radius: 16px;
-      border: 2px solid white;
-      background: transparent;
-      color: white;
-      cursor: pointer;
-    }
+/* HISTORIAL */
+#history {
+  margin-top: 50px;
+  padding: 16px;
+  border-top: 1px solid #222;
+}
 
-    .choice.selected {
-      background: var(--yellow);
-      color: black;
-    }
+#history h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-    .result {
-      display: none;
-      margin-top: 30px;
-      text-align: center;
-    }
+#rounds {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .winner {
-      color: var(--yellow);
-      font-size: 26px;
-      font-weight: 800;
-    }
-
-    .stats {
-      margin-top: 10px;
-      font-size: 14px;
-      opacity: 0.85;
-    }
-  </style>
+#rounds li {
+  font-size: 14px;
+  margin-bottom: 6px;
+  opacity: 0.85;
+}
+</style>
 </head>
+
 <body>
 
-<div class="app">
-  <header>
-    <h1>Ninety-Nine</h1>
-    <div>⋮</div>
-  </header>
+<header>
+  <h1>Ninety-Nine</h1>
+  <div id="pot">$0</div>
+  <div id="timer">05:00</div>
+</header>
 
-  <div class="pot">Pozo: $<span id="pot">0</span></div>
-  <div class="timer">Tiempo restante: <span id="time">05:00</span></div>
+<main>
+  <div id="goCircle">GO!</div>
 
-  <div class="go-container">
-    <button class="go" id="goBtn">GO!</button>
+  <div id="choices" class="hidden">
+    <button class="choice" data-choice="cara">CARA</button>
+    <button class="choice" data-choice="cruz">CRUZ</button>
   </div>
 
-  <div class="choices" id="choices">
-    <button class="choice" data-value="cara">⭕</button>
-    <button class="choice" data-value="x">❌</button>
-  </div>
+  <div id="status"></div>
+</main>
 
-  <div class="result" id="result">
-    <div class="winner" id="winnerText"></div>
-    <div class="stats" id="statsText"></div>
-  </div>
-</div>
+<section id="history">
+  <h2>Historial</h2>
+  <ul id="rounds"></ul>
+</section>
 
 <script>
-  let pot = 0;
-  let votes = { cara: 0, x: 0 };
-  let userChoice = null;
-  let roundTime = 300;
-  let timerInterval;
+/* ESTADO */
+let time = 300; // 5 minutos
+let pot = 0;
+let votes = { cara: 0, cruz: 0 };
+let hasPlayed = false;
 
-  const potEl = document.getElementById('pot');
-  const timeEl = document.getElementById('time');
-  const goBtn = document.getElementById('goBtn');
-  const choicesEl = document.getElementById('choices');
-  const resultEl = document.getElementById('result');
-  const winnerText = document.getElementById('winnerText');
-  const statsText = document.getElementById('statsText');
+/* ELEMENTOS */
+const timerEl = document.getElementById("timer");
+const potEl = document.getElementById("pot");
+const goCircle = document.getElementById("goCircle");
+const choices = document.getElementById("choices");
+const status = document.getElementById("status");
+const rounds = document.getElementById("rounds");
 
-  function startTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      roundTime--;
-      const min = String(Math.floor(roundTime / 60)).padStart(2, '0');
-      const sec = String(roundTime % 60).padStart(2, '0');
-      timeEl.textContent = `${min}:${sec}`;
+/* TIMER */
+function updateTimer() {
+  const min = String(Math.floor(time / 60)).padStart(2, "0");
+  const sec = String(time % 60).padStart(2, "0");
+  timerEl.textContent = `${min}:${sec}`;
+}
 
-      if (roundTime <= 0) {
-        clearInterval(timerInterval);
-        endRound();
-      }
-    }, 1000);
+setInterval(() => {
+  if (time > 0) {
+    time--;
+    updateTimer();
+  } else {
+    finishRound();
+    startNewRound();
   }
+}, 1000);
 
-  goBtn.onclick = () => {
-    pot += 100;
-    potEl.textContent = pot;
-    votes.cara += Math.random() > 0.5 ? 1 : 0;
-    votes.x += Math.random() > 0.5 ? 1 : 0;
+/* RONDAS */
+function startNewRound() {
+  time = 300;
+  votes = { cara: 0, cruz: 0 };
+  pot = 0;
+  hasPlayed = false;
 
-    goBtn.style.display = 'none';
-    choicesEl.style.display = 'flex';
-    startTimer();
-  };
+  potEl.textContent = "$0";
+  status.textContent = "";
+  choices.classList.add("hidden");
+}
 
-  document.querySelectorAll('.choice').forEach(btn => {
-    btn.onclick = () => {
-      document.querySelectorAll('.choice').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      userChoice = btn.dataset.value;
-      votes[userChoice]++;
-    };
+function finishRound() {
+  const total = votes.cara + votes.cruz;
+  if (total === 0) return;
+
+  const caraPct = (votes.cara / total) * 100;
+  const cruzPct = (votes.cruz / total) * 100;
+
+  let winner = "EMPATE";
+  if (caraPct < cruzPct) winner = "CARA";
+  else if (cruzPct < caraPct) winner = "CRUZ";
+
+  const li = document.createElement("li");
+  li.textContent =
+    `Pozo $${pot} | Cara ${caraPct.toFixed(1)}% | Cruz ${cruzPct.toFixed(1)}% | Winner: ${winner}`;
+
+  rounds.prepend(li);
+}
+
+/* INTERACCIÓN */
+goCircle.addEventListener("click", () => {
+  if (hasPlayed) return;
+  choices.classList.remove("hidden");
+  status.textContent = "Elegí cara o cruz";
+});
+
+document.querySelectorAll(".choice").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (hasPlayed) return;
+
+    hasPlayed = true;
+    const choice = btn.dataset.choice;
+
+    votes[choice]++;
+    pot += 100; // simulación pago
+    potEl.textContent = `$${pot}`;
+
+    choices.classList.add("hidden");
+    status.textContent = "Estás participando en esta ronda";
   });
+});
 
-  function endRound() {
-    choicesEl.style.display = 'none';
-    resultEl.style.display = 'block';
-
-    const total = votes.cara + votes.x;
-    const caraPct = votes.cara / total;
-    const xPct = votes.x / total;
-
-    let winner;
-    if (caraPct < xPct) winner = '⭕';
-    else if (xPct < caraPct) winner = '❌';
-    else winner = 'Empate';
-
-    winnerText.textContent = winner === 'Empate' ? 'EMPATE' : `WINNER ${winner}`;
-    statsText.textContent = `⭕ ${(caraPct*100).toFixed(1)}% | ❌ ${(xPct*100).toFixed(1)}%`;
-
-    setTimeout(resetGame, 5000);
-  }
-
-  function resetGame() {
-    votes = { cara: 0, x: 0 };
-    userChoice = null;
-    roundTime = 300;
-    resultEl.style.display = 'none';
-    goBtn.style.display = 'block';
-    timeEl.textContent = '05:00';
-  }
+updateTimer();
 </script>
 
 </body>
