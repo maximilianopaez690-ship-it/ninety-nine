@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Ninety-Nine</title>
@@ -7,28 +7,30 @@
 
   <style>
     :root {
-      --bg: #0e0f12;
+      --black: #0b0b0b;
       --yellow: #f5c400;
-      --text: #ffffff;
-      --muted: #9aa0a6;
+      --gray: #9a9a9a;
+      --white: #ffffff;
     }
 
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      align-items: center;
     }
 
     header {
-      padding: 16px;
+      width: 100%;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -36,181 +38,187 @@
 
     header h1 {
       margin: 0;
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 24px;
+      font-weight: bold;
     }
 
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      padding: 20px;
-      text-align: center;
+    .menu {
+      font-size: 24px;
+      cursor: pointer;
     }
 
     .pot {
-      font-size: 28px;
+      margin-top: 10px;
+      font-size: 36px;
+      font-weight: bold;
       color: var(--yellow);
-      font-weight: 700;
     }
 
     .timer {
+      margin-top: 6px;
       font-size: 14px;
-      color: var(--muted);
+      color: var(--gray);
     }
 
-    .go-button {
+    .go-container {
+      margin-top: 80px;
       width: 220px;
       height: 220px;
       border-radius: 50%;
       border: 6px solid var(--yellow);
-      background: transparent;
-      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      animation: pulse 2.5s infinite;
+    }
+
+    .go-container span {
       font-size: 42px;
-      font-weight: 700;
-      cursor: pointer;
+      font-weight: bold;
     }
 
-    .go-button:active {
-      transform: scale(0.97);
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
     }
 
-    footer {
-      background: #15161b;
-      padding: 12px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      cursor: pointer;
+    .last-draw {
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--gray);
     }
 
-    /* MODAL */
+    /* MODALS */
+
     .modal {
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
       display: none;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       z-index: 10;
     }
 
     .modal-content {
-      background: #1c1d22;
-      padding: 24px;
+      background: #111;
+      padding: 30px;
       border-radius: 12px;
-      width: 90%;
-      max-width: 320px;
       text-align: center;
+      width: 85%;
+      max-width: 400px;
     }
 
-    .modal button {
-      margin-top: 16px;
-      padding: 12px 20px;
+    .modal-content h2 {
+      margin-top: 0;
+      color: var(--yellow);
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+      padding: 14px 24px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
       background: var(--yellow);
-      font-weight: 600;
+      color: #000;
       cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-content p {
+      font-size: 14px;
+      color: var(--gray);
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Ninety-Nine</h1>
-  <span>⋮</span>
-</header>
+  <header>
+    <h1>Ninety-Nine</h1>
+    <div class="menu">⋮</div>
+  </header>
 
-<main>
   <div class="pot">$12.450</div>
-  <div class="timer" id="timer">Next draw in: 59:59</div>
+  <div class="timer">Next draw in 42:18</div>
 
-  <button class="go-button" id="goBtn">GO!</button>
-</main>
-
-<footer onclick="toggleHistory()">
-  ↓ Latest activity
-</footer>
-
-<!-- MODAL +18 -->
-<div class="modal" id="ageModal">
-  <div class="modal-content">
-    <p>Are you over 18?</p>
-    <button onclick="confirmAge()">Yes</button>
+  <div class="go-container" id="goBtn">
+    <span>GO!</span>
   </div>
-</div>
 
-<!-- MODAL AD -->
-<div class="modal" id="adModal">
-  <div class="modal-content">
-    <p>Watching ad…</p>
-    <p id="adTimer">5</p>
+  <div class="last-draw">
+    Last draw · 01:00 · $9.870
   </div>
-</div>
 
-<script>
-  let ageConfirmed = false;
+  <!-- +18 MODAL -->
+  <div class="modal" id="ageModal">
+    <div class="modal-content">
+      <h2>+18</h2>
+      <p>You must be over 18 to participate.</p>
+      <button id="confirmAge">I’m over 18</button>
+    </div>
+  </div>
 
-  const goBtn = document.getElementById("goBtn");
-  const ageModal = document.getElementById("ageModal");
-  const adModal = document.getElementById("adModal");
+  <!-- AD MODAL -->
+  <div class="modal" id="adModal">
+    <div class="modal-content">
+      <h2>Advertisement</h2>
+      <p>Your ticket is being generated…</p>
+      <p id="adTimer">5</p>
+    </div>
+  </div>
 
-  goBtn.onclick = () => {
-    if (!ageConfirmed) {
-      ageModal.style.display = "flex";
-    } else {
-      startAd();
-    }
-  };
+  <!-- CONFIRM MODAL -->
+  <div class="modal" id="doneModal">
+    <div class="modal-content">
+      <h2>Done</h2>
+      <p>Your ticket has been registered.</p>
+      <button onclick="closeDone()">OK</button>
+    </div>
+  </div>
 
-  function confirmAge() {
-    ageConfirmed = true;
-    ageModal.style.display = "none";
-    startAd();
-  }
-
-  function startAd() {
-    adModal.style.display = "flex";
-    let seconds = 5;
+  <script>
+    const goBtn = document.getElementById("goBtn");
+    const ageModal = document.getElementById("ageModal");
+    const adModal = document.getElementById("adModal");
+    const doneModal = document.getElementById("doneModal");
     const adTimer = document.getElementById("adTimer");
 
-    const interval = setInterval(() => {
-      seconds--;
-      adTimer.textContent = seconds;
-      if (seconds === 0) {
-        clearInterval(interval);
-        adModal.style.display = "none";
-        generateTicket();
-      }
-    }, 1000);
-  }
+    goBtn.onclick = () => {
+      ageModal.style.display = "flex";
+    };
 
-  function generateTicket() {
-    console.log("Talón generado (anónimo)");
-    alert("Ticket generated");
-  }
+    document.getElementById("confirmAge").onclick = () => {
+      ageModal.style.display = "none";
+      startAd();
+    };
 
-  // TIMER DE RONDA
-  let remaining = 3600;
-  const timerEl = document.getElementById("timer");
+    function startAd() {
+      adModal.style.display = "flex";
+      let time = 5;
+      adTimer.textContent = time;
 
-  setInterval(() => {
-    remaining--;
-    const m = String(Math.floor(remaining / 60)).padStart(2, "0");
-    const s = String(remaining % 60).padStart(2, "0");
-    timerEl.textContent = `Next draw in: ${m}:${s}`;
-    if (remaining <= 0) remaining = 3600;
-  }, 1000);
+      const interval = setInterval(() => {
+        time--;
+        adTimer.textContent = time;
+        if (time <= 0) {
+          clearInterval(interval);
+          adModal.style.display = "none";
+          doneModal.style.display = "flex";
+        }
+      }, 1000);
+    }
 
-  function toggleHistory() {
-    alert("History / forum coming soon");
-  }
-</script>
+    function closeDone() {
+      doneModal.style.display = "none";
+    }
+  </script>
 
 </body>
-</html>
+    </html>
