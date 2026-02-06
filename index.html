@@ -1,229 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Ninety-Nine</title>
+  <meta charset="UTF-8" />
+  <title>Ninety-Nine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root{
-  --yellow:#FFD400;
-  --yellow-soft:#FFE066;
-  --black:#000;
-  --white:#fff;
-  --gray:#f2f2f2;
-}
+  <style>
+    :root {
+      --bg: #0e0f12;
+      --yellow: #f5c400;
+      --text: #ffffff;
+      --muted: #9aa0a6;
+    }
 
-*{box-sizing:border-box;font-family:Inter, Arial, sans-serif;}
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-body{
-  margin:0;
-  background:var(--yellow);
-  color:var(--black);
-}
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:16px;
-}
+    header {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-.logo{
-  font-size:28px;
-  font-weight:800;
-  color:white;
-}
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
 
-.menu{
-  font-size:24px;
-  color:white;
-  cursor:pointer;
-}
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 20px;
+      text-align: center;
+    }
 
-/* POT */
-.pot{
-  text-align:center;
-  margin-top:10px;
-  font-size:32px;
-  font-weight:700;
-}
+    .pot {
+      font-size: 28px;
+      color: var(--yellow);
+      font-weight: 700;
+    }
 
-/* GO BUTTON */
-.go-container{
-  display:flex;
-  justify-content:center;
-  margin:40px 0;
-}
+    .timer {
+      font-size: 14px;
+      color: var(--muted);
+    }
 
-.go-circle{
-  width:160px;
-  height:160px;
-  border:6px solid white;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  font-weight:900;
-  color:white;
-  cursor:pointer;
-}
+    .go-button {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 6px solid var(--yellow);
+      background: transparent;
+      color: var(--text);
+      font-size: 42px;
+      font-weight: 700;
+      cursor: pointer;
+    }
 
-/* FORUM */
-.forum{
-  background:white;
-  border-radius:24px 24px 0 0;
-  padding:16px;
-  min-height:250px;
-}
+    .go-button:active {
+      transform: scale(0.97);
+    }
 
-.forum h3{
-  margin:0 0 8px 0;
-}
+    footer {
+      background: #15161b;
+      padding: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      cursor: pointer;
+    }
 
-.post{
-  background:var(--gray);
-  padding:10px;
-  border-radius:12px;
-  margin-bottom:8px;
-  font-size:14px;
-}
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
 
-/* MODALS */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
+    .modal-content {
+      background: #1c1d22;
+      padding: 24px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 320px;
+      text-align: center;
+    }
 
-.modal-content{
-  background:white;
-  padding:20px;
-  border-radius:20px;
-  max-width:300px;
-  text-align:center;
-}
-
-.modal button{
-  margin-top:12px;
-  padding:10px 16px;
-  border:none;
-  border-radius:12px;
-  background:var(--yellow);
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* AD */
-#adTimer{
-  font-size:28px;
-  font-weight:800;
-}
-</style>
+    .modal button {
+      margin-top: 16px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: var(--yellow);
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Ninety-Nine</div>
-  <div class="menu">⋮</div>
+  <h1>Ninety-Nine</h1>
+  <span>⋮</span>
 </header>
 
-<div class="pot">$ 1.245</div>
+<main>
+  <div class="pot">$12.450</div>
+  <div class="timer" id="timer">Next draw in: 59:59</div>
 
-<div class="go-container">
-  <div class="go-circle" onclick="startFlow()">GO!</div>
-</div>
+  <button class="go-button" id="goBtn">GO!</button>
+</main>
 
-<div class="forum" id="forum">
-  <h3>Latest results</h3>
-</div>
+<footer onclick="toggleHistory()">
+  ↓ Latest activity
+</footer>
 
-<!-- AGE MODAL -->
+<!-- MODAL +18 -->
 <div class="modal" id="ageModal">
   <div class="modal-content">
-    <h3>Before you play</h3>
-    <p>You must be over 18 to participate.</p>
-    <button onclick="acceptAge()">I am over 18</button>
+    <p>Are you over 18?</p>
+    <button onclick="confirmAge()">Yes</button>
   </div>
 </div>
 
-<!-- AD MODAL -->
+<!-- MODAL AD -->
 <div class="modal" id="adModal">
   <div class="modal-content">
-    <p>Advertisement</p>
-    <div id="adTimer">5</div>
+    <p>Watching ad…</p>
+    <p id="adTimer">5</p>
   </div>
 </div>
 
 <script>
-let accepted = false;
-let tickets = [];
-let ticketId = 1;
+  let ageConfirmed = false;
 
-function startFlow(){
-  if(!accepted){
-    document.getElementById("ageModal").style.display="flex";
-  }else{
-    showAd();
-  }
-}
+  const goBtn = document.getElementById("goBtn");
+  const ageModal = document.getElementById("ageModal");
+  const adModal = document.getElementById("adModal");
 
-function acceptAge(){
-  accepted = true;
-  document.getElementById("ageModal").style.display="none";
-  showAd();
-}
-
-function showAd(){
-  const ad = document.getElementById("adModal");
-  const timer = document.getElementById("adTimer");
-  let time = 5;
-  ad.style.display="flex";
-  timer.textContent = time;
-
-  const interval = setInterval(()=>{
-    time--;
-    timer.textContent = time;
-    if(time===0){
-      clearInterval(interval);
-      ad.style.display="none";
-      generateTicket();
+  goBtn.onclick = () => {
+    if (!ageConfirmed) {
+      ageModal.style.display = "flex";
+    } else {
+      startAd();
     }
-  },1000);
-}
-
-function generateTicket(){
-  const now = new Date();
-  const ticket = {
-    id: ticketId++,
-    time: now.toLocaleTimeString()
   };
-  tickets.push(ticket);
 
-  addPost(`🎟 Ticket #${ticket.id} generated at ${ticket.time}`);
-}
+  function confirmAge() {
+    ageConfirmed = true;
+    ageModal.style.display = "none";
+    startAd();
+  }
 
-function addPost(text){
-  const forum = document.getElementById("forum");
-  const div = document.createElement("div");
-  div.className="post";
-  div.textContent=text;
-  forum.appendChild(div);
-}
+  function startAd() {
+    adModal.style.display = "flex";
+    let seconds = 5;
+    const adTimer = document.getElementById("adTimer");
 
-/* SIMULATED DRAW EVERY HOUR (for demo = 30s) */
-setInterval(()=>{
-  if(tickets.length===0) return;
-  const winner = tickets[Math.floor(Math.random()*tickets.length)];
-  addPost(`🏆 Winner: Ticket #${winner.id} (anonymous)`);
-  tickets = [];
-},30000);
+    const interval = setInterval(() => {
+      seconds--;
+      adTimer.textContent = seconds;
+      if (seconds === 0) {
+        clearInterval(interval);
+        adModal.style.display = "none";
+        generateTicket();
+      }
+    }, 1000);
+  }
+
+  function generateTicket() {
+    console.log("Talón generado (anónimo)");
+    alert("Ticket generated");
+  }
+
+  // TIMER DE RONDA
+  let remaining = 3600;
+  const timerEl = document.getElementById("timer");
+
+  setInterval(() => {
+    remaining--;
+    const m = String(Math.floor(remaining / 60)).padStart(2, "0");
+    const s = String(remaining % 60).padStart(2, "0");
+    timerEl.textContent = `Next draw in: ${m}:${s}`;
+    if (remaining <= 0) remaining = 3600;
+  }, 1000);
+
+  function toggleHistory() {
+    alert("History / forum coming soon");
+  }
 </script>
 
 </body>
