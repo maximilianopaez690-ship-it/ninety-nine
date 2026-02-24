@@ -1,229 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Ninety-Nine</title>
+  <meta charset="UTF-8">
+  <title>Kyugard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-<style>
-* {
-  box-sizing: border-box;
-  font-family: Inter, system-ui, sans-serif;
-}
+    body {
+      background-color: #f4f8fc;
+      color: #1c2b3a;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-body {
-  margin: 0;
-  background: #000;
-  color: #fff;
-}
+    header {
+      padding: 20px 40px;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e6ed;
+    }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-}
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      color: #0d3b66;
+    }
 
-header h1 {
-  margin: 0;
-  font-size: 22px;
-  color: #fff;
-}
+    .hero {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 20px;
+    }
 
-#pot {
-  color: #ffd400;
-  font-size: 18px;
-}
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 600;
+      color: #0d3b66;
+    }
 
-#timer {
-  font-size: 18px;
-}
+    .hero p {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #3a4a5a;
+      max-width: 600px;
+    }
 
-/* MAIN */
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-}
+    footer {
+      padding: 60px 20px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid #e0e6ed;
+    }
 
-#goCircle {
-  width: 190px;
-  height: 190px;
-  border-radius: 50%;
-  border: 4px solid #ffd400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 44px;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-}
+    .manifesto {
+      font-size: 20px;
+      line-height: 1.8;
+      color: #1c2b3a;
+      margin-bottom: 20px;
+    }
 
-#choices {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
-}
-
-.choice {
-  padding: 16px 36px;
-  font-size: 22px;
-  background: #ffd400;
-  border: none;
-  cursor: pointer;
-  color: #000;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
-
-#status {
-  margin-top: 20px;
-  font-size: 16px;
-  opacity: 0.9;
-}
-
-/* HISTORIAL */
-#history {
-  margin-top: 50px;
-  padding: 16px;
-  border-top: 1px solid #222;
-}
-
-#history h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#rounds {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#rounds li {
-  font-size: 14px;
-  margin-bottom: 6px;
-  opacity: 0.85;
-}
-</style>
+    .author {
+      font-size: 16px;
+      color: #0d3b66;
+      font-style: italic;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Ninety-Nine</h1>
-  <div id="pot">$0</div>
-  <div id="timer">05:00</div>
-</header>
+  <header>
+    <div class="logo">Kyugard</div>
+  </header>
 
-<main>
-  <div id="goCircle">GO!</div>
+  <section class="hero">
+    <div>
+      <h1>Democracia Directa Voluntaria</h1>
+      <p>Un espacio para pensar, aprender y construir una comunidad descentralizada.</p>
+    </div>
+  </section>
 
-  <div id="choices" class="hidden">
-    <button class="choice" data-choice="cara">CARA</button>
-    <button class="choice" data-choice="cruz">CRUZ</button>
-  </div>
-
-  <div id="status"></div>
-</main>
-
-<section id="history">
-  <h2>Historial</h2>
-  <ul id="rounds"></ul>
-</section>
-
-<script>
-/* ESTADO */
-let time = 300; // 5 minutos
-let pot = 0;
-let votes = { cara: 0, cruz: 0 };
-let hasPlayed = false;
-
-/* ELEMENTOS */
-const timerEl = document.getElementById("timer");
-const potEl = document.getElementById("pot");
-const goCircle = document.getElementById("goCircle");
-const choices = document.getElementById("choices");
-const status = document.getElementById("status");
-const rounds = document.getElementById("rounds");
-
-/* TIMER */
-function updateTimer() {
-  const min = String(Math.floor(time / 60)).padStart(2, "0");
-  const sec = String(time % 60).padStart(2, "0");
-  timerEl.textContent = `${min}:${sec}`;
-}
-
-setInterval(() => {
-  if (time > 0) {
-    time--;
-    updateTimer();
-  } else {
-    finishRound();
-    startNewRound();
-  }
-}, 1000);
-
-/* RONDAS */
-function startNewRound() {
-  time = 300;
-  votes = { cara: 0, cruz: 0 };
-  pot = 0;
-  hasPlayed = false;
-
-  potEl.textContent = "$0";
-  status.textContent = "";
-  choices.classList.add("hidden");
-}
-
-function finishRound() {
-  const total = votes.cara + votes.cruz;
-  if (total === 0) return;
-
-  const caraPct = (votes.cara / total) * 100;
-  const cruzPct = (votes.cruz / total) * 100;
-
-  let winner = "EMPATE";
-  if (caraPct < cruzPct) winner = "CARA";
-  else if (cruzPct < caraPct) winner = "CRUZ";
-
-  const li = document.createElement("li");
-  li.textContent =
-    `Pozo $${pot} | Cara ${caraPct.toFixed(1)}% | Cruz ${cruzPct.toFixed(1)}% | Winner: ${winner}`;
-
-  rounds.prepend(li);
-}
-
-/* INTERACCIÓN */
-goCircle.addEventListener("click", () => {
-  if (hasPlayed) return;
-  choices.classList.remove("hidden");
-  status.textContent = "Elegí cara o cruz";
-});
-
-document.querySelectorAll(".choice").forEach(btn => {
-  btn.addEventListener("click", () => {
-    if (hasPlayed) return;
-
-    hasPlayed = true;
-    const choice = btn.dataset.choice;
-
-    votes[choice]++;
-    pot += 100; // simulación pago
-    potEl.textContent = `$${pot}`;
-
-    choices.classList.add("hidden");
-    status.textContent = "Estás participando en esta ronda";
-  });
-});
-
-updateTimer();
-</script>
+  <footer>
+    <div class="manifesto">
+      Al final, Kyugard será una comunidad descentralizada.<br>
+      Por eso, no espero que seamos muchos.<br>
+      Espero que seamos todos.
+    </div>
+    <div class="author">
+      — Adrien Polito
+    </div>
+  </footer>
 
 </body>
 </html>
