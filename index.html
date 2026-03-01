@@ -1,233 +1,643 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kyugard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kyugard</title>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI', sans-serif;
-}
+  <style>
+    :root{
+      --bg: #050506;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.12);
+      --text: rgba(255,255,255,0.86);
+      --muted: rgba(255,255,255,0.62);
+      --gold: #d8b35a;
+      --gold-2: #f2d690;
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --radius: 18px;
+    }
 
-body{
-  color:#1c2b3a;
-  background:#f4f8fc;
-}
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{
+      background: radial-gradient(1200px 700px at 50% 10%, rgba(216,179,90,0.12), transparent 55%),
+                  radial-gradient(900px 500px at 15% 30%, rgba(255,255,255,0.06), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.35;
+    }
 
-/* NAVBAR */
+    a{ color: inherit; text-decoration:none; }
+    .container{ width:min(1100px, 92vw); margin: 0 auto; }
 
-header{
-  position:fixed;
-  width:100%;
-  top:0;
-  left:0;
-  background:white;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 60px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.05);
-  z-index:1000;
-}
+    /* Header */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(5,5,6,0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .brand-name{
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 18px;
+    }
+    .navlinks{
+      display:flex; gap: 18px; align-items:center;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .navlinks a{ padding: 8px 10px; border-radius: 10px; }
+    .navlinks a:hover{ background: rgba(255,255,255,0.06); color: var(--text); }
 
-.logo{
-  font-size:22px;
-  font-weight:600;
-  color:#0d3b66;
-}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(216,179,90,0.35);
+      background: rgba(216,179,90,0.10);
+      color: var(--gold-2);
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(216,179,90,0.16);
+      border-color: rgba(216,179,90,0.55);
+    }
 
-nav a{
-  margin-left:25px;
-  text-decoration:none;
-  color:#1c2b3a;
-  font-weight:500;
-}
+    /* Hero */
+    .hero{
+      padding: 44px 0 26px;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .hero-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 40% 0%, rgba(216,179,90,0.16), transparent 60%),
+        radial-gradient(600px 260px at 90% 30%, rgba(255,255,255,0.07), transparent 65%);
+      pointer-events:none;
+    }
+    .hero-content{ position:relative; z-index: 1; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(216,179,90,0.30);
+      background: rgba(216,179,90,0.08);
+      color: var(--gold-2);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .2px;
+    }
+    h1{
+      margin-top: 14px;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .cta-row{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .btn-solid{
+      border-color: rgba(216,179,90,0.55);
+      background: rgba(216,179,90,0.18);
+      color: var(--gold-2);
+    }
+    .btn-ghost{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.86);
+      font-weight: 800;
+    }
+    .btn-ghost:hover{ background: rgba(255,255,255,0.08); }
 
-nav a:hover{
-  color:#0d3b66;
-}
+    /* Right panel (logo + tagline) */
+    .brand-panel{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      gap: 14px;
+      position:relative;
+      overflow:hidden;
+      min-height: 320px;
+    }
+    .brand-panel:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(420px 220px at 50% 20%, rgba(216,179,90,0.16), transparent 65%);
+      pointer-events:none;
+    }
+    .logo-wrap{ width: 104px; height: 104px; position:relative; z-index:1; }
+    .tag{
+      position:relative; z-index:1;
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -0.6px;
+      color: var(--gold-2);
+      margin-top: 6px;
+    }
+    .tagline{
+      position:relative; z-index:1;
+      color: rgba(255,255,255,0.78);
+      font-weight: 700;
+      font-size: 18px;
+    }
 
-/* HERO */
+    /* Sections */
+    section{ padding: 22px 0; }
+    .section-title{
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .section-sub{
+      color: var(--muted);
+      margin-bottom: 14px;
+      max-width: 75ch;
+      font-size: 15px;
+    }
 
-.hero{
-  height:100vh;
-  background-image:linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.9)),
-  url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
-}
+    /* Gard */
+    .gard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(216,179,90,0.20);
+      background: linear-gradient(180deg, rgba(216,179,90,0.12), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow:hidden;
+      position: relative;
+    }
+    .gard-head{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .gard-badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(216,179,90,0.30);
+      background: rgba(216,179,90,0.10);
+      color: var(--gold-2);
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .gard-title{
+      font-weight: 900;
+      font-size: 18px;
+      margin-top: 6px;
+      letter-spacing: -0.2px;
+    }
+    .gard-note{
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 6px;
+      max-width: 70ch;
+    }
 
-.hero-content{
-  max-width:800px;
-}
+    .chat{
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 220px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .msg{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .dot{
+      width: 28px; height: 28px;
+      border-radius: 999px;
+      background: rgba(216,179,90,0.22);
+      border: 1px solid rgba(216,179,90,0.35);
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    .bubble{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      max-width: 72ch;
+    }
+    .bubble b{ color: rgba(255,255,255,0.92); }
+    .bubble p{ color: rgba(255,255,255,0.78); margin-top: 4px; font-size: 14px; }
 
-.hero h1{
-  font-size:56px;
-  color:#0d3b66;
-  margin-bottom:20px;
-}
+    /* Kyu cards */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+      min-height: 210px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(300px 160px at 30% 0%, rgba(216,179,90,0.12), transparent 70%);
+      pointer-events:none;
+      opacity: .7;
+    }
+    .card > *{ position:relative; z-index:1; }
+    .card-top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.82);
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .price{
+      color: var(--gold-2);
+      font-weight: 900;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(216,179,90,0.28);
+      background: rgba(216,179,90,0.10);
+      white-space: nowrap;
+    }
+    .card h3{
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      margin-top: 10px;
+    }
+    .card p{
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 8px;
+      max-width: 60ch;
+    }
+    .card .card-actions{
+      display:flex; gap: 10px; flex-wrap: wrap;
+    }
 
-.hero p{
-  font-size:22px;
-  color:#3a4a5a;
-}
+    /* Footer */
+    footer{
+      padding: 28px 0 34px;
+      margin-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.20);
+    }
+    .quote{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      color: rgba(255,255,255,0.80);
+    }
+    .quote p{
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .quote .sig{
+      margin-top: 10px;
+      color: var(--gold-2);
+      font-weight: 900;
+    }
+    .footrow{
+      margin-top: 14px;
+      display:flex;
+      justify-content:space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-/* COURSES */
-
-.courses{
-  padding:100px 60px;
-  text-align:center;
-}
-
-.courses h2{
-  font-size:36px;
-  margin-bottom:60px;
-  color:#0d3b66;
-}
-
-.course-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-  gap:40px;
-}
-
-.card{
-  background:white;
-  padding:40px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-}
-
-.card h3{
-  margin-bottom:15px;
-  color:#0d3b66;
-}
-
-.card p{
-  margin-bottom:20px;
-  color:#555;
-}
-
-.card button{
-  padding:10px 20px;
-  border:none;
-  background:#0d3b66;
-  color:white;
-  border-radius:5px;
-  cursor:pointer;
-}
-
-.card button:hover{
-  background:#094a85;
-}
-
-/* MANIFESTO */
-
-.manifesto-section{
-  background:#ffffff;
-  padding:100px 20px;
-  text-align:center;
-}
-
-.manifesto{
-  font-size:24px;
-  line-height:1.8;
-  max-width:800px;
-  margin:auto;
-  margin-bottom:25px;
-}
-
-.author{
-  font-size:18px;
-  color:#0d3b66;
-  font-style:italic;
-}
-
-/* FOOTER */
-
-footer{
-  padding:40px;
-  text-align:center;
-  background:#f0f4f8;
-  font-size:14px;
-  color:#555;
-}
-</style>
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+      .navlinks{ display:none; }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">Kyugard</div>
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Cursos</a>
-    <a href="#">Sobre Nosotros</a>
-    <a href="#">Blog</a>
-    <a href="#">Contacto</a>
-  </nav>
-</header>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#inicio">
+          <!-- Mini logo (SVG) -->
+          <svg width="34" height="34" viewBox="0 0 120 120" aria-label="Kyugard logo" role="img">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#f2d690"/>
+                <stop offset="1" stop-color="#d8b35a"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(216,179,90,0.25)" stroke-width="2"/>
+            <!-- 6 personas (icono simplificado) -->
+            <g fill="url(#g)">
+              <!-- cabezas -->
+              <circle cx="60" cy="14" r="9"/>
+              <circle cx="98" cy="34" r="9"/>
+              <circle cx="98" cy="86" r="9"/>
+              <circle cx="60" cy="106" r="9"/>
+              <circle cx="22" cy="86" r="9"/>
+              <circle cx="22" cy="34" r="9"/>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Democracia Directa Voluntaria</h1>
-    <p>Construyendo una comunidad donde la verdadera democracia y la libertad sean posibles.</p>
-  </div>
-</section>
+              <!-- brazos curvos (arcos) -->
+              <path d="M60 26 C74 26 86 30 94 40 L86 44 C80 37 71 34 60 34 Z"/>
+              <path d="M104 60 C104 74 100 86 90 94 L86 86 C93 80 96 71 96 60 Z"/>
+              <path d="M60 94 C46 94 34 90 26 80 L34 76 C40 83 49 86 60 86 Z"/>
+              <path d="M16 60 C16 46 20 34 30 26 L34 34 C27 40 24 49 24 60 Z"/>
+              <path d="M86 76 C78 84 70 86 60 86 L60 94 C72 94 84 90 94 80 Z"/>
+              <path d="M34 44 C42 36 50 34 60 34 L60 26 C48 26 36 30 26 40 Z"/>
+            </g>
+          </svg>
 
-<section class="courses">
-  <h2>Nuestros Cursos</h2>
-  <div class="course-grid">
+          <div class="brand-name">Kyugard</div>
+        </a>
 
-    <div class="card">
-      <h3>Fundamentos de Descentralización</h3>
-      <p>Comprende los principios filosóficos y técnicos de una comunidad descentralizada.</p>
-      <button>Ingresar</button>
+        <nav class="navlinks" aria-label="Navegación">
+          <a href="#inicio">Inicio</a>
+          <a href="#gard">Gard</a>
+          <a href="#cursos">Kyu</a>
+          <a href="#frase">Frase</a>
+        </nav>
+
+        <a class="btn" href="#cursos">Empezar</a>
+      </div>
     </div>
+  </header>
 
-    <div class="card">
-      <h3>Democracia Directa Aplicada</h3>
-      <p>Aprende cómo implementar participación voluntaria en decisiones colectivas.</p>
-      <button>Ingresar</button>
+  <main id="inicio" class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div class="hero-card">
+          <div class="hero-content">
+            <div class="kicker">Kyugard — Comunidad en formación</div>
+            <h1>Una evolución consciente, de la vida interior a la vida que compartimos.</h1>
+            <p class="sub">
+              Kyugard es una comunidad de gente que evoluciona para construir un mundo mejor.
+              Comenzá con los Kyu y avanzá hacia el Gard: el espacio de conversación y construcción colectiva.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn btn-solid" href="#cursos">Empezá por el Tercer Kyu</a>
+              <a class="btn btn-ghost" href="#gard">Ver qué es el Gard</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-panel">
+          <div class="logo-wrap" aria-hidden="true">
+            <!-- Logo grande (SVG). Podés reemplazar este SVG por tu logo final cuando quieras -->
+            <svg width="104" height="104" viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f2d690"/>
+                  <stop offset="1" stop-color="#d8b35a"/>
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="60" r="56" fill="none" stroke="rgba(216,179,90,0.28)" stroke-width="2"/>
+              <g fill="url(#gold)">
+                <circle cx="60" cy="14" r="9"/>
+                <circle cx="98" cy="34" r="9"/>
+                <circle cx="98" cy="86" r="9"/>
+                <circle cx="60" cy="106" r="9"/>
+                <circle cx="22" cy="86" r="9"/>
+                <circle cx="22" cy="34" r="9"/>
+
+                <path d="M60 26 C74 26 86 30 94 40 L86 44 C80 37 71 34 60 34 Z"/>
+                <path d="M104 60 C104 74 100 86 90 94 L86 86 C93 80 96 71 96 60 Z"/>
+                <path d="M60 94 C46 94 34 90 26 80 L34 76 C40 83 49 86 60 86 Z"/>
+                <path d="M16 60 C16 46 20 34 30 26 L34 34 C27 40 24 49 24 60 Z"/>
+                <path d="M86 76 C78 84 70 86 60 86 L60 94 C72 94 84 90 94 80 Z"/>
+                <path d="M34 44 C42 36 50 34 60 34 L60 26 C48 26 36 30 26 40 Z"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="tag">Kyugard</div>
+          <div class="tagline">Anímate a evolucionar</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- GARD -->
+    <section id="gard">
+      <div class="section-title">Gard</div>
+      <div class="section-sub">
+        El Gard es el objetivo: un espacio de conversación, debate y propuestas, accesible para quienes completan los Kyu.
+        No es un chat público: es una comunidad preparada.
+      </div>
+
+      <div class="gard">
+        <div class="gard-head">
+          <div>
+            <div class="gard-badge">Gard — Comunidad (meta)</div>
+            <div class="gard-title">Un lugar para construir juntos, sin ruido.</div>
+            <div class="gard-note">
+              Acá se conversa con respeto, se proponen ideas con claridad y se aprende a debatir sin atacar.
+              El acceso se habilita al completar el recorrido de los Kyu.
+            </div>
+          </div>
+          <a class="btn btn-solid" href="#cursos">Ver los Kyu</a>
+        </div>
+
+        <div class="chat" aria-label="Vista previa conceptual del Gard">
+          <div class="msg">
+            <div class="dot"></div>
+            <div class="bubble">
+              <b>Participante</b>
+              <p>¿Cómo convertir una idea en una propuesta clara y respetuosa para toda la comunidad?</p>
+            </div>
+          </div>
+
+          <div class="msg">
+            <div class="dot"></div>
+            <div class="bubble">
+              <b>Participante</b>
+              <p>Propongo que el debate tenga una regla simple: primero resumir la idea del otro antes de responder.</p>
+            </div>
+          </div>
+
+          <div class="msg">
+            <div class="dot"></div>
+            <div class="bubble">
+              <b>Participante</b>
+              <p>Esto cambia todo: cuando escuchamos bien, el conflicto baja y la calidad sube.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KYU -->
+    <section id="cursos">
+      <div class="section-title">Recorrido Kyu</div>
+      <div class="section-sub">
+        Tres etapas simples, con la misma estética y el mismo estándar: claridad, respeto, paz y construcción.
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <div class="pill">Tercer Kyu</div>
+              <div class="price">Acceso inicial</div>
+            </div>
+            <h3>Fundamentos</h3>
+            <p>
+              Principios de Kyugard, revolución evolutiva (paz, ley y cultura), descentralización (pros y contras) y marco general.
+            </p>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-solid" href="#cursos" onclick="alert('Luego lo conectamos a la página del Tercer Kyu.'); return false;">Empezar</a>
+            <a class="btn btn-ghost" href="#gard">Ver meta</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <div class="pill">Segundo Kyu</div>
+              <div class="price">$1 anual</div>
+            </div>
+            <h3>Profundización</h3>
+            <p>
+              Participación consciente, responsabilidad colectiva, estructura de propuestas y preparación para el debate y la convivencia.
+            </p>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-solid" href="#cursos" onclick="alert('Luego lo conectamos al pago / acceso del Segundo Kyu.'); return false;">Acceder</a>
+            <a class="btn btn-ghost" href="#gard">Ver Gard</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div>
+            <div class="card-top">
+              <div class="pill">Primer Kyu</div>
+              <div class="price">$1 anual</div>
+            </div>
+            <h3>Debate y Propuesta</h3>
+            <p>
+              El arte de debatir con respeto, proponer ideas con claridad y sostener paz, ley y responsabilidad en comunidad.
+            </p>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-solid" href="#cursos" onclick="alert('Luego lo conectamos al acceso del Primer Kyu.'); return false;">Acceder</a>
+            <a class="btn btn-ghost" href="#gard">Objetivo</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="frase">
+    <div class="container">
+      <div class="quote">
+        <p>
+          Al final, Kyugard será una comunidad descentralizada.<br/>
+          Por eso, no espero que seamos muchos.<br/>
+          Espero que seamos todos.
+        </p>
+        <div class="sig">— Adrien Polito</div>
+      </div>
+
+      <div class="footrow">
+        <div>© <span id="year"></span> Kyugard</div>
+        <div>
+          <a href="#inicio">Inicio</a> ·
+          <a href="#gard">Gard</a> ·
+          <a href="#cursos">Kyu</a>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <div class="card">
-      <h3>Gobernanza Digital</h3>
-      <p>Explora herramientas modernas para la organización y toma de decisiones comunitarias.</p>
-      <button>Ingresar</button>
-    </div>
-
-  </div>
-</section>
-
-<section class="manifesto-section">
-  <div class="manifesto">
-    Al final, Kyugard será una comunidad descentralizada.<br>
-    Por eso, no espero que seamos muchos.<br>
-    Espero que seamos todos.
-  </div>
-  <div class="author">
-    — Adrien Polito
-  </div>
-</section>
-
-<footer>
-  © 2026 Kyugard — Todos los derechos reservados.
-</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
