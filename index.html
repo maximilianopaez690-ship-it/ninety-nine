@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kyugard</title>
 
-  <!-- Tipos (opcionales): podés borrarlo si no querés depender de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,18 +12,12 @@
   <style>
     :root{
       --bg0:#05060a;
-      --bg1:#070a12;
       --bg2:#0b1030;
       --text:#f4f1e6;
 
       --gold1:#f7e7b1;
       --gold2:#d9b66a;
-      --gold3:#a77b2a;
 
-      --glass: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.10);
-
-      --radius: 18px;
       --shadow: 0 20px 60px rgba(0,0,0,.55);
     }
 
@@ -33,34 +26,28 @@
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-      background: radial-gradient(1200px 700px at 30% 20%, rgba(255,215,120,.10), transparent 55%),
-                  radial-gradient(900px 600px at 70% 30%, rgba(120,160,255,.10), transparent 55%),
-                  linear-gradient(180deg, var(--bg0), var(--bg2));
+      background:
+        radial-gradient(1200px 700px at 30% 20%, rgba(255,215,120,.10), transparent 55%),
+        radial-gradient(900px 600px at 70% 30%, rgba(120,160,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg2));
       min-height:100vh;
     }
 
-    /* Marco como “captura” */
-    .frame{
-      max-width: 1180px;
-      margin: 28px auto;
-      padding: 0 16px;
-    }
+    .frame{ max-width:1180px; margin:28px auto; padding:0 16px; }
     .shell{
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:22px;
       overflow:hidden;
-      box-shadow: var(--shadow);
+      box-shadow:var(--shadow);
       background:
         radial-gradient(1400px 700px at 55% 35%, rgba(255,210,120,.08), transparent 60%),
         radial-gradient(1200px 700px at 45% 55%, rgba(120,170,255,.10), transparent 60%),
         linear-gradient(180deg, rgba(10,12,22,.92), rgba(8,10,18,.92));
-      position: relative;
+      position:relative;
     }
 
-    /* “Cosmos” simple con estrellas */
     .stars{
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0; pointer-events:none; opacity:.75;
       background-image:
         radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.55), transparent 55%),
         radial-gradient(1px 1px at 140px 90px, rgba(255,255,255,.40), transparent 55%),
@@ -73,63 +60,30 @@
         radial-gradient(1px 1px at 560px 420px, rgba(255,255,255,.22), transparent 55%),
         radial-gradient(2px 2px at 860px 520px, rgba(255,255,255,.28), transparent 55%),
         radial-gradient(1px 1px at 1040px 560px, rgba(255,255,255,.18), transparent 55%);
-      opacity:.75;
-      pointer-events:none;
       filter: blur(.15px);
     }
 
     /* Navbar */
     .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 18px 22px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(0,0,0,.20), transparent);
-      position: relative;
-      z-index: 2;
+      position:relative; z-index:2;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 220px;
-    }
-    .brand-mark{
-      width:34px; height:34px;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
-    }
+    .brand{ display:flex; align-items:center; gap:12px; min-width:220px; }
+    .brand-mark{ width:34px; height:34px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
     .brand-name{
       font-family: Cinzel, serif;
-      letter-spacing: .4px;
-      font-weight: 700;
-      font-size: 22px;
+      font-weight:700;
+      font-size:22px;
+      letter-spacing:.4px;
       background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip:text; background-clip:text; color: transparent;
     }
-
-    .navlinks{
-      display:flex;
-      gap:26px;
-      align-items:center;
-      font-family: Inter, sans-serif;
-      font-weight: 500;
-      color: rgba(244,241,230,.85);
-    }
-    .navlinks a{
-      color: inherit;
-      text-decoration:none;
-      opacity:.9;
-    }
+    .navlinks{ display:flex; gap:26px; align-items:center; font-weight:500; color: rgba(244,241,230,.85); }
+    .navlinks a{ color:inherit; text-decoration:none; opacity:.9; }
     .navlinks a:hover{ opacity:1; text-decoration:underline; }
-
-    .navcta{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
 
     .btn{
       border: 1px solid rgba(255,255,255,.12);
@@ -145,94 +99,78 @@
       box-shadow: 0 10px 28px rgba(0,0,0,.28);
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.09);
-      border-color: rgba(255,255,255,.18);
-    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18); }
     .btn-gold{
-      border: 0;
-      color: #1b1406;
+      border:0;
+      color:#1b1406;
       background: linear-gradient(180deg, var(--gold1), var(--gold2));
       box-shadow: 0 18px 40px rgba(217,182,106,.20), 0 14px 28px rgba(0,0,0,.30);
     }
-    .btn-gold:hover{ transform: translateY(-1px); }
 
     /* Layout principal */
     .main{
-      position: relative;
-      z-index: 2;
-      padding: 34px 26px 34px;
+      position:relative; z-index:2;
+      padding:34px 26px 34px;
       display:grid;
       grid-template-columns: 1.1fr .9fr;
-      gap: 26px;
+      gap:26px;
     }
 
-    /* Columna izquierda */
     .hero h1{
-      margin: 0 0 10px;
-      font-family: Cinzel, serif;
-      font-weight: 700;
+      margin:0 0 10px;
+      font-family:Cinzel, serif;
+      font-weight:700;
       font-size: clamp(34px, 4vw, 54px);
-      line-height: 1.06;
+      line-height:1.06;
       background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
       text-shadow: 0 22px 60px rgba(0,0,0,.35);
     }
     .hero p{
-      margin: 0 0 18px;
-      max-width: 520px;
-      font-size: 16px;
-      line-height: 1.7;
+      margin:0 0 18px;
+      max-width: 560px;
+      font-size:16px;
+      line-height:1.7;
       color: rgba(244,241,230,.84);
     }
-
-    .hero-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap: wrap;
+    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+    .note{
       margin-top: 14px;
+      font-size: 13px;
+      color: rgba(244,241,230,.78);
+    }
+    .price{
+      font-weight: 800;
+      background: linear-gradient(180deg, var(--gold1), var(--gold2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
     }
 
-    /* Columna derecha: diagrama */
-    .diagram{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 0;
-    }
-
-    /* Contenedor del triángulo: sin líneas */
+    /* Diagrama */
+    .diagram{ display:flex; align-items:center; justify-content:center; padding: 10px 0; }
     .tri{
-      width: min(520px, 100%);
+      width:min(520px, 100%);
       aspect-ratio: 1 / 1;
-      position: relative;
+      position:relative;
       display:grid;
       place-items:center;
     }
 
-    /* Todos los círculos MISMO DIÁMETRO */
-    .node{
-      width: 150px;
-      height: 150px;
-      border-radius: 999px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      border: 1px solid rgba(255,255,255,.14);
+    /* 4 círculos IGUALES */
+    .node, .gard{
+      width:150px; height:150px; border-radius:999px;
+      display:grid; place-items:center; text-align:center;
+      border:1px solid rgba(255,255,255,.14);
       background:
         radial-gradient(120px 120px at 50% 40%, rgba(255,215,140,.12), transparent 55%),
         rgba(0,0,0,.25);
       box-shadow: 0 24px 55px rgba(0,0,0,.45);
-      position: absolute;
-      user-select:none;
-    }
-    .node::before{
-      content:"";
       position:absolute;
-      inset:-3px;
+      user-select:none;
+      overflow:hidden;
+    }
+    .node::before, .gard::before{
+      content:"";
+      position:absolute; inset:-3px;
       border-radius:999px;
       background: radial-gradient(closest-side, rgba(247,231,177,.42), rgba(217,182,106,.18), transparent 72%);
       filter: blur(6px);
@@ -241,136 +179,73 @@
     }
 
     .node .label{
-      font-family: Cinzel, serif;
-      letter-spacing: .6px;
+      font-family:Cinzel, serif;
+      letter-spacing:.6px;
       color: rgba(244,241,230,.92);
-      font-weight: 700;
-      font-size: 20px;
+      font-weight:700;
+      font-size:20px;
       text-transform: lowercase;
-      margin-bottom: 4px;
+      margin-bottom:4px;
     }
     .node .roman{
-      font-family: Cinzel, serif;
-      font-size: 38px;
-      font-weight: 700;
-      line-height: 1;
+      font-family:Cinzel, serif;
+      font-size:38px;
+      font-weight:700;
+      line-height:1;
       background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
     }
 
-    /* Gard central: MISMO TAMAÑO que los Kyu */
-    .gard{
-      width: 150px;
-      height: 150px;
-      border-radius: 999px;
-      position:absolute;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(120px 120px at 50% 35%, rgba(255,215,140,.14), transparent 55%),
-        rgba(0,0,0,.30);
-      box-shadow: 0 24px 60px rgba(0,0,0,.55);
-      overflow:hidden;
-    }
-    .gard::before{
-      content:"";
-      position:absolute;
-      inset:-4px;
-      border-radius:999px;
-      background: radial-gradient(closest-side, rgba(247,231,177,.50), rgba(217,182,106,.22), transparent 72%);
-      filter: blur(7px);
-      opacity:.95;
-      z-index:-1;
-    }
-
-    .gard .lock{
-      width: 30px;
-      height: 30px;
-      margin-bottom: 6px;
-      opacity:.95;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.45));
-    }
     .gard .title{
-      font-family: Cinzel, serif;
-      font-weight: 800;
-      font-size: 22px;
+      font-family:Cinzel, serif;
+      font-weight:800;
+      font-size:22px;
       letter-spacing:.4px;
       background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
-      margin-bottom: 2px;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin-bottom:2px;
     }
-    .gard .sub{
-      font-size: 12.5px;
-      color: rgba(244,241,230,.85);
-      margin-bottom: 0;
-    }
+    .gard .sub{ font-size:12.5px; color: rgba(244,241,230,.85); }
 
-    /* Posiciones del triángulo (sin líneas) */
-    .pos-top{ top: 24px; left: 50%; transform: translateX(-50%); }
-    .pos-left{ bottom: 34px; left: 34px; }
-    .pos-right{ bottom: 34px; right: 34px; }
-    .pos-center{ top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .lock{ width:30px; height:30px; margin-bottom:6px; opacity:.95; filter: drop-shadow(0 12px 18px rgba(0,0,0,.45)); }
 
-    /* Etiquetas debajo de nodos */
-    .caption{
-      position:absolute;
-      width: 180px;
-      text-align:center;
-      font-size: 13px;
-      line-height: 1.35;
-      color: rgba(244,241,230,.80);
-    }
-    .cap-left{ bottom: -10px; left: 20px; }
-    .cap-right{ bottom: -10px; right: 20px; }
-    .cap-top{ top: 178px; left: 50%; transform: translateX(-50%); }
+    /* Posiciones triángulo */
+    .pos-top{ top:24px; left:50%; transform: translateX(-50%); }
+    .pos-left{ bottom:34px; left:34px; }
+    .pos-right{ bottom:34px; right:34px; }
+    .pos-center{ top:50%; left:50%; transform: translate(-50%, -50%); }
 
-    .cap-title{
-      display:block;
-      font-weight: 700;
-      color: rgba(244,241,230,.92);
-      margin-bottom: 4px;
-    }
-    .cap-muted{ color: rgba(244,241,230,.72); }
-
-    /* CTA desbloqueo */
-    .unlock{
-      margin-top: 18px;
+    /* Estado demo (desbloqueo) */
+    .status{
+      margin-top: 14px;
       display:flex;
+      gap:10px;
+      flex-wrap:wrap;
       align-items:center;
-      gap: 10px;
-      flex-wrap: wrap;
     }
-    .note{
-      font-size: 13px;
-      color: rgba(244,241,230,.78);
+    .pill{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(244,241,230,.86);
     }
-    .price{
-      font-weight: 800;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
+    .pill.ok{
+      border-color: rgba(217,182,106,.35);
+      background: rgba(217,182,106,.12);
     }
 
-    /* Responsive */
     @media (max-width: 980px){
-      .main{ grid-template-columns: 1fr; }
-      .diagram{ padding-top: 22px; }
+      .main{ grid-template-columns:1fr; }
       .navlinks{ display:none; }
       .brand{ min-width:auto; }
+      .diagram{ padding-top:22px; }
     }
-
     @media (max-width: 560px){
-      .node, .gard{ width: 130px; height: 130px; }
-      .pos-left{ left: 10px; }
-      .pos-right{ right: 10px; }
-      .cap-left, .cap-right{ display:none; }
+      .node, .gard{ width:130px; height:130px; }
+      .pos-left{ left:10px; }
+      .pos-right{ right:10px; }
     }
   </style>
 </head>
@@ -382,8 +257,7 @@
 
       <header class="nav">
         <div class="brand">
-          <!-- Reemplazá este SVG por tu logo real si querés precisión absoluta:
-               <img src="logo.png" alt="Kyugard" class="brand-mark" /> -->
+          <!-- Placeholder (6 puntos). Ideal: reemplazar por tu archivo exacto -->
           <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
             <defs>
               <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
@@ -392,7 +266,6 @@
               </linearGradient>
             </defs>
             <circle cx="50" cy="50" r="34" fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round"/>
-            <!-- 6 puntos (simple) -->
             <g fill="url(#g)">
               <circle cx="50" cy="10" r="6"/>
               <circle cx="78" cy="26" r="6"/>
@@ -402,104 +275,114 @@
               <circle cx="22" cy="26" r="6"/>
             </g>
           </svg>
-
           <div class="brand-name">Kyugard</div>
         </div>
 
         <nav class="navlinks">
           <a href="#inicio">Inicio</a>
           <a href="#cursos">Cursos</a>
-          <a href="#blog">Blog</a>
+          <a href="#gard">Gard</a>
           <a href="#contacto">Contacto</a>
         </nav>
 
-        <div class="navcta">
+        <div>
           <a class="btn btn-gold" href="#cursos">Empezar ahora</a>
         </div>
       </header>
 
       <main class="main" id="inicio">
         <section class="hero">
-          <h1>Entrena, progresa<br/>y únete a Kyugard</h1>
+          <h1>Elige evolucionar.</h1>
           <p>
-            Completa los <strong>Kyu</strong> (cursos) para evolucionar paso a paso.
-            Al alcanzar <strong>Kyu I</strong> y con una membresía de
-            <span class="price">US$1</span>, desbloqueás el <strong>Gard</strong>:
-            el foro privado donde la comunidad se conecta y construye.
+            <strong>Los tres Kyu son gratuitos.</strong> Avanzás por etapas, a tu ritmo.
+            Cuando completes <strong>Kyu I, Kyu II y Kyu III</strong>, desbloqueás el acceso al
+            <strong>Gard</strong> — el foro privado donde la comunidad debate y construye.
+          </p>
+          <p class="note">
+            Para entrar al Gard solo se requiere: <strong>3 Kyu completados</strong> +
+            <span class="price">US$1 / año</span>.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-gold" href="#cursos">Ver cursos</a>
-            <a class="btn" href="#gard">¿Qué es el Gard?</a>
+            <a class="btn btn-gold" href="#cursos">Ver Kyu gratuitos</a>
+            <a class="btn" href="#gard">Cómo se desbloquea</a>
           </div>
 
-          <div class="unlock" id="gard">
-            <span class="note">Acceso al Gard: <strong>Kyu I</strong> + <span class="price">US$1</span> membresía.</span>
-            <a class="btn" href="#unirse">Desbloquear</a>
+          <!-- “Demo” de estado (podés borrarlo si no querés mostrarlo) -->
+          <div class="status" aria-label="Estado de progreso (demo)">
+            <span class="pill ok">Kyu I: pendiente</span>
+            <span class="pill ok">Kyu II: pendiente</span>
+            <span class="pill ok">Kyu III: pendiente</span>
+            <span class="pill">Gard: bloqueado</span>
           </div>
         </section>
 
         <section class="diagram" id="cursos">
-          <div class="tri" aria-label="Mapa de progreso Kyugard">
+          <div class="tri">
             <!-- Kyu I -->
-            <div class="node pos-top">
+            <a class="node pos-top" href="kyu-1.html" title="Ir a Kyu I">
               <div>
                 <div class="label">kyu</div>
                 <div class="roman">I</div>
               </div>
-            </div>
+            </a>
 
             <!-- Kyu II -->
-            <div class="node pos-left">
+            <a class="node pos-left" href="kyu-2.html" title="Ir a Kyu II">
               <div>
                 <div class="label">kyu</div>
                 <div class="roman">II</div>
               </div>
-            </div>
+            </a>
 
             <!-- Kyu III -->
-            <div class="node pos-right">
+            <a class="node pos-right" href="kyu-3.html" title="Ir a Kyu III">
               <div>
                 <div class="label">kyu</div>
                 <div class="roman">III</div>
               </div>
-            </div>
+            </a>
 
-            <!-- Gard (MISMO tamaño) -->
-            <div class="gard pos-center">
+            <!-- Gard (bloqueado visualmente, mismo tamaño) -->
+            <a class="gard pos-center" href="#gard" title="Gard (requiere 3 Kyu + US$1/año)">
               <div>
-                <!-- candado simple -->
                 <svg class="lock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M7 10V8a5 5 0 0 1 10 0v2" stroke="#f7e7b1" stroke-width="2" stroke-linecap="round"/>
                   <rect x="6" y="10" width="12" height="11" rx="2" stroke="#d9b66a" stroke-width="2"/>
                   <path d="M12 14v3" stroke="#f7e7b1" stroke-width="2" stroke-linecap="round"/>
                 </svg>
                 <div class="title">Gard</div>
-                <div class="sub">Foro exclusivo</div>
+                <div class="sub">Foro privado</div>
               </div>
-            </div>
-
-            <!-- captions (opcionales) -->
-            <div class="caption cap-top">
-              <span class="cap-title">Kyu I</span>
-              <span class="cap-muted">Nivel requerido para entrar al Gard.</span>
-            </div>
-            <div class="caption cap-left">
-              <span class="cap-title">Kyu II</span>
-              <span class="cap-muted">Curso intermedio.</span>
-            </div>
-            <div class="caption cap-right">
-              <span class="cap-title">Kyu III</span>
-              <span class="cap-muted">Curso de entrada.</span>
-            </div>
+            </a>
           </div>
         </section>
       </main>
+
+      <section style="position:relative; z-index:2; padding: 0 26px 28px;" id="gard">
+        <div style="border-top:1px solid rgba(255,255,255,.10); padding-top:18px;">
+          <div style="display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:center;">
+            <div>
+              <h2 style="margin:0 0 8px; font-family:Cinzel,serif; letter-spacing:.2px;">
+                ¿Qué es el Gard?
+              </h2>
+              <p style="margin:0; color:rgba(244,241,230,.84); line-height:1.7;">
+                Es el espacio donde la comunidad se une: debates, propuestas, aprendizaje y construcción.
+                Se habilita cuando completás los 3 Kyu. Para sostenerlo, el acceso es de
+                <span class="price">US$1 por año</span>.
+              </p>
+            </div>
+            <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
+              <a class="btn" href="#cursos">Hacer los Kyu</a>
+              <a class="btn btn-gold" href="#unirse">Pagar US$1/año</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 
-  <!-- Anclas “fantasma” -->
-  <div id="blog"></div>
   <div id="contacto"></div>
   <div id="unirse"></div>
 </body>
