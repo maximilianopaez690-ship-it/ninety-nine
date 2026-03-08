@@ -1,389 +1,613 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyugard</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <meta name="description" content="Kyugard es una comunidad dedicada al estudio, debate y evolución del pensamiento democrático." />
   <style>
-    :root{
-      --bg0:#05060a;
-      --bg2:#0b1030;
-      --text:#f4f1e6;
+    :root {
+      --bg-dark: #081623;
+      --overlay: rgba(14, 35, 56, 0.72);
+      --overlay-strong: rgba(14, 35, 56, 0.84);
+      --blue: #173a5e;
+      --blue-2: #274f78;
+      --blue-soft: #edf3f9;
+      --text: #13202c;
+      --muted: #5f6b78;
+      --white: #ffffff;
+      --line: rgba(19, 32, 44, 0.10);
+      --shadow: 0 14px 40px rgba(9, 24, 39, 0.12);
+      --radius: 18px;
+      --max: 1200px;
+    }* { box-sizing: border-box; }
 
-      --gold1:#f7e7b1;
-      --gold2:#d9b66a;
+html { scroll-behavior: smooth; }
 
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-    }
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background: #ffffff;
+  line-height: 1.55;
+}
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 30% 20%, rgba(255,215,120,.10), transparent 55%),
-        radial-gradient(900px 600px at 70% 30%, rgba(120,160,255,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg2));
-      min-height:100vh;
-    }
+img {
+  display: block;
+  max-width: 100%;
+}
 
-    .frame{ max-width:1180px; margin:28px auto; padding:0 16px; }
-    .shell{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:22px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      background:
-        radial-gradient(1400px 700px at 55% 35%, rgba(255,210,120,.08), transparent 60%),
-        radial-gradient(1200px 700px at 45% 55%, rgba(120,170,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(10,12,22,.92), rgba(8,10,18,.92));
-      position:relative;
-    }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-    .stars{
-      position:absolute; inset:0; pointer-events:none; opacity:.75;
-      background-image:
-        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.55), transparent 55%),
-        radial-gradient(1px 1px at 140px 90px, rgba(255,255,255,.40), transparent 55%),
-        radial-gradient(1px 1px at 280px 220px, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(2px 2px at 520px 180px, rgba(255,255,255,.50), transparent 55%),
-        radial-gradient(1px 1px at 720px 110px, rgba(255,255,255,.35), transparent 55%),
-        radial-gradient(1px 1px at 940px 260px, rgba(255,255,255,.30), transparent 55%),
-        radial-gradient(2px 2px at 1060px 120px, rgba(255,255,255,.45), transparent 55%),
-        radial-gradient(1px 1px at 180px 340px, rgba(255,255,255,.25), transparent 55%),
-        radial-gradient(1px 1px at 560px 420px, rgba(255,255,255,.22), transparent 55%),
-        radial-gradient(2px 2px at 860px 520px, rgba(255,255,255,.28), transparent 55%),
-        radial-gradient(1px 1px at 1040px 560px, rgba(255,255,255,.18), transparent 55%);
-      filter: blur(.15px);
-    }
+.container {
+  width: min(var(--max), 92vw);
+  margin: 0 auto;
+}
 
-    /* Navbar */
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:18px 22px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(0,0,0,.20), transparent);
-      position:relative; z-index:2;
-    }
-    .brand{ display:flex; align-items:center; gap:12px; min-width:220px; }
-    .brand-mark{ width:34px; height:34px; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
-    .brand-name{
-      font-family: Cinzel, serif;
-      font-weight:700;
-      font-size:22px;
-      letter-spacing:.4px;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text; background-clip:text; color: transparent;
-    }
-    .navlinks{ display:flex; gap:26px; align-items:center; font-weight:500; color: rgba(244,241,230,.85); }
-    .navlinks a{ color:inherit; text-decoration:none; opacity:.9; }
-    .navlinks a:hover{ opacity:1; text-decoration:underline; }
+.display {
+  letter-spacing: -0.02em;
+}
 
-    .btn{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: rgba(244,241,230,.92);
-      padding: 10px 16px;
-      border-radius: 999px;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 600;
-      box-shadow: 0 10px 28px rgba(0,0,0,.28);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18); }
-    .btn-gold{
-      border:0;
-      color:#1b1406;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      box-shadow: 0 18px 40px rgba(217,182,106,.20), 0 14px 28px rgba(0,0,0,.30);
-    }
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
 
-    /* Layout principal */
-    .main{
-      position:relative; z-index:2;
-      padding:34px 26px 34px;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:26px;
-    }
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .hero h1{
-      margin:0 0 10px;
-      font-family:Cinzel, serif;
-      font-weight:700;
-      font-size: clamp(34px, 4vw, 54px);
-      line-height:1.06;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow: 0 22px 60px rgba(0,0,0,.35);
-    }
-    .hero p{
-      margin:0 0 18px;
-      max-width: 560px;
-      font-size:16px;
-      line-height:1.7;
-      color: rgba(244,241,230,.84);
-    }
-    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
-    .note{
-      margin-top: 14px;
-      font-size: 13px;
-      color: rgba(244,241,230,.78);
-    }
-    .price{
-      font-weight: 800;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 22px 0;
+}
 
-    /* Diagrama */
-    .diagram{ display:flex; align-items:center; justify-content:center; padding: 10px 0; }
-    .tri{
-      width:min(520px, 100%);
-      aspect-ratio: 1 / 1;
-      position:relative;
-      display:grid;
-      place-items:center;
-    }
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
 
-    /* 4 círculos IGUALES */
-    .node, .gard{
-      width:150px; height:150px; border-radius:999px;
-      display:grid; place-items:center; text-align:center;
-      border:1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(120px 120px at 50% 40%, rgba(255,215,140,.12), transparent 55%),
-        rgba(0,0,0,.25);
-      box-shadow: 0 24px 55px rgba(0,0,0,.45);
-      position:absolute;
-      user-select:none;
-      overflow:hidden;
-    }
-    .node::before, .gard::before{
-      content:"";
-      position:absolute; inset:-3px;
-      border-radius:999px;
-      background: radial-gradient(closest-side, rgba(247,231,177,.42), rgba(217,182,106,.18), transparent 72%);
-      filter: blur(6px);
-      opacity:.9;
-      z-index:-1;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--white);
+  min-width: 0;
+}
 
-    .node .label{
-      font-family:Cinzel, serif;
-      letter-spacing:.6px;
-      color: rgba(244,241,230,.92);
-      font-weight:700;
-      font-size:20px;
-      text-transform: lowercase;
-      margin-bottom:4px;
-    }
-    .node .roman{
-      font-family:Cinzel, serif;
-      font-size:38px;
-      font-weight:700;
-      line-height:1;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 auto;
+}
 
-    .gard .title{
-      font-family:Cinzel, serif;
-      font-weight:800;
-      font-size:22px;
-      letter-spacing:.4px;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      margin-bottom:2px;
-    }
-    .gard .sub{ font-size:12.5px; color: rgba(244,241,230,.85); }
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
 
-    .lock{ width:30px; height:30px; margin-bottom:6px; opacity:.95; filter: drop-shadow(0 12px 18px rgba(0,0,0,.45)); }
+.brand-name {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
 
-    /* Posiciones triángulo */
-    .pos-top{ top:24px; left:50%; transform: translateX(-50%); }
-    .pos-left{ bottom:34px; left:34px; }
-    .pos-right{ bottom:34px; right:34px; }
-    .pos-center{ top:50%; left:50%; transform: translate(-50%, -50%); }
+.brand-tagline {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  opacity: 0.92;
+  margin-top: 4px;
+}
 
-    /* Estado demo (desbloqueo) */
-    .status{
-      margin-top: 14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .pill{
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(244,241,230,.86);
-    }
-    .pill.ok{
-      border-color: rgba(217,182,106,.35);
-      background: rgba(217,182,106,.12);
-    }
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--white);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+}
 
-    @media (max-width: 980px){
-      .main{ grid-template-columns:1fr; }
-      .navlinks{ display:none; }
-      .brand{ min-width:auto; }
-      .diagram{ padding-top:22px; }
-    }
-    @media (max-width: 560px){
-      .node, .gard{ width:130px; height:130px; }
-      .pos-left{ left:10px; }
-      .pos-right{ right:10px; }
-    }
+.nav a {
+  opacity: 0.95;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+.nav .login {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.74);
+  background: transparent;
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--white);
+  background:
+    linear-gradient(var(--overlay), var(--overlay-strong)),
+    url('https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 22%, rgba(255,255,255,0.08), transparent 38%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(940px, 92vw);
+  text-align: center;
+  padding: 170px 0 88px;
+}
+
+.hero h1 {
+  margin: 0 auto;
+  font-size: clamp(2.6rem, 6vw, 4.9rem);
+  line-height: 1.08;
+  max-width: 920px;
+  text-wrap: balance;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.24);
+}
+
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.button-primary {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+  background: var(--blue-2);
+}
+
+.button-secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.24);
+  backdrop-filter: blur(5px);
+}
+
+.button-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.10);
+}
+
+.section {
+  padding: 88px 0;
+}
+
+.section-light {
+  background: linear-gradient(to bottom, #fafbfd, #ffffff);
+}
+
+.section-soft {
+  background: #f5f8fb;
+}
+
+.section-heading {
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto 48px;
+}
+
+.section-heading h2 {
+  margin: 0 0 14px;
+  color: var(--blue);
+  font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.18rem;
+}
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.method-card,
+.community-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.method-media {
+  height: 210px;
+  background: linear-gradient(135deg, #d9e4ef, #b9cadc);
+  display: grid;
+  place-items: center;
+  color: rgba(19, 32, 44, 0.62);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.method-body {
+  padding: 24px 24px 28px;
+  text-align: center;
+}
+
+.method-step {
+  font-size: 1.15rem;
+  color: var(--blue-2);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.method-body h3 {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-size: 2rem;
+}
+
+.method-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.community-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.community-card {
+  padding: 28px;
+}
+
+.community-card h3 {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-size: 2rem;
+}
+
+.community-card p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.forum-box,
+.live-box {
+  background: #f9fbfd;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.forum-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 12px;
+  margin-bottom: 10px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.forum-item:last-child {
+  margin-bottom: 0;
+}
+
+.forum-item strong,
+.live-box strong {
+  display: block;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.forum-item span,
+.live-box span {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.live-preview {
+  height: 180px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background:
+    linear-gradient(rgba(14,35,56,0.56), rgba(14,35,56,0.56)),
+    url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80') center center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #c62828;
+  color: var(--white);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+.final-cta {
+  position: relative;
+  padding: 96px 0;
+  text-align: center;
+  color: var(--white);
+  background:
+    linear-gradient(var(--overlay), var(--overlay-strong)),
+    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 40%);
+  pointer-events: none;
+}
+
+.final-cta .container {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.final-cta h2 {
+  margin: 0 0 12px;
+  font-size: clamp(2.1rem, 4.8vw, 3.7rem);
+}
+
+.final-cta p {
+  margin: 0 auto 28px;
+  color: rgba(255,255,255,0.92);
+  font-size: 1.16rem;
+  max-width: 760px;
+}
+
+.site-footer {
+  background: #091624;
+  color: rgba(255,255,255,0.8);
+  padding: 22px 0;
+  text-align: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 980px) {
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+
+  .method-grid,
+  .community-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-name {
+    font-size: 1.55rem;
+  }
+
+  .hero-content {
+    padding-top: 160px;
+  }
+
+  .hero h1 {
+    font-size: 2.35rem;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+}
+
   </style>
 </head>
-
 <body>
-  <div class="frame">
-    <div class="shell">
-      <div class="stars"></div>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#inicio" aria-label="Kyugard inicio">
+        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="32" cy="32" r="24" stroke="white" stroke-width="3" opacity="0.95"/>
+          <circle cx="32" cy="9" r="4" fill="white"/>
+          <circle cx="51.92" cy="20.5" r="4" fill="white"/>
+          <circle cx="51.92" cy="43.5" r="4" fill="white"/>
+          <circle cx="32" cy="55" r="4" fill="white"/>
+          <circle cx="12.08" cy="43.5" r="4" fill="white"/>
+          <circle cx="12.08" cy="20.5" r="4" fill="white"/>
+          <path d="M32 13 L32 23" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M48.6 23.5 L40.1 28.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M48.6 40.5 L40.1 35.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M32 51 L32 41" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M15.4 40.5 L23.9 35.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M15.4 23.5 L23.9 28.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-copy">
+          <span class="brand-name display">KYUGARD</span>
+          <span class="brand-tagline">Democratic Evolution</span>
+        </span>
+      </a><nav class="nav" aria-label="Navegación principal">
+    <a href="#metodo">Método</a>
+    <a href="#comunidad">Comunidad</a>
+    <a href="#foro">Foro</a>
+    <a href="#acceder" class="login">Acceder</a>
+  </nav>
+</div>
 
-      <header class="nav">
-        <div class="brand">
-          <!-- Placeholder (6 puntos). Ideal: reemplazar por tu archivo exacto -->
-          <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
-            <defs>
-              <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#f7e7b1"/>
-                <stop offset="1" stop-color="#d9b66a"/>
-              </linearGradient>
-            </defs>
-            <circle cx="50" cy="50" r="34" fill="none" stroke="url(#g)" stroke-width="8" stroke-linecap="round"/>
-            <g fill="url(#g)">
-              <circle cx="50" cy="10" r="6"/>
-              <circle cx="78" cy="26" r="6"/>
-              <circle cx="78" cy="74" r="6"/>
-              <circle cx="50" cy="90" r="6"/>
-              <circle cx="22" cy="74" r="6"/>
-              <circle cx="22" cy="26" r="6"/>
-            </g>
-          </svg>
-          <div class="brand-name">Kyugard</div>
+  </header>  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content container fade-up">
+        <h1 class="display">Aprender hoy para mejorar el mañana.</h1>
+        <div class="hero-actions">
+          <a href="#metodo" class="button button-primary">Comienza tu camino</a>
+          <a href="#comunidad" class="button button-secondary">Explorar la comunidad</a>
         </div>
+      </div>
+    </section><section class="section section-light" id="metodo">
+  <div class="container">
+    <div class="section-heading fade-up">
+      <h2 class="display">El método Kyugard</h2>
+      <p>Un camino estructurado para comprender, analizar y mejorar la democracia.</p>
+    </div>
 
-        <nav class="navlinks">
-          <a href="#inicio">Inicio</a>
-          <a href="#cursos">Cursos</a>
-          <a href="#gard">Gard</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-
-        <div>
-          <a class="btn btn-gold" href="#cursos">Empezar ahora</a>
+    <div class="method-grid">
+      <article class="method-card fade-up">
+        <div class="method-media">Imagen de estudio</div>
+        <div class="method-body">
+          <div class="method-step">1</div>
+          <h3 class="display">Comprender</h3>
+          <p>Estudia la historia, la filosofía y los principios esenciales de la democracia.</p>
         </div>
-      </header>
+      </article>
 
-      <main class="main" id="inicio">
-        <section class="hero">
-          <h1>Elige evolucionar.</h1>
-          <p>
-            <strong>Los tres Kyu son gratuitos.</strong> Avanzás por etapas, a tu ritmo.
-            Cuando completes <strong>Kyu I, Kyu II y Kyu III</strong>, desbloqueás el acceso al
-            <strong>Gard</strong> — el foro privado donde la comunidad debate y construye.
-          </p>
-          <p class="note">
-            Para entrar al Gard solo se requiere: <strong>3 Kyu completados</strong> +
-            <span class="price">US$1 / año</span>.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-gold" href="#cursos">Ver Kyu gratuitos</a>
-            <a class="btn" href="#gard">Cómo se desbloquea</a>
-          </div>
-
-          <!-- “Demo” de estado (podés borrarlo si no querés mostrarlo) -->
-          <div class="status" aria-label="Estado de progreso (demo)">
-            <span class="pill ok">Kyu I: pendiente</span>
-            <span class="pill ok">Kyu II: pendiente</span>
-            <span class="pill ok">Kyu III: pendiente</span>
-            <span class="pill">Gard: bloqueado</span>
-          </div>
-        </section>
-
-        <section class="diagram" id="cursos">
-          <div class="tri">
-            <!-- Kyu I -->
-            <a class="node pos-top" href="kyu-1.html" title="Ir a Kyu I">
-              <div>
-                <div class="label">kyu</div>
-                <div class="roman">I</div>
-              </div>
-            </a>
-
-            <!-- Kyu II -->
-            <a class="node pos-left" href="kyu-2.html" title="Ir a Kyu II">
-              <div>
-                <div class="label">kyu</div>
-                <div class="roman">II</div>
-              </div>
-            </a>
-
-            <!-- Kyu III -->
-            <a class="node pos-right" href="kyu-3.html" title="Ir a Kyu III">
-              <div>
-                <div class="label">kyu</div>
-                <div class="roman">III</div>
-              </div>
-            </a>
-
-            <!-- Gard (bloqueado visualmente, mismo tamaño) -->
-            <a class="gard pos-center" href="#gard" title="Gard (requiere 3 Kyu + US$1/año)">
-              <div>
-                <svg class="lock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M7 10V8a5 5 0 0 1 10 0v2" stroke="#f7e7b1" stroke-width="2" stroke-linecap="round"/>
-                  <rect x="6" y="10" width="12" height="11" rx="2" stroke="#d9b66a" stroke-width="2"/>
-                  <path d="M12 14v3" stroke="#f7e7b1" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                <div class="title">Gard</div>
-                <div class="sub">Foro privado</div>
-              </div>
-            </a>
-          </div>
-        </section>
-      </main>
-
-      <section style="position:relative; z-index:2; padding: 0 26px 28px;" id="gard">
-        <div style="border-top:1px solid rgba(255,255,255,.10); padding-top:18px;">
-          <div style="display:grid; grid-template-columns: 1.1fr .9fr; gap:18px; align-items:center;">
-            <div>
-              <h2 style="margin:0 0 8px; font-family:Cinzel,serif; letter-spacing:.2px;">
-                ¿Qué es el Gard?
-              </h2>
-              <p style="margin:0; color:rgba(244,241,230,.84); line-height:1.7;">
-                Es el espacio donde la comunidad se une: debates, propuestas, aprendizaje y construcción.
-                Se habilita cuando completás los 3 Kyu. Para sostenerlo, el acceso es de
-                <span class="price">US$1 por año</span>.
-              </p>
-            </div>
-            <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
-              <a class="btn" href="#cursos">Hacer los Kyu</a>
-              <a class="btn btn-gold" href="#unirse">Pagar US$1/año</a>
-            </div>
-          </div>
+      <article class="method-card fade-up">
+        <div class="method-media">Imagen de análisis</div>
+        <div class="method-body">
+          <div class="method-step">2</div>
+          <h3 class="display">Analizar</h3>
+          <p>Examina sistemas políticos, debates actuales y distintas perspectivas.</p>
         </div>
-      </section>
+      </article>
 
+      <article class="method-card fade-up">
+        <div class="method-media">Imagen de discernimiento</div>
+        <div class="method-body">
+          <div class="method-step">3</div>
+          <h3 class="display">Discernir</h3>
+          <p>Desarrolla pensamiento crítico para evaluar instituciones y proponer mejoras.</p>
+        </div>
+      </article>
     </div>
   </div>
+</section>
 
-  <div id="contacto"></div>
-  <div id="unirse"></div>
-</body>
+<section class="section section-soft" id="comunidad">
+  <div class="container">
+    <div class="section-heading fade-up">
+      <h2 class="display">Una comunidad de aprendizaje</h2>
+      <p>Únete a espacios diseñados para el estudio, el diálogo y la colaboración.</p>
+    </div>
+
+    <div class="community-grid">
+      <article class="community-card fade-up" id="foro">
+        <h3 class="display">Foro de debate</h3>
+        <p>Discute temas políticos y recibe retroalimentación de personas interesadas en comprender y mejorar la democracia.</p>
+        <div class="forum-box">
+          <div class="forum-item">
+            <strong>¿Es posible mejorar la democracia en la era digital?</strong>
+            <span>24 respuestas · hace 3 horas</span>
+          </div>
+          <div class="forum-item">
+            <strong>Análisis: modelos de votación en Europa</strong>
+            <span>12 respuestas · ayer</span>
+          </div>
+          <div class="forum-item">
+            <strong>¿Qué hace funcionar a las democracias nórdicas?</strong>
+            <span>19 respuestas · hace 2 días</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="community-card fade-up">
+        <h3 class="display">Sesiones en vivo</h3>
+        <p>Participa en clases y debates en tiempo real con invitados, profesores y miembros de la comunidad.</p>
+        <div class="live-box">
+          <div class="live-preview">
+            <span class="live-badge">EN VIVO</span>
+          </div>
+          <strong>Los desafíos de la democracia moderna</strong>
+          <span>Sesión abierta con especialistas invitados</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="acceder">
+  <div class="container fade-up">
+    <h2 class="display">Forma parte de Kyugard</h2>
+    <p>Una comunidad dedicada al estudio, debate y evolución del pensamiento democrático.</p>
+    <a href="#inicio" class="button button-primary">Unirme al proyecto</a>
+  </div>
+</section>
+
+  </main>  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> Kyugard · Democratic Evolution</div>
+  </footer>  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach((element) => {
+      observer.observe(element);
+    });
+  </script></body>
 </html>
