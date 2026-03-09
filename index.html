@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyugard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#071523;
+color:white;
+}
+
+header{
+position:absolute;
+top:20px;
+left:40px;
+right:40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:10;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:28px;
+font-weight:bold;
+}
+
+.logo img{
+height:40px;
+}
+
+.menu button{
+margin-left:10px;
+padding:10px 20px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,0.4);
+background:transparent;
+color:white;
+cursor:pointer;
+}
+
+.hero{
+height:100vh;
+background:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa") center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+position:relative;
+}
+
+.overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(7,21,35,0.65);
+}
+
+.content{
+position:relative;
+max-width:900px;
+padding:20px;
+}
+
+h1{
+font-size:46px;
+line-height:1.2;
+margin-bottom:20px;
+}
+
+p{
+font-size:20px;
+opacity:0.9;
+}
+
+.main-button{
+margin-top:30px;
+padding:16px 40px;
+font-size:20px;
+border:none;
+border-radius:40px;
+background:#173a5e;
+color:white;
+cursor:pointer;
+}
+
+.manifesto{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(7,21,35,0.95);
+z-index:20;
+overflow:auto;
+padding:40px;
+}
+
+.manifesto-content{
+max-width:800px;
+margin:auto;
+}
+
+.close{
+margin-top:20px;
+padding:10px 20px;
+border:none;
+background:#173a5e;
+color:white;
+border-radius:20px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.png">
+KYUGARD
+</div>
+
+<div class="menu">
+<button onclick="openManifesto()">Info</button>
+<button>Acceder</button>
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="overlay"></div>
+
+<div class="content">
+
+<h1>
+Si la humanidad pudo construir ciudades, cruzar océanos, surcar los cielos y alcanzar el espacio
+</h1>
+
+<p>
+también puede aprender a mejorar la forma en que se gobierna a sí misma.
+</p>
+
+<button class="main-button">
+Entrar al foro
+</button>
+
+</div>
+
+</section>
+
+<div class="manifesto" id="manifesto">
+
+<div class="manifesto-content">
+
+<h2>Manifiesto Kyugard</h2>
+
+<p>
+Kyugard es una comunidad dedicada a comprender el futuro de la democracia.
+</p>
+
+<p>
+Buscamos estudiar los problemas del mundo, debatir ideas y encontrar soluciones a través del conocimiento, la argumentación y el respeto.
+</p>
+
+<p>
+Cada usuario puede aportar su experiencia para construir una comunidad global que aspire a mejorar la forma en que la humanidad se gobierna a sí misma.
+</p>
+
+<button class="close" onclick="closeManifesto()">Cerrar</button>
+
+</div>
+
+</div>
+
+<script>
+
+function openManifesto(){
+document.getElementById("manifesto").style.display="block";
+}
+
+function closeManifesto(){
+document.getElementById("manifesto").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
