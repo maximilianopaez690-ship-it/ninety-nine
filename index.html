@@ -1,613 +1,627 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyugard</title>
-  <meta name="description" content="Kyugard es una comunidad dedicada al estudio, debate y evolución del pensamiento democrático." />
+  <meta name="description" content="Kyugard es una comunidad dedicada a estudiar hacia dónde se dirige la democracia en el futuro." />
   <style>
-    :root {
-      --bg-dark: #081623;
-      --overlay: rgba(14, 35, 56, 0.72);
-      --overlay-strong: rgba(14, 35, 56, 0.84);
-      --blue: #173a5e;
-      --blue-2: #274f78;
-      --blue-soft: #edf3f9;
-      --text: #13202c;
-      --muted: #5f6b78;
-      --white: #ffffff;
-      --line: rgba(19, 32, 44, 0.10);
-      --shadow: 0 14px 40px rgba(9, 24, 39, 0.12);
-      --radius: 18px;
-      --max: 1200px;
-    }* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  color: var(--text);
-  background: #ffffff;
-  line-height: 1.55;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.container {
-  width: min(var(--max), 92vw);
-  margin: 0 auto;
-}
-
-.display {
-  letter-spacing: -0.02em;
-}
-
-.fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  padding: 22px 0;
-}
-
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: var(--white);
-  min-width: 0;
-}
-
-.brand-mark {
-  width: 52px;
-  height: 52px;
-  flex: 0 0 auto;
-}
-
-.brand-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-
-.brand-name {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
-.brand-tagline {
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.92rem;
-  opacity: 0.92;
-  margin-top: 4px;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  color: var(--white);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.98rem;
-}
-
-.nav a {
-  opacity: 0.95;
-}
-
-.nav a:hover {
-  opacity: 1;
-}
-
-.nav .login {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.74);
-  background: transparent;
-}
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  color: var(--white);
-  background:
-    linear-gradient(var(--overlay), var(--overlay-strong)),
-    url('https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center 22%, rgba(255,255,255,0.08), transparent 38%);
-  pointer-events: none;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  width: min(940px, 92vw);
-  text-align: center;
-  padding: 170px 0 88px;
-}
-
-.hero h1 {
-  margin: 0 auto;
-  font-size: clamp(2.6rem, 6vw, 4.9rem);
-  line-height: 1.08;
-  max-width: 920px;
-  text-wrap: balance;
-  text-shadow: 0 10px 30px rgba(0,0,0,0.24);
-}
-
-.hero-actions {
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 15px 28px;
-  border-radius: 999px;
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-}
-
-.button-primary {
-  background: var(--blue);
-  color: var(--white);
-  box-shadow: var(--shadow);
-}
-
-.button-primary:hover {
-  transform: translateY(-2px);
-  background: var(--blue-2);
-}
-
-.button-secondary {
-  background: rgba(255,255,255,0.06);
-  color: var(--white);
-  border-color: rgba(255,255,255,0.24);
-  backdrop-filter: blur(5px);
-}
-
-.button-secondary:hover {
-  transform: translateY(-2px);
-  background: rgba(255,255,255,0.10);
-}
-
-.section {
-  padding: 88px 0;
-}
-
-.section-light {
-  background: linear-gradient(to bottom, #fafbfd, #ffffff);
-}
-
-.section-soft {
-  background: #f5f8fb;
-}
-
-.section-heading {
-  text-align: center;
-  max-width: 920px;
-  margin: 0 auto 48px;
-}
-
-.section-heading h2 {
-  margin: 0 0 14px;
-  color: var(--blue);
-  font-size: clamp(2.2rem, 4.8vw, 3.6rem);
-}
-
-.section-heading p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1.18rem;
-}
-
-.method-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.method-card,
-.community-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-.method-media {
-  height: 210px;
-  background: linear-gradient(135deg, #d9e4ef, #b9cadc);
-  display: grid;
-  place-items: center;
-  color: rgba(19, 32, 44, 0.62);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.method-body {
-  padding: 24px 24px 28px;
-  text-align: center;
-}
-
-.method-step {
-  font-size: 1.15rem;
-  color: var(--blue-2);
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.method-body h3 {
-  margin: 0 0 10px;
-  color: var(--blue);
-  font-size: 2rem;
-}
-
-.method-body p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
-.community-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-}
-
-.community-card {
-  padding: 28px;
-}
-
-.community-card h3 {
-  margin: 0 0 10px;
-  color: var(--blue);
-  font-size: 2rem;
-}
-
-.community-card p {
-  margin: 0 0 18px;
-  color: var(--muted);
-  font-size: 1.05rem;
-}
-
-.forum-box,
-.live-box {
-  background: #f9fbfd;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-}
-
-.forum-item {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 14px 12px;
-  margin-bottom: 10px;
-  font-family: "Segoe UI", system-ui, sans-serif;
-}
-
-.forum-item:last-child {
-  margin-bottom: 0;
-}
-
-.forum-item strong,
-.live-box strong {
-  display: block;
-  color: var(--text);
-  margin-bottom: 4px;
-  font-size: 1rem;
-}
-
-.forum-item span,
-.live-box span {
-  color: var(--muted);
-  font-size: 0.94rem;
-}
-
-.live-preview {
-  height: 180px;
-  border-radius: 12px;
-  margin-bottom: 14px;
-  background:
-    linear-gradient(rgba(14,35,56,0.56), rgba(14,35,56,0.56)),
-    url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80') center center / cover no-repeat;
-  position: relative;
-  overflow: hidden;
-}
-
-.live-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: #c62828;
-  color: var(--white);
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 5px 10px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
-}
-
-.final-cta {
-  position: relative;
-  padding: 96px 0;
-  text-align: center;
-  color: var(--white);
-  background:
-    linear-gradient(var(--overlay), var(--overlay-strong)),
-    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=80') center center / cover no-repeat;
-}
-
-.final-cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 40%);
-  pointer-events: none;
-}
-
-.final-cta .container {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-}
-
-.final-cta h2 {
-  margin: 0 0 12px;
-  font-size: clamp(2.1rem, 4.8vw, 3.7rem);
-}
-
-.final-cta p {
-  margin: 0 auto 28px;
-  color: rgba(255,255,255,0.92);
-  font-size: 1.16rem;
-  max-width: 760px;
-}
-
-.site-footer {
-  background: #091624;
-  color: rgba(255,255,255,0.8);
-  padding: 22px 0;
-  text-align: center;
-  font-family: "Segoe UI", system-ui, sans-serif;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 980px) {
-  .site-header .container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav {
-    flex-wrap: wrap;
-    gap: 14px 18px;
-  }
-
-  .method-grid,
-  .community-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .brand-name {
-    font-size: 1.55rem;
-  }
-
-  .hero-content {
-    padding-top: 160px;
-  }
-
-  .hero h1 {
-    font-size: 2.35rem;
-  }
-
-  .button {
-    width: 100%;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-  }
-}
-
+    :root{
+      --bg:#071523;
+      --overlay:rgba(8, 25, 44, 0.72);
+      --overlay-2:rgba(8, 25, 44, 0.84);
+      --primary:#173a5e;
+      --primary-2:#274f78;
+      --soft:#f5f8fb;
+      --card:#ffffff;
+      --text:#13202c;
+      --muted:#5f6b78;
+      --line:rgba(19,32,44,.10);
+      --white:#ffffff;
+      --shadow:0 14px 40px rgba(9,24,39,.12);
+      --radius:18px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.6;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(var(--max),92vw);margin:auto}
+    .display{letter-spacing:-.02em}
+
+    .site-header{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:20;
+      padding:22px 0;
+    }
+
+    .site-header .container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:var(--white);
+    }
+
+    .brand-logo{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+    }
+
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
+
+    .brand-name{
+      font-size:2rem;
+      font-weight:700;
+    }
+
+    .brand-tagline{
+      font-family:system-ui,sans-serif;
+      font-size:.95rem;
+      opacity:.92;
+      margin-top:4px;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-family:system-ui,sans-serif;
+    }
+
+    .nav-btn{
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.06);
+      backdrop-filter:blur(5px);
+      padding:11px 20px;
+      border-radius:999px;
+      font-size:.98rem;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .nav-btn:hover,
+    .hero-btn:hover,
+    .course-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .hero{
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+      color:var(--white);
+      background-image:
+        linear-gradient(var(--overlay), var(--overlay-2)),
+        url("https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at center 22%, rgba(255,255,255,.08), transparent 40%);
+      pointer-events:none;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      width:min(980px,92vw);
+      text-align:center;
+      padding:180px 0 90px;
+    }
+
+    .hero h1{
+      margin:0 auto;
+      max-width:980px;
+      font-size:clamp(2.2rem, 5.5vw, 4.6rem);
+      line-height:1.08;
+      text-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .hero h1 .line-2{
+      display:block;
+      margin-top:10px;
+      font-size:.62em;
+      line-height:1.18;
+      font-weight:400;
+    }
+
+    .hero-actions{
+      margin-top:30px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px 30px;
+      border-radius:999px;
+      font-family:system-ui,sans-serif;
+      font-size:1rem;
+      transition:.2s ease;
+    }
+
+    .hero-btn.primary{
+      background:var(--primary);
+      color:var(--white);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-btn.primary:hover{
+      background:var(--primary-2);
+    }
+
+    .hero-btn.secondary{
+      background:rgba(255,255,255,.08);
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.24);
+    }
+
+    .section{
+      padding:88px 0;
+    }
+
+    .section-light{
+      background:linear-gradient(#fafbfd,#fff);
+    }
+
+    .section-soft{
+      background:var(--soft);
+    }
+
+    .section-heading{
+      text-align:center;
+      max-width:900px;
+      margin:0 auto 46px;
+    }
+
+    .section-heading h2{
+      margin:0 0 14px;
+      font-size:clamp(2rem,4.5vw,3.4rem);
+      color:var(--primary);
+    }
+
+    .section-heading p{
+      margin:0;
+      color:var(--muted);
+      font-size:1.15rem;
+    }
+
+    .courses{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:28px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .card-top{
+      height:180px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#d9e4ef,#b9cadc);
+      color:rgba(19,32,44,.62);
+      font-family:system-ui,sans-serif;
+      font-weight:600;
+      letter-spacing:.04em;
+    }
+
+    .card-body{
+      padding:24px;
+      text-align:center;
+    }
+
+    .card-step{
+      color:var(--primary-2);
+      font-weight:700;
+      font-size:1rem;
+      margin-bottom:4px;
+      font-family:system-ui,sans-serif;
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      color:var(--primary);
+      font-size:1.9rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .course-btn{
+      display:inline-block;
+      margin-top:18px;
+      padding:12px 20px;
+      background:var(--primary);
+      color:var(--white);
+      border-radius:999px;
+      font-family:system-ui,sans-serif;
+      font-size:.95rem;
+      transition:.2s ease;
+    }
+
+    .news-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:24px;
+    }
+
+    .news-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .news-card span{
+      display:block;
+      font-family:system-ui,sans-serif;
+      color:var(--primary-2);
+      font-size:.88rem;
+      font-weight:700;
+      margin-bottom:10px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .news-card h4{
+      margin:0 0 10px;
+      font-size:1.3rem;
+      color:var(--text);
+    }
+
+    .news-card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .site-footer{
+      background:#091624;
+      color:rgba(255,255,255,.82);
+      text-align:center;
+      padding:24px 0;
+      font-family:system-ui,sans-serif;
+      font-size:.95rem;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:50;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:min(860px,95vw);
+      max-height:88vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      padding:28px;
+      position:relative;
+    }
+
+    .modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      border:none;
+      background:#eef3f8;
+      color:var(--text);
+      width:40px;
+      height:40px;
+      border-radius:999px;
+      font-size:1.2rem;
+      cursor:pointer;
+    }
+
+    .modal-box h2{
+      margin:0 0 16px;
+      color:var(--primary);
+      font-size:2.1rem;
+    }
+
+    .modal-box h3{
+      margin:26px 0 10px;
+      color:var(--primary);
+      font-size:1.35rem;
+    }
+
+    .modal-box p{
+      margin:0 0 14px;
+      color:var(--text);
+    }
+
+    .modal-box .quote{
+      margin-top:22px;
+      padding:18px;
+      border-left:4px solid var(--primary);
+      background:var(--soft);
+      font-style:italic;
+    }
+
+    @media (max-width: 980px){
+      .site-header .container{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .nav{
+        flex-wrap:wrap;
+      }
+
+      .courses,
+      .news-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .brand-name{
+        font-size:1.6rem;
+      }
+
+      .hero-content{
+        padding-top:165px;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .hero-btn,
+      .nav-btn{
+        width:100%;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container">
-      <a class="brand" href="#inicio" aria-label="Kyugard inicio">
-        <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="32" cy="32" r="24" stroke="white" stroke-width="3" opacity="0.95"/>
-          <circle cx="32" cy="9" r="4" fill="white"/>
-          <circle cx="51.92" cy="20.5" r="4" fill="white"/>
-          <circle cx="51.92" cy="43.5" r="4" fill="white"/>
-          <circle cx="32" cy="55" r="4" fill="white"/>
-          <circle cx="12.08" cy="43.5" r="4" fill="white"/>
-          <circle cx="12.08" cy="20.5" r="4" fill="white"/>
-          <path d="M32 13 L32 23" stroke="white" stroke-width="3" stroke-linecap="round"/>
-          <path d="M48.6 23.5 L40.1 28.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-          <path d="M48.6 40.5 L40.1 35.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-          <path d="M32 51 L32 41" stroke="white" stroke-width="3" stroke-linecap="round"/>
-          <path d="M15.4 40.5 L23.9 35.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-          <path d="M15.4 23.5 L23.9 28.5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-        </svg>
+      <a href="#" class="brand">
+        <img src="logo-kyugard.png" alt="Logo de Kyugard" class="brand-logo">
         <span class="brand-copy">
           <span class="brand-name display">KYUGARD</span>
           <span class="brand-tagline">Democratic Evolution</span>
         </span>
-      </a><nav class="nav" aria-label="Navegación principal">
-    <a href="#metodo">Método</a>
-    <a href="#comunidad">Comunidad</a>
-    <a href="#foro">Foro</a>
-    <a href="#acceder" class="login">Acceder</a>
-  </nav>
-</div>
+      </a>
 
-  </header>  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-content container fade-up">
-        <h1 class="display">Aprender hoy para mejorar el mañana.</h1>
+      <nav class="nav">
+        <button class="nav-btn" id="openInfo">Info</button>
+        <a href="#" class="nav-btn">Acceder</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="display">
+          Si la humanidad pudo construir ciudades, cruzar océanos, surcar los cielos y alcanzar el espacio,
+          <span class="line-2">también puede aprender a mejorar la forma en que se gobierna a sí misma.</span>
+        </h1>
+
         <div class="hero-actions">
-          <a href="#metodo" class="button button-primary">Comienza tu camino</a>
-          <a href="#comunidad" class="button button-secondary">Explorar la comunidad</a>
+          <a href="#cursos" class="hero-btn primary">Entrar al foro</a>
+          <button class="hero-btn secondary" id="openInfoHero">Conocer Kyugard</button>
         </div>
       </div>
-    </section><section class="section section-light" id="metodo">
-  <div class="container">
-    <div class="section-heading fade-up">
-      <h2 class="display">El método Kyugard</h2>
-      <p>Un camino estructurado para comprender, analizar y mejorar la democracia.</p>
-    </div>
+    </section>
 
-    <div class="method-grid">
-      <article class="method-card fade-up">
-        <div class="method-media">Imagen de estudio</div>
-        <div class="method-body">
-          <div class="method-step">1</div>
-          <h3 class="display">Comprender</h3>
-          <p>Estudia la historia, la filosofía y los principios esenciales de la democracia.</p>
+    <section class="section section-light" id="cursos">
+      <div class="container">
+        <div class="section-heading">
+          <h2 class="display">Los tres cursos de Kyugard</h2>
+          <p>Un camino de aprendizaje para comprender el presente, analizar el futuro y participar con responsabilidad.</p>
         </div>
-      </article>
 
-      <article class="method-card fade-up">
-        <div class="method-media">Imagen de análisis</div>
-        <div class="method-body">
-          <div class="method-step">2</div>
-          <h3 class="display">Analizar</h3>
-          <p>Examina sistemas políticos, debates actuales y distintas perspectivas.</p>
-        </div>
-      </article>
+        <div class="courses">
+          <article class="card">
+            <div class="card-top">Curso 1</div>
+            <div class="card-body">
+              <div class="card-step">Comprender</div>
+              <h3 class="display">Comprender</h3>
+              <p>Estudia los principales problemas de la política, la economía, la cultura y la sociedad contemporánea.</p>
+              <a href="#" class="course-btn">Explorar curso</a>
+            </div>
+          </article>
 
-      <article class="method-card fade-up">
-        <div class="method-media">Imagen de discernimiento</div>
-        <div class="method-body">
-          <div class="method-step">3</div>
-          <h3 class="display">Discernir</h3>
-          <p>Desarrolla pensamiento crítico para evaluar instituciones y proponer mejoras.</p>
+          <article class="card">
+            <div class="card-top">Curso 2</div>
+            <div class="card-body">
+              <div class="card-step">Analizar</div>
+              <h3 class="display">Analizar</h3>
+              <p>Examina soluciones posibles, modelos democráticos, descentralización y evolución del pensamiento político.</p>
+              <a href="#" class="course-btn">Explorar curso</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">Curso 3</div>
+            <div class="card-body">
+              <div class="card-step">Discernir</div>
+              <h3 class="display">Discernir</h3>
+              <p>Aprende a informarte, debatir, argumentar y participar de forma pacífica, legal y responsable.</p>
+              <a href="#" class="course-btn">Explorar curso</a>
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading">
+          <h2 class="display">Novedades</h2>
+          <p>Una comunidad que recién comienza, pero que quiere crecer con ideas, estudio y participación.</p>
+        </div>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <span>Nueva etapa</span>
+            <h4>Kyugard ya está online</h4>
+            <p>La plataforma comienza su recorrido con una visión global sobre el futuro de la democracia.</p>
+          </article>
+
+          <article class="news-card">
+            <span>Próximamente</span>
+            <h4>Primer foro abierto</h4>
+            <p>Muy pronto se habilitará un espacio para debatir ideas, propuestas y desafíos del mundo actual.</p>
+          </article>
+
+          <article class="news-card">
+            <span>En desarrollo</span>
+            <h4>El método Kyugard</h4>
+            <p>Los tres cursos serán la base educativa de la comunidad: comprender, analizar y discernir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> Kyugard · Democratic Evolution
+  </footer>
+
+  <div class="modal" id="infoModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeInfo">×</button>
+
+      <h2 class="display">Kyugard</h2>
+
+      <p>
+        Kyugard es una comunidad dedicada a estudiar hacia dónde se dirige la democracia en el futuro.
+        Analiza sus problemas actuales, explora posibles evoluciones y promueve el aprendizaje antes del debate.
+      </p>
+
+      <h3>Qué es Kyugard</h3>
+      <p>
+        Kyugard nace como una plataforma educativa y comunitaria. Su objetivo es comprender los desafíos de la democracia,
+        estudiar sus límites y pensar de forma seria cómo podría evolucionar en el futuro.
+      </p>
+
+      <h3>Qué obtienes</h3>
+      <p>
+        Acceso a una comunidad que busca comprender el mundo antes de opinar sobre él. Un espacio para aprender,
+        debatir y aportar ideas que puedan contribuir a sociedades más libres, responsables y conscientes.
+      </p>
+
+      <h3>Por qué formar parte</h3>
+      <p>
+        Kyugard es todavía una comunidad pequeña que recién comienza. Pero cada persona que aprende, piensa y participa suma.
+        Porque el futuro no lo construyen solo los gobiernos: también lo construyen los ciudadanos.
+      </p>
+
+      <h3>La Declaración de Kyugard</h3>
+      <p>
+        El mundo atraviesa transformaciones profundas en la forma en que las sociedades se organizan, debaten y toman decisiones.
+        La democracia, uno de los sistemas políticos más influyentes de la historia moderna, enfrenta hoy desafíos que requieren reflexión, estudio y evolución.
+      </p>
+      <p>
+        Kyugard nace como una comunidad dedicada a comprender esos desafíos y explorar el futuro de la democracia.
+      </p>
+      <p>
+        Creemos que las ideas políticas no deben debatirse únicamente desde la opinión, sino también desde el conocimiento.
+        Por eso promovemos el estudio, el análisis y el diálogo respetuoso como herramientas fundamentales para mejorar nuestras sociedades.
+      </p>
+      <p>
+        Kyugard no pretende imponer una verdad absoluta. Propone un espacio donde las ideas puedan examinarse, discutirse y evolucionar con responsabilidad.
+      </p>
+      <p>
+        Nuestro objetivo es construir una comunidad de ciudadanos que comprendan mejor el mundo en el que viven
+        y que estén dispuestos a participar en la mejora de las ideas que lo gobiernan.
+      </p>
+
+      <div class="quote">
+        Tal vez Kyugard sea solo una pequeña comunidad que recién comienza. Pero cada persona que decide aprender, debatir y pensar con honestidad contribuye a un futuro mejor.
+      </div>
     </div>
   </div>
-</section>
 
-<section class="section section-soft" id="comunidad">
-  <div class="container">
-    <div class="section-heading fade-up">
-      <h2 class="display">Una comunidad de aprendizaje</h2>
-      <p>Únete a espacios diseñados para el estudio, el diálogo y la colaboración.</p>
-    </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    <div class="community-grid">
-      <article class="community-card fade-up" id="foro">
-        <h3 class="display">Foro de debate</h3>
-        <p>Discute temas políticos y recibe retroalimentación de personas interesadas en comprender y mejorar la democracia.</p>
-        <div class="forum-box">
-          <div class="forum-item">
-            <strong>¿Es posible mejorar la democracia en la era digital?</strong>
-            <span>24 respuestas · hace 3 horas</span>
-          </div>
-          <div class="forum-item">
-            <strong>Análisis: modelos de votación en Europa</strong>
-            <span>12 respuestas · ayer</span>
-          </div>
-          <div class="forum-item">
-            <strong>¿Qué hace funcionar a las democracias nórdicas?</strong>
-            <span>19 respuestas · hace 2 días</span>
-          </div>
-        </div>
-      </article>
+    const modal = document.getElementById("infoModal");
+    const openInfo = document.getElementById("openInfo");
+    const openInfoHero = document.getElementById("openInfoHero");
+    const closeInfo = document.getElementById("closeInfo");
 
-      <article class="community-card fade-up">
-        <h3 class="display">Sesiones en vivo</h3>
-        <p>Participa en clases y debates en tiempo real con invitados, profesores y miembros de la comunidad.</p>
-        <div class="live-box">
-          <div class="live-preview">
-            <span class="live-badge">EN VIVO</span>
-          </div>
-          <strong>Los desafíos de la democracia moderna</strong>
-          <span>Sesión abierta con especialistas invitados</span>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+    function showModal() {
+      modal.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
 
-<section class="final-cta" id="acceder">
-  <div class="container fade-up">
-    <h2 class="display">Forma parte de Kyugard</h2>
-    <p>Una comunidad dedicada al estudio, debate y evolución del pensamiento democrático.</p>
-    <a href="#inicio" class="button button-primary">Unirme al proyecto</a>
-  </div>
-</section>
+    function hideModal() {
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
 
-  </main>  <footer class="site-footer">
-    <div class="container">© <span id="year"></span> Kyugard · Democratic Evolution</div>
-  </footer>  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    openInfo.addEventListener("click", showModal);
+    openInfoHero.addEventListener("click", showModal);
+    closeInfo.addEventListener("click", hideModal);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.fade-up').forEach((element) => {
-      observer.observe(element);
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) hideModal();
     });
-  </script></body>
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") hideModal();
+    });
+  </script>
+</body>
 </html>
