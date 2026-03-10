@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Kyugard</title>
 
 <style>
@@ -13,22 +11,23 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: "Georgia", serif;
 }
 
 body{
+font-family:Georgia, serif;
 color:white;
+background:black;
 }
 
 /* HERO */
 
 .hero{
 
-height:100vh;
+min-height:100vh;
 
 background:
-linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.85)),
-url("https://images-assets.nasa.gov/image/iss040e090540/iss040e090540~orig.jpg");
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.85)),
+url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80");
 
 background-size:cover;
 background-position:center;
@@ -39,99 +38,175 @@ align-items:center;
 justify-content:center;
 
 text-align:center;
-padding:40px;
+padding:30px;
 
 }
 
 /* LOGO */
 
 .logo{
-width:420px;
-max-width:90%;
-margin-bottom:60px;
+width:min(700px,90vw);
+margin-bottom:40px;
 }
 
 /* FRASE */
 
 .hero h1{
 
-font-size:52px;
+font-size:clamp(2rem,6vw,4rem);
 max-width:900px;
-line-height:1.25;
+line-height:1.15;
 
 }
 
 .hero p{
 
-margin-top:25px;
-font-size:22px;
+margin-top:20px;
+font-size:18px;
 max-width:650px;
 opacity:0.9;
+font-family:Arial, sans-serif;
 
 }
 
-/* BOTON */
+/* BOTONES */
 
-.cta{
+.buttons{
 
-margin-top:60px;
+margin-top:40px;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
 
-padding:18px 50px;
+}
 
-background:#1d4ed8;
+.btn{
 
+padding:16px 40px;
 border-radius:40px;
-
-font-size:18px;
-
+font-size:17px;
 text-decoration:none;
 color:white;
-
+font-family:Arial, sans-serif;
 transition:0.3s;
 
 }
 
-.cta:hover{
+.primary{
+background:#1f4d7a;
+}
 
-background:#2563eb;
+.primary:hover{
+background:#2a6aa3;
+}
 
-transform:scale(1.05);
+.secondary{
+
+border:1px solid rgba(255,255,255,0.4);
+backdrop-filter:blur(10px);
+
+}
+
+.secondary:hover{
+background:rgba(255,255,255,0.1);
+}
+
+/* INFO SECTION */
+
+.info{
+
+background:#08131f;
+padding:100px 30px;
+text-align:center;
+
+}
+
+.info h2{
+
+font-size:40px;
+margin-bottom:30px;
+
+}
+
+.info p{
+
+max-width:800px;
+margin:auto;
+line-height:1.8;
+font-family:Arial, sans-serif;
+font-size:18px;
+opacity:0.9;
+
+}
+
+/* FOOTER */
+
+footer{
+
+background:#050c14;
+padding:25px;
+text-align:center;
+font-family:Arial, sans-serif;
+font-size:14px;
+opacity:0.7;
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <section class="hero">
 
-<img src="logo-kyugard.png" class="logo">
+<img src="logo.png" class="logo">
 
 <h1>
-
-Si la humanidad pudo construir ciudades,
-cruzar océanos,
-surcar los cielos
-y alcanzar el espacio,
-
-también puede mejorar la forma
-en que se gobierna a sí misma.
-
+Si la humanidad pudo construir ciudades, cruzar océanos,
+surcar los cielos y alcanzar el espacio,
+también puede mejorar la forma en que se gobierna a sí misma.
 </h1>
 
 <p>
-
 Kyugard es una comunidad dedicada a comprender y debatir
 la evolución de la democracia con una visión global,
 seria y responsable.
-
 </p>
 
-<a class="cta" href="#foro">Entrar al foro</a>
+<div class="buttons">
+
+<a href="cursos.html" class="btn primary">
+Comenzar formación
+</a>
+
+<a href="#info" class="btn secondary">
+Info
+</a>
+
+</div>
 
 </section>
+
+<section id="info" class="info">
+
+<h2>¿Qué es Kyugard?</h2>
+
+<p>
+Kyugard es un espacio dedicado al estudio, la reflexión y el debate sobre
+la evolución de la democracia. A través de cursos formativos y discusiones
+responsables, los participantes adquieren las herramientas necesarias para
+comprender los sistemas políticos, analizar ideas con pensamiento crítico y
+participar en debates constructivos sobre el futuro de la gobernanza humana.
+</p>
+
+</section>
+
+<footer>
+
+© 2026 Kyugard · Democratic Evolution
+
+</footer>
 
 </body>
 </html>
