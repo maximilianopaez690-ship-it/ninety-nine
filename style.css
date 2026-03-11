@@ -51,8 +51,8 @@ a {
 }
 
 .logo {
-  width: 38px;
-  height: 38px;
+  width: auto;
+  height: 50px;
   object-fit: contain;
 }
 
