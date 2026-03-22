@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyugard</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#f5f5f5;
+  color:#111;
+  text-align:center;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* HEADER */
+.top{
+  background:black;
+  color:white;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
+}
+
+.header img{
+  height:45px;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+}
+
+button{
+  padding:10px 15px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn-outline{
+  border:1px solid white;
+  background:transparent;
+  color:white;
+}
+
+.btn-light{
+  background:white;
+  color:black;
+}
+
+/* HERO */
+.hero{
+  padding:100px 20px;
+  font-size:30px;
+  line-height:1.4;
+}
+
+/* SECCIONES */
+.section{
+  padding:80px 20px;
+  font-size:22px;
+  line-height:1.6;
+}
+
+/* TRANSICION */
+.transition{
+  font-size:26px;
+  font-weight:bold;
+}
+
+/* CURSO */
+.course{
+  padding:80px 20px;
+  background:#fafafa;
+}
+
+.course button{
+  margin-top:20px;
+  padding:15px 25px;
+  font-size:16px;
+}
+
+/* FOOTER */
+.footer{
+  padding:60px 20px;
+  font-size:18px;
+  color:#555;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="top">
+
+  <div class="header">
+    <img src="logo.png">
+
+    <div class="buttons">
+      <button class="btn-outline">Info</button>
+      <button class="btn-light" onclick="changeLang()" id="langBtn">ENGLISH</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div id="hero">
+      Bienvenidos a Kyugard.<br>
+      Una revolución del pensamiento.
+    </div>
+  </div>
+
+</div>
+
+<!-- FRASE -->
+<div class="section">
+  <div id="phrase">
+    Cada época tiene su revolución.<br>
+    Esta es la nuestra.
+  </div>
+</div>
+
+<!-- EXPLICACION -->
+<div class="section">
+  <div id="exp">
+    Pensamos diferente.<br>
+    Y eso siempre fue un problema.<br><br>
+
+    Kyugard parte de una idea simple:<br>
+    las diferencias no deben eliminarse.<br><br>
+
+    Deben entenderse.<br><br>
+
+    Porque cuando se analizan<br>
+    y se ponen a prueba,<br><br>
+
+    las diferencias dejan de ser un conflicto.<br><br>
+
+    Se convierten en una herramienta<br>
+    para tomar mejores decisiones.<br><br>
+
+    Eso es una revolución del pensamiento.
+  </div>
+</div>
+
+<!-- TRANSICION -->
+<div class="section transition">
+  <div id="transition">
+    Kyugard comienza como pensamiento.<br>
+    Y se convierte en sistema.
+  </div>
+</div>
+
+<!-- CURSO -->
+<div class="course">
+  <div id="courseText">
+    Si querés entender Kyugard,<br>
+    este es el primer paso.<br><br>
+
+    Comenzá por sus fundamentos.
+  </div>
+
+  <button>Comenzar</button>
+</div>
+
+<!-- FOOTER / PATREON -->
+<div class="footer">
+  <div id="footerText">
+    Kyugard no se construye solo.<br>
+    Se construye con quienes deciden pensar diferente.
+  </div>
+</div>
+
+<script>
+
+let lang = "es";
+
+function changeLang(){
+  if(lang === "es"){
+    lang = "en";
+
+    document.getElementById("hero").innerHTML =
+      "Welcome to Kyugard.<br>A revolution of thought.";
+
+    document.getElementById("phrase").innerHTML =
+      "Every era has its revolution.<br>This is ours.";
+
+    document.getElementById("exp").innerHTML =
+      "We think differently.<br>And that has always been a problem.<br><br>\
+Kyugard starts from a simple idea:<br>differences should not be eliminated.<br><br>\
+They should be understood.<br><br>\
+Because when they are analyzed<br>and tested,<br><br>\
+differences stop being a conflict.<br><br>\
+They become a tool<br>to make better decisions.<br><br>\
+That is a revolution of thought.";
+
+    document.getElementById("transition").innerHTML =
+      "Kyugard begins as thought.<br>And becomes a system.";
+
+    document.getElementById("courseText").innerHTML =
+      "If you want to understand Kyugard,<br>this is the first step.<br><br>\
+Start with its foundations.";
+
+    document.getElementById("footerText").innerHTML =
+      "Kyugard is not built alone.<br>It is built by those who choose to think differently.";
+
+    document.getElementById("langBtn").innerText = "ESPAÑOL";
+
+  } else {
+    lang = "es";
+
+    location.reload();
+  }
+}
+
+</script>
+
+</body>
+</html>
