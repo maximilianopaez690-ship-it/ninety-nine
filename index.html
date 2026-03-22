@@ -1,1 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyugard</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f4f4f5;
+      --surface: #ffffff;
+      --surface-2: #fafafa;
+      --text: #111111;
+      --muted: #5f5f67;
+      --border: #e2e2e7;
+      --black: #050505;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .top {
+      background:
+        radial-gradient(circle at top center, rgba(255,255,255,0.08), transparent 34%),
+        linear-gradient(180deg, #000000 0%, #050505 100%);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0 14px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .logo-wrap img {
+      height: 68px;
+      width: auto;
+      max-width: 280px;
+      object-fit: contain;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-outline-light {
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.02);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .btn-outline-light:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .btn-light {
+      color: var(--black);
+      background: var(--white);
+      border: 1px solid var(--white);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.12);
+    }
+
+    .btn-light:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .hero {
+      min-height: 62vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 34px 0 88px;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 880px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: clamp(28px, 4vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .section {
+      padding: 92px 0;
+    }
+
+    .statement {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .statement .wrap {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .statement p {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .explanation {
+      background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .explanation .panel {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: var(--shadow);
+      border-radius: 30px;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 42px 28px;
+      backdrop-filter: blur(6px);
+      text-align: center;
+    }
+
+    .explanation p {
+      font-size: clamp(23px, 2.4vw, 33px);
+      line-height: 1.38;
+      letter-spacing: -0.03em;
+      color: #161616;
+      font-weight: 500;
+    }
+
+    .transition {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .transition .wrap {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .transition p {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .course {
+      background: linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .course .panel {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 44px 28px;
+      text-align: center;
+    }
+
+    .course p {
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.25;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .course .course-button {
+      margin-top: 28px;
+    }
+
+    .btn-dark {
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 14px;
+      color: var(--white);
+      background: var(--black);
+      border: 1px solid var(--black);
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+    }
+
+    .btn-dark:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .patreon {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .patreon .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .patreon p {
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.22;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .patreon .btn-row {
+      margin-top: 26px;
+    }
+
+    .footer {
+      text-align: center;
+      color: #7a7a84;
+      font-size: 14px;
+      padding: 26px 0 40px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(680px, 100%);
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      position: relative;
+      text-align: left;
+    }
+
+    .modal h3 {
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .modal p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 20px;
+    }
+
+    .close-modal:hover {
+      background: #f7f7f7;
+    }
+
+    @media (max-width: 720px) {
+      .header {
+        align-items: flex-start;
+      }
+
+      .logo-wrap img {
+        height: 58px;
+        max-width: 220px;
+      }
+
+      .actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .btn {
+        min-height: 44px;
+        padding: 0 16px;
+      }
+
+      .hero {
+        min-height: 52vh;
+        padding: 22px 0 64px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .explanation .panel,
+      .course .panel {
+        padding: 34px 20px;
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top">
+    <div class="container">
+      <header class="header">
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Kyugard">
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-outline-light" id="infoBtn">Info</button>
+          <button class="btn btn-light" id="langBtn">ENGLISH</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 id="heroLine1">Bienvenidos a Kyugard.</h1>
+          <p id="heroLine2">Una revolución del pensamiento.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="section statement">
+    <div class="container">
+      <div class="wrap">
+        <p id="statementText">
+          Cada época tiene su revolución.<br>
+          Esta es la nuestra.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section explanation">
+    <div class="container">
+      <div class="panel">
+        <p id="explanationText">
+          Pensamos diferente.<br>
+          Y eso siempre fue un problema.<br><br>
+
+          Kyugard parte de una idea simple:<br>
+          las diferencias no deben eliminarse.<br><br>
+
+          Deben entenderse.<br><br>
+
+          Porque cuando se analizan<br>
+          y se ponen a prueba,<br><br>
+
+          las diferencias dejan de ser un conflicto.<br><br>
+
+          Se convierten en una herramienta<br>
+          para tomar mejores decisiones.<br><br>
+
+          Eso es una revolución del pensamiento.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section transition">
+    <div class="container">
+      <div class="wrap">
+        <p id="transitionText">
+          Kyugard comienza como pensamiento.<br>
+          Y se convierte en sistema.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section course" id="course">
+    <div class="container">
+      <div class="panel">
+        <p id="courseText">
+          Si querés entender Kyugard,<br>
+          este es el primer paso.<br><br>
+
+          Comenzá por sus fundamentos.
+        </p>
+
+        <div class="course-button">
+          <button class="btn-dark" id="startCourseBtn">Comenzar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section patreon">
+    <div class="container">
+      <div class="wrap">
+        <p id="patreonText">
+          Kyugard no se construye solo.<br>
+          Se construye con quienes deciden pensar diferente.
+        </p>
+
+        <div class="btn-row">
+          <button class="btn-dark" id="supportBtn">Apoyar en Patreon</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span id="footerText">© 2026 Kyugard</span>
+  </footer>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="close-modal" id="closeModal">×</button>
+      <h3 id="modalTitle">Info</h3>
+      <p id="modalText1">
+        Kyugard es una revolución del pensamiento aplicada a la forma en que entendemos el gobierno, las diferencias y las decisiones colectivas.
+      </p>
+      <p id="modalText2">
+        Esta página es una introducción a su identidad, su visión y el primer paso para empezar a comprenderlo.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    let currentLang = "es";
+
+    const translations = {
+      es: {
+        langBtn: "ENGLISH",
+        infoBtn: "Info",
+        heroLine1: "Bienvenidos a Kyugard.",
+        heroLine2: "Una revolución del pensamiento.",
+        statementText: "Cada época tiene su revolución.<br>Esta es la nuestra.",
+        explanationText:
+          "Pensamos diferente.<br>Y eso siempre fue un problema.<br><br>" +
+          "Kyugard parte de una idea simple:<br>las diferencias no deben eliminarse.<br><br>" +
+          "Deben entenderse.<br><br>" +
+          "Porque cuando se analizan<br>y se ponen a prueba,<br><br>" +
+          "las diferencias dejan de ser un conflicto.<br><br>" +
+          "Se convierten en una herramienta<br>para tomar mejores decisiones.<br><br>" +
+          "Eso es una revolución del pensamiento.",
+        transitionText: "Kyugard comienza como pensamiento.<br>Y se convierte en sistema.",
+        courseText: "Si querés entender Kyugard,<br>este es el primer paso.<br><br>Comenzá por sus fundamentos.",
+        startCourseBtn: "Comenzar",
+        patreonText: "Kyugard no se construye solo.<br>Se construye con quienes deciden pensar diferente.",
+        supportBtn: "Apoyar en Patreon",
+        footerText: "© 2026 Kyugard",
+        modalTitle: "Info",
+        modalText1: "Kyugard es una revolución del pensamiento aplicada a la forma en que entendemos el gobierno, las diferencias y las decisiones colectivas.",
+        modalText2: "Esta página es una introducción a su identidad, su visión y el primer paso para empezar a comprenderlo."
+      },
+      en: {
+        langBtn: "ESPAÑOL",
+        infoBtn: "Info",
+        heroLine1: "Welcome to Kyugard.",
+        heroLine2: "A revolution of thought.",
+        statementText: "Every era has its revolution.<br>This is ours.",
+        explanationText:
+          "We think differently.<br>And that has always been a problem.<br><br>" +
+          "Kyugard starts from a simple idea:<br>differences should not be eliminated.<br><br>" +
+          "They should be understood.<br><br>" +
+          "Because when they are analyzed<br>and put to the test,<br><br>" +
+          "differences stop being a conflict.<br><br>" +
