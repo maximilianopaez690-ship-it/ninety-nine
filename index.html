@@ -1,182 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kyugard</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="./css/styles.css">
 
-  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="page">
 
-    <!-- HERO -->
-    <section class="hero">
-      <header class="header">
-        <a href="./index.html" class="logo-link" aria-label="Ir al inicio">
-          <img src="./assets/logo.png" alt="Kyugard" class="logo" />
-        </a>
+<!-- HERO -->
+<section class="hero">
 
-        <nav class="top-nav" aria-label="Navegación principal">
-          <a href="./info.html" class="nav-link">Info</a>
-          <button id="lang-btn" class="nav-link nav-button" type="button">
-            English
-          </button>
-        </nav>
-      </header>
+  <header class="header">
+    <img src="./assets/logo.png" class="logo">
 
-      <div class="hero-content">
-        <h1 class="hero-title">
-          <span data-i18n="heroLine1">Bienvenidos a <span class="brand-word">Kyugard</span>.</span>
-          <span data-i18n="heroLine2">Una revolución del pensamiento.</span>
-        </h1>
+    <div class="nav">
+      <a href="./info.html">Info</a>
+      <button id="lang-btn">English</button>
+    </div>
+  </header>
 
-        <a href="./modules.html" class="hero-cta" data-i18n="start">
-          Comenzar
-        </a>
-      </div>
-    </section>
+  <div class="hero-content">
+    <h1>
+      <span data-i18n="heroLine1"></span>
+      <span data-i18n="heroLine2"></span>
+    </h1>
 
-    <!-- CONTENIDO -->
-    <section class="content">
+    <a href="#" class="cta" data-i18n="start"></a>
+  </div>
 
-      <!-- BLOQUE PUENTE -->
-      <article class="card">
-        <div class="card-inner">
-          <div class="card-item" aria-hidden="true"></div>
+</section>
 
-          <div class="card-text">
-            <p class="card-main" data-i18n="bridgeMain">
-              Cada época tiene su revolución.
-            </p>
-            <p class="card-sub" data-i18n="bridgeSub">
-              Esta es la nuestra.
-            </p>
-          </div>
-        </div>
-      </article>
+<!-- CONTENIDO -->
+<section class="content">
 
-      <!-- BLOQUE MANIFIESTO -->
-      <article class="card card-manifest">
-        <div class="card-inner">
-          <div class="card-item" aria-hidden="true"></div>
+  <!-- FRASE PUENTE -->
+  <div class="card">
+    <div class="dot"></div>
 
-          <div class="card-text">
-            <p class="card-main" data-i18n="manifestLine1">
-              Kyugard busca una revolución en la democracia:
-            </p>
+    <div>
+      <p class="main" data-i18n="bridgeMain"></p>
+      <p class="sub" data-i18n="bridgeSub"></p>
+    </div>
+  </div>
 
-            <p class="card-sub" data-i18n="manifestLine2">
-              una evolución en la que los presidentes, senadores y gobernadores dejen de existir.
-            </p>
+  <!-- MANIFIESTO -->
+  <div class="card big">
 
-            <p class="card-emphasis" data-i18n="manifestLine3">“Revolución”.</p>
+    <div class="dot"></div>
 
-            <p class="card-sub" data-i18n="manifestLine4">
-              Sé lo que estás pensando:
-            </p>
+    <div>
+      <p class="main" data-i18n="manifestLine1"></p>
+      <p class="sub" data-i18n="manifestLine2"></p>
 
-            <p class="card-sub" data-i18n="manifestLine5">
-              que solo hay una forma de conseguirlo.
-            </p>
+      <p class="emphasis" data-i18n="manifestLine3"></p>
 
-            <p class="card-break" data-i18n="manifestLine6">Pero no.</p>
+      <p class="sub" data-i18n="manifestLine4"></p>
+      <p class="sub" data-i18n="manifestLine5"></p>
 
-            <p class="card-sub" data-i18n="manifestLine7">Existe otra vía.</p>
-            <p class="card-sub" data-i18n="manifestLine8">Una vía pacífica.</p>
-            <p class="card-sub" data-i18n="manifestLine9">
-              Una vía en la que no tengas que sacrificar tu vida.
-            </p>
+      <p class="break" data-i18n="manifestLine6"></p>
 
-            <p class="card-sub card-last" data-i18n="manifestLine10">
-              Solo tengas que comprometerte a comprender qué significa la evolución de la democracia.
-            </p>
-          </div>
-        </div>
-      </article>
+      <p class="sub" data-i18n="manifestLine7"></p>
+      <p class="sub" data-i18n="manifestLine8"></p>
+      <p class="sub" data-i18n="manifestLine9"></p>
 
-      <!-- BLOQUE CURSO -->
-      <article class="card">
-        <div class="card-inner card-with-icon">
-          <div class="card-item" aria-hidden="true"></div>
+      <p class="sub last" data-i18n="manifestLine10"></p>
+    </div>
 
-          <div class="card-text">
-            <p class="card-main" data-i18n="courseMain">
-              Si querés entender Kyugard, este es el primer paso.
-            </p>
+  </div>
 
-            <p class="card-sub" data-i18n="courseSub">
-              Comenzá por sus fundamentos.
-            </p>
+  <!-- CURSO -->
+  <div class="card">
 
-            <a href="./modules.html" class="card-button" data-i18n="start">
-              Comenzar
-            </a>
-          </div>
+    <div class="dot"></div>
 
-          <div class="card-icon" aria-hidden="true">
-            <!-- Birrete -->
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M2 9.5L12 5l10 4.5-10 4.5L2 9.5Z" />
-              <path d="M6 11.3V15c0 .7 2.7 3 6 3s6-2.3 6-3v-3.7" />
-              <path d="M20 10v4.5" />
-            </svg>
-          </div>
-        </div>
-      </article>
+    <div>
+      <p class="main" data-i18n="courseMain"></p>
+      <p class="sub" data-i18n="courseSub"></p>
 
-      <!-- BLOQUE PATREON -->
-      <article class="card">
-        <div class="card-inner card-with-icon">
-          <div class="card-item" aria-hidden="true"></div>
+      <a href="#" class="button" data-i18n="start"></a>
+    </div>
 
-          <div class="card-text">
-            <p class="card-main" data-i18n="supportMain">
-              Kyugard no se construye solo.
-            </p>
+  </div>
 
-            <p class="card-sub" data-i18n="supportSub">
-              Se construye con quienes deciden pensar diferente.
-            </p>
+  <!-- PATREON -->
+  <div class="card">
 
-            <a
-              href="https://www.patreon.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="card-button"
-              data-i18n="patreon"
-            >
-              Patreon
-            </a>
-          </div>
+    <div class="dot"></div>
 
-          <div class="card-icon" aria-hidden="true">
-            <!-- Apretón de manos -->
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M8 12 5.5 9.5a2.1 2.1 0 0 0-3 3L6 16" />
-              <path d="M16 12l2.5-2.5a2.1 2.1 0 0 1 3 3L18 16" />
-              <path d="M9 13l2 2a2 2 0 0 0 2.8 0l4.4-4.4a2 2 0 0 0-2.8-2.8L12 11 10.6 9.6a2.2 2.2 0 0 0-3.1 0L5 12.1a2 2 0 0 0 0 2.8l2.1 2.1a2 2 0 0 0 2.8 0" />
-            </svg>
-          </div>
-        </div>
-      </article>
+    <div>
+      <p class="main" data-i18n="supportMain"></p>
+      <p class="sub" data-i18n="supportSub"></p>
 
-    </section>
+      <a href="#" class="button" data-i18n="patreon"></a>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>© Kyugard 2026</p>
-    </footer>
+  </div>
 
-  </main>
+</section>
 
-  <script src="./js/app.js"></script>
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© Kyugard 2026</p>
+</footer>
+
+<script src="./js/app.js"></script>
+
 </body>
 </html>
