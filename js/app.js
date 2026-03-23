@@ -1,6 +1,6 @@
 const translations = {
   es: {
-    heroLine1: 'Bienvenidos a <span class="brand-word">Kyugard</span>.',
+    heroLine1: 'Bienvenidos a Kyugard.',
     heroLine2: 'Una revolución del pensamiento.',
     start: 'Comenzar',
     patreon: 'Patreon',
@@ -27,7 +27,7 @@ const translations = {
   },
 
   en: {
-    heroLine1: 'Welcome to <span class="brand-word">Kyugard</span>.',
+    heroLine1: 'Welcome to Kyugard.',
     heroLine2: 'A revolution of thought.',
     start: 'Start',
     patreon: 'Patreon',
@@ -57,32 +57,38 @@ const translations = {
 let currentLang = localStorage.getItem('lang') || 'es';
 
 function getTranslation(lang, key) {
-  if (translations[lang] && translations[lang][key]) {
+  if (
+    translations[lang] &&
+    Object.prototype.hasOwnProperty.call(translations[lang], key)
+  ) {
     return translations[lang][key];
   }
 
-  if (translations.es && translations.es[key]) {
-    console.warn(`Falta "${key}" en "${lang}", usando español`);
+  if (
+    translations.es &&
+    Object.prototype.hasOwnProperty.call(translations.es, key)
+  ) {
+    console.warn(`Falta la traducción "${key}" en "${lang}". Se usa español por defecto.`);
     return translations.es[key];
   }
 
-  console.warn(`Clave inexistente: ${key}`);
+  console.warn(`La clave "${key}" no existe en translations.`);
   return '';
 }
 
 function applyTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach((el) => {
-    const key = el.getAttribute('data-i18n');
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const key = element.getAttribute('data-i18n');
     const value = getTranslation(currentLang, key);
 
     if (value !== '') {
-      el.innerHTML = value;
+      element.innerHTML = value;
     }
   });
 
-  const btn = document.getElementById('lang-btn');
-  if (btn) {
-    btn.textContent = currentLang === 'es' ? 'English' : 'Español';
+  const langBtn = document.getElementById('lang-btn');
+  if (langBtn) {
+    langBtn.textContent = currentLang === 'es' ? 'English' : 'Español';
   }
 
   document.documentElement.lang = currentLang;
@@ -97,8 +103,8 @@ function toggleLanguage() {
 document.addEventListener('DOMContentLoaded', () => {
   applyTranslations();
 
-  const btn = document.getElementById('lang-btn');
-  if (btn) {
-    btn.addEventListener('click', toggleLanguage);
+  const langBtn = document.getElementById('lang-btn');
+  if (langBtn) {
+    langBtn.addEventListener('click', toggleLanguage);
   }
 });
