@@ -5,101 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyugard</title>
 
-  <!-- Tipografía -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
 
 <main class="page">
 
-  <!-- HERO -->
   <section class="hero">
-
     <header class="header">
-      <img src="./assets/logo.png" class="logo">
+      <a href="./index.html" class="logo-link">
+        <img src="./assets/logo.png" alt="Kyugard" class="logo">
+      </a>
 
-      <div class="nav">
-        <a href="./idea.html">Info</a>
-        <button id="lang-btn">English</button>
+      <div class="top-nav">
+        <a href="./idea.html" class="nav-link">Info</a>
+        <button id="lang-btn" class="nav-link nav-button" type="button">English</button>
       </div>
     </header>
 
     <div class="hero-content">
-      <h1 data-i18n="heroLine1">Bienvenidos a Kyugard.</h1>
-      <p data-i18n="heroLine2">Una revolución del pensamiento.</p>
-
-      <a href="./modules.html" class="cta" data-i18n="start">
-        Comenzar
-      </a>
+      <h1 class="hero-title" data-i18n="heroLine1">Bienvenidos a Kyugard.</h1>
+      <p class="hero-subtitle" data-i18n="heroLine2">Una revolución del pensamiento.</p>
+      <a href="./modules.html" class="hero-cta" data-i18n="start">Comenzar</a>
     </div>
-
   </section>
 
-  <!-- CONTENIDO -->
   <section class="content">
 
-    <!-- FRASE PUENTE -->
-    <div class="card">
-      <div class="dot"></div>
-
-      <div>
-        <p class="main" data-i18n="bridgeMain"></p>
-        <p class="sub" data-i18n="bridgeSub"></p>
+    <article class="card">
+      <div class="card-inner">
+        <div class="dot"></div>
+        <div class="card-text">
+          <p class="card-main" data-i18n="bridgeMain">Cada época tiene su revolución.</p>
+          <p class="card-sub" data-i18n="bridgeSub">Esta es la nuestra.</p>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <!-- MANIFIESTO -->
-    <div class="card big">
-      <div class="dot"></div>
-
-      <div>
-        <p class="main" data-i18n="manifestLine1"></p>
-        <p class="sub" data-i18n="manifestLine2"></p>
-
-        <p class="emphasis" data-i18n="manifestLine3"></p>
-
-        <p class="sub" data-i18n="manifestLine4"></p>
-        <p class="sub" data-i18n="manifestLine5"></p>
-
-        <p class="break" data-i18n="manifestLine6"></p>
-
-        <p class="sub" data-i18n="manifestLine7"></p>
-        <p class="sub" data-i18n="manifestLine8"></p>
-        <p class="sub" data-i18n="manifestLine9"></p>
-
-        <p class="sub last" data-i18n="manifestLine10"></p>
+    <article class="card card-manifest">
+      <div class="card-inner">
+        <div class="dot"></div>
+        <div class="card-text">
+          <p class="card-main" data-i18n="manifestLine1">Kyugard busca una revolución en la democracia:</p>
+          <p class="card-sub" data-i18n="manifestLine2">una evolución en la que los presidentes, senadores y gobernadores dejen de existir.</p>
+          <p class="card-emphasis" data-i18n="manifestLine3">“Revolución”.</p>
+          <p class="card-sub" data-i18n="manifestLine4">Sé lo que estás pensando:</p>
+          <p class="card-sub" data-i18n="manifestLine5">que solo hay una forma de conseguirlo.</p>
+          <p class="card-break" data-i18n="manifestLine6">Pero no.</p>
+          <p class="card-sub" data-i18n="manifestLine7">Existe otra vía.</p>
+          <p class="card-sub" data-i18n="manifestLine8">Una vía pacífica.</p>
+          <p class="card-sub" data-i18n="manifestLine9">Una vía en la que no tengas que sacrificar tu vida.</p>
+          <p class="card-sub card-last" data-i18n="manifestLine10">Solo tengas que comprometerte a comprender qué significa la evolución de la democracia.</p>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <!-- CURSO -->
-    <div class="card">
-      <div class="dot"></div>
-
-      <div>
-        <p class="main" data-i18n="courseMain"></p>
-        <p class="sub" data-i18n="courseSub"></p>
-
-        <a href="./modules.html" class="button" data-i18n="start"></a>
+    <article class="card">
+      <div class="card-inner">
+        <div class="dot"></div>
+        <div class="card-text">
+          <p class="card-main" data-i18n="courseMain">Si querés entender Kyugard, este es el primer paso.</p>
+          <p class="card-sub" data-i18n="courseSub">Comenzá por sus fundamentos.</p>
+          <a href="./modules.html" class="card-button" data-i18n="start">Comenzar</a>
+        </div>
       </div>
-    </div>
+    </article>
 
-    <!-- PATREON -->
-    <div class="card">
-      <div class="dot"></div>
-
-      <div>
-        <p class="main" data-i18n="supportMain"></p>
-        <p class="sub" data-i18n="supportSub"></p>
-
-        <a href="https://www.patreon.com/" class="button" data-i18n="patreon"></a>
+    <article class="card">
+      <div class="card-inner">
+        <div class="dot"></div>
+        <div class="card-text">
+          <p class="card-main" data-i18n="supportMain">Kyugard no se construye solo.</p>
+          <p class="card-sub" data-i18n="supportSub">Se construye con quienes deciden pensar diferente.</p>
+          <a href="https://www.patreon.com/" target="_blank" rel="noopener noreferrer" class="card-button" data-i18n="patreon">Patreon</a>
+        </div>
       </div>
-    </div>
+    </article>
 
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© Kyugard 2026</p>
   </footer>
@@ -107,6 +92,5 @@
 </main>
 
 <script src="./js/app.js"></script>
-
 </body>
 </html>
