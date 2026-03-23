@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kyugard — Curso</title>
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      background: #f4f4f5;
+      color: #111;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .top {
+      background: #000;
+      color: white;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 110px;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-light {
+      background: white;
+      color: black;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+    }
+
+    .hero p {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
+    .section {
+      padding: 40px 0;
+    }
+
+    .modules {
+      display: grid;
+      gap: 14px;
+    }
+
+    .module {
+      padding: 20px;
+      border-radius: 14px;
+      background: white;
+      border: 1px solid #ddd;
+      transition: 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .module:hover {
+      transform: translateY(-2px);
+    }
+
+    .module-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .module-desc {
+      font-size: 16px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top">
+  <div class="header">
+    <div class="logo">
+      <a href="index.html"><img src="logo.png"></a>
+    </div>
+
+    <button class="btn btn-light" id="langBtn">ENGLISH</button>
+  </div>
+
+  <div class="hero">
+    <h1 id="title">Curso Kyugard</h1>
+    <p id="subtitle">Aprender a pensar en gris.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <h2 id="modulesTitle">Módulos</h2>
+
+    <div class="modules">
+
+      <a href="modulo-1.html" class="module">
+        <div class="module-title" id="m1">Módulo 1 — El problema</div>
+        <div class="module-desc" id="d1">No pensamos mal. Pensamos incompleto.</div>
+      </a>
+
+      <a href="modulo-2.html" class="module">
+        <div class="module-title" id="m2">Módulo 2 — Gris</div>
+        <div class="module-desc" id="d2">La realidad no es blanca ni negra.</div>
+      </a>
+
+      <a href="modulo-3.html" class="module">
+        <div class="module-title" id="m3">Módulo 3 — Las corrientes</div>
+        <div class="module-desc" id="d3">Dentro de cada idea hay múltiples formas de pensar.</div>
+      </a>
+
+      <a href="modulo-4.html" class="module">
+        <div class="module-title" id="m4">Módulo 4 — El acuerdo</div>
+        <div class="module-desc" id="d4">Ceder no es perder.</div>
+      </a>
+
+      <a href="modulo-5.html" class="module">
+        <div class="module-title" id="m5">Módulo 5 — El sistema</div>
+        <div class="module-desc" id="d5">Un sistema que evoluciona constantemente.</div>
+      </a>
+
+      <a href="modulo-6.html" class="module">
+        <div class="module-title" id="m6">Módulo 6 — Kyugard</div>
+        <div class="module-desc" id="d6">La síntesis de una nueva forma de pensar.</div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  © 2026 Kyugard
+</div>
+
+<script>
+let currentLang = localStorage.getItem("kyugard_lang") || "es";
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("kyugard_lang", lang);
+
+  if (lang === "es") {
+    document.getElementById("title").textContent = "Curso Kyugard";
+    document.getElementById("subtitle").textContent = "Aprender a pensar en gris.";
+    document.getElementById("modulesTitle").textContent = "Módulos";
+
+    document.getElementById("m1").textContent = "Módulo 1 — El problema";
+    document.getElementById("d1").textContent = "No pensamos mal. Pensamos incompleto.";
+
+    document.getElementById("m2").textContent = "Módulo 2 — Gris";
+    document.getElementById("d2").textContent = "La realidad no es blanca ni negra.";
+
+    document.getElementById("m3").textContent = "Módulo 3 — Las corrientes";
+    document.getElementById("d3").textContent = "Dentro de cada idea hay múltiples formas de pensar.";
+
+    document.getElementById("m4").textContent = "Módulo 4 — El acuerdo";
+    document.getElementById("d4").textContent = "Ceder no es perder.";
+
+    document.getElementById("m5").textContent = "Módulo 5 — El sistema";
+    document.getElementById("d5").textContent = "Un sistema que evoluciona constantemente.";
+
+    document.getElementById("m6").textContent = "Módulo 6 — Kyugard";
+    document.getElementById("d6").textContent = "La síntesis de una nueva forma de pensar.";
+
+    document.getElementById("langBtn").textContent = "ENGLISH";
+
+  } else {
+
+    document.getElementById("title").textContent = "Kyugard Course";
+    document.getElementById("subtitle").textContent = "Learn to think in grey.";
+    document.getElementById("modulesTitle").textContent = "Modules";
+
+    document.getElementById("m1").textContent = "Module 1 — The problem";
+    document.getElementById("d1").textContent = "We don’t think wrong. We think incompletely.";
+
+    document.getElementById("m2").textContent = "Module 2 — Grey";
+    document.getElementById("d2").textContent = "Reality is not black or white.";
+
+    document.getElementById("m3").textContent = "Module 3 — Currents";
+    document.getElementById("d3").textContent = "Every idea has multiple ways of thinking.";
+
+    document.getElementById("m4").textContent = "Module 4 — Agreement";
+    document.getElementById("d4").textContent = "Yielding is not losing.";
+
+    document.getElementById("m5").textContent = "Module 5 — The system";
+    document.getElementById("d5").textContent = "A system that evolves constantly.";
+
+    document.getElementById("m6").textContent = "Module 6 — Kyugard";
+    document.getElementById("d6").textContent = "The synthesis of a new way of thinking.";
+
+    document.getElementById("langBtn").textContent = "ESPAÑOL";
+  }
+}
+
+document.getElementById("langBtn").onclick = () => {
+  setLang(currentLang === "es" ? "en" : "es");
+};
+
+setLang(currentLang);
+</script>
+
+</body>
+</html>
