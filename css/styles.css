@@ -293,8 +293,8 @@ button {
   }
 
   .logo {
-    width: min(210px, 40vw);
-    min-width: 125px;
+    width: min(300px, 48vw);
+    min-width: 180px;
   }
 }
 
