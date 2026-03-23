@@ -1,21 +1,21 @@
 const translations = {
   es: {
-    hero: "Bienvenidos a Kyugard.\nUna revolución del pensamiento.",
+    hero: "Bienvenidos a Kyugard.<br>Una revolución del pensamiento.",
     start: "Comenzar",
-    puente: "Cada época tiene su revolución.\nEsta es la nuestra.",
-    explicacion: "Pensamos diferente.\nY eso siempre fue un problema.\n\nKyugard parte de una idea simple:\nlas diferencias no deben eliminarse.\n\nDeben entenderse.\n\nPorque cuando se analizan\ny se ponen a prueba,\n\nlas diferencias dejan de ser un conflicto.\n\nSe convierten en una herramienta\npara tomar mejores decisiones.\n\nEso es una revolución del pensamiento.",
-    transicion: "Kyugard comienza como pensamiento.\nY se convierte en sistema.",
-    curso: "Si querés entender Kyugard,\neste es el primer paso.\n\nComenzá por sus fundamentos.",
-    cierre: "Kyugard no se construye solo.\n\nSe construye con quienes deciden\npensar diferente."
+    puente: "Cada época tiene su revolución.<br>Esta es la nuestra.",
+    explicacion: "Pensamos diferente.<br>Y eso siempre fue un problema.<br><br>Kyugard parte de una idea simple:<br>las diferencias no deben eliminarse.<br><br>Deben entenderse.<br><br>Porque cuando se analizan<br>y se ponen a prueba,<br><br>las diferencias dejan de ser un conflicto.<br><br>Se convierten en una herramienta<br>para tomar mejores decisiones.<br><br>Eso es una revolución del pensamiento.",
+    sistema: "Kyugard comienza como pensamiento.<br>Y se convierte en sistema. ⚙️",
+    curso: "Si querés entender Kyugard,<br>este es el primer paso.<br><br>Comenzá por sus fundamentos. 🎓",
+    cierre: "Kyugard no se construye solo. 🤝<br><br>Se construye con quienes deciden<br>pensar diferente."
   },
   en: {
-    hero: "Welcome to Kyugard.\nA revolution of thought.",
+    hero: "Welcome to Kyugard.<br>A revolution of thought.",
     start: "Start",
-    puente: "Every era has its revolution.\nThis is ours.",
-    explicacion: "We think differently.\nAnd that has always been a problem.\n\nKyugard starts from a simple idea:\ndifferences should not be eliminated.\n\nThey must be understood.\n\nBecause when they are analyzed\nand tested,\n\ndifferences stop being conflict.\n\nThey become a tool\nfor better decisions.\n\nThat is a revolution of thought.",
-    transicion: "Kyugard begins as thought.\nAnd becomes a system.",
-    curso: "If you want to understand Kyugard,\nthis is the first step.\n\nStart with its foundations.",
-    cierre: "Kyugard is not built alone.\n\nIt is built by those who choose\nto think differently."
+    puente: "Every era has its revolution.<br>This is ours.",
+    explicacion: "We think differently.<br>And that has always been a problem.<br><br>Kyugard starts from a simple idea:<br>differences should not be eliminated.<br><br>They must be understood.<br><br>Because when analyzed<br>and tested,<br><br>differences stop being conflict.<br><br>They become a tool<br>for better decisions.<br><br>This is a revolution of thought.",
+    sistema: "Kyugard begins as thought.<br>And becomes a system. ⚙️",
+    curso: "If you want to understand Kyugard,<br>this is the first step.<br><br>Start with its foundations. 🎓",
+    cierre: "Kyugard is not built alone. 🤝<br><br>It is built by those who choose<br>to think differently."
   }
 };
 
@@ -24,8 +24,11 @@ let lang = localStorage.getItem("lang") || "es";
 function applyTranslations() {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    el.innerText = translations[lang][key];
+    el.innerHTML = translations[lang][key];
   });
+
+  document.getElementById("lang-btn").textContent =
+    lang === "es" ? "English" : "Español";
 }
 
 function toggleLanguage() {
