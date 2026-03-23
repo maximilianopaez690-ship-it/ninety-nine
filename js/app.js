@@ -56,17 +56,33 @@ const translations = {
 
 let currentLang = localStorage.getItem('lang') || 'es';
 
+function getTranslation(lang, key) {
+  if (translations[lang] && translations[lang][key]) {
+    return translations[lang][key];
+  }
+
+  if (translations.es && translations.es[key]) {
+    console.warn(`Falta "${key}" en "${lang}", usando español`);
+    return translations.es[key];
+  }
+
+  console.warn(`Clave inexistente: ${key}`);
+  return '';
+}
+
 function applyTranslations() {
-  document.querySelectorAll('[data-i18n]').forEach((element) => {
-    const key = element.getAttribute('data-i18n');
-    if (translations[currentLang][key] !== undefined) {
-      element.innerHTML = translations[currentLang][key];
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const value = getTranslation(currentLang, key);
+
+    if (value !== '') {
+      el.innerHTML = value;
     }
   });
 
-  const langBtn = document.getElementById('lang-btn');
-  if (langBtn) {
-    langBtn.textContent = currentLang === 'es' ? 'English' : 'Español';
+  const btn = document.getElementById('lang-btn');
+  if (btn) {
+    btn.textContent = currentLang === 'es' ? 'English' : 'Español';
   }
 
   document.documentElement.lang = currentLang;
@@ -81,8 +97,8 @@ function toggleLanguage() {
 document.addEventListener('DOMContentLoaded', () => {
   applyTranslations();
 
-  const langBtn = document.getElementById('lang-btn');
-  if (langBtn) {
-    langBtn.addEventListener('click', toggleLanguage);
+  const btn = document.getElementById('lang-btn');
+  if (btn) {
+    btn.addEventListener('click', toggleLanguage);
   }
 });
