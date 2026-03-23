@@ -13,7 +13,6 @@
     :root {
       --bg: #f4f4f5;
       --surface: #ffffff;
-      --surface-soft: #fafafa;
       --text: #111111;
       --muted: #5f5f67;
       --border: #e5e7eb;
@@ -135,19 +134,24 @@
     }
 
     .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       min-height: 50px;
       padding: 0 22px;
-      border-radius: 14px;
+      border-radius: 999px;
       color: var(--white);
       background: var(--black);
       border: 1px solid var(--black);
       font-weight: 700;
+      text-decoration: none;
       box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+      transition: 0.2s ease;
     }
 
     .btn-dark:hover {
+      background: #222;
       transform: translateY(-1px);
-      opacity: 0.96;
     }
 
     .hero {
@@ -379,6 +383,7 @@
     @media (max-width: 760px) {
       .logo-wrap img {
         height: 110px;
+        max-width: none;
       }
 
       .btn {
@@ -445,13 +450,7 @@
     <div class="container">
       <div class="panel">
         <h2 class="section-title" id="learnTitle">Qué vas a aprender</h2>
-
-        <div class="learn-list" id="learnList">
-          <div class="learn-item"><span class="learn-icon">✓</span><span>Comprender por qué el pensamiento blanco o negro limita nuestras decisiones.</span></div>
-          <div class="learn-item"><span class="learn-icon">✓</span><span>Entender el valor de los matices y las corrientes de pensamiento.</span></div>
-          <div class="learn-item"><span class="learn-icon">✓</span><span>Aprender que ceder no siempre significa perder.</span></div>
-          <div class="learn-item"><span class="learn-icon">✓</span><span>Descubrir una nueva forma de construir decisiones colectivas.</span></div>
-        </div>
+        <div class="learn-list" id="learnList"></div>
       </div>
     </div>
   </section>
@@ -502,7 +501,7 @@
         <p id="ctaText">
           Si querés comenzar este recorrido, el primer paso está acá.
         </p>
-        <a class="btn-dark btn" href="modulo-1.html" id="ctaBtn">Comenzar curso</a>
+        <a class="btn-dark" href="modulo-1.html" id="ctaBtn">Comenzar curso</a>
       </div>
     </div>
   </section>
@@ -526,6 +525,14 @@
 
   <script>
     let currentLang = "es";
+
+    function saveLanguage(lang) {
+      localStorage.setItem("kyugard_lang", lang);
+    }
+
+    function getSavedLanguage() {
+      return localStorage.getItem("kyugard_lang") || "es";
+    }
 
     const translations = {
       es: {
@@ -619,6 +626,7 @@
     function applyLanguage(lang) {
       currentLang = lang;
       document.documentElement.lang = lang;
+      saveLanguage(lang);
 
       const t = translations[lang];
 
@@ -661,7 +669,8 @@
     }
 
     document.getElementById("langBtn").addEventListener("click", () => {
-      applyLanguage(currentLang === "es" ? "en" : "es");
+      const nextLang = currentLang === "es" ? "en" : "es";
+      applyLanguage(nextLang);
     });
 
     const modal = document.getElementById("modal");
@@ -681,7 +690,7 @@
       if (e.key === "Escape") modal.classList.remove("show");
     });
 
-    applyLanguage("es");
+    applyLanguage(getSavedLanguage());
   </script>
 </body>
 </html>
