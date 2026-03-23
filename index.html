@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kyugard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<button onclick="toggleLanguage()" id="langBtn">ENGLISH</button>
+
+<section class="section">
+<h1 id="hero1">Bienvenidos a Kyugard.</h1>
+<h2 id="hero2">Una revolución del pensamiento.</h2>
+</section>
+
+<section class="section left">
+<p id="epic1">Cada época tiene su revolución.</p>
+<p id="epic2">Esta es la nuestra.</p>
+</section>
+
+<section class="section left">
+<p id="def1">Kyugard no es una ideología.</p>
+<p id="def2">Es una forma de pensar y mejorar las decisiones colectivas.</p>
+<p id="def3">Una revolución del pensamiento no implica cambiar el poder.</p>
+<p id="def4">Implica cambiar la forma en que lo comprendemos.</p>
+</section>
+
+<section class="section left">
+<p id="diff1">Todos pensamos diferente, y eso no es un problema.</p>
+<p id="diff2">Es lo que nos permite construir algo mejor.</p>
+</section>
+
+<section class="section left">
+<div class="icon">⚙️</div>
+<p id="sys1">Kyugard comienza como pensamiento.</p>
+<p id="sys2">Y se convierte en sistema.</p>
+</section>
+
+<section class="section left">
+<div class="icon">🎓</div>
+<p id="course1">Si querés entender Kyugard, este es el primer paso.</p>
+<p id="course2">Comenzá por sus fundamentos.</p>
+<a href="curso.html">Ir al curso</a>
+</section>
+
+<section class="section left">
+<div class="icon">🤝</div>
+<p id="patreon1">Kyugard no se construye solo.</p>
+<p id="patreon2">Se construye con quienes deciden pensar diferente.</p>
+</section>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+function applyLanguage(lang) {
+
+document.documentElement.lang = lang;
+
+if (lang === "es") {
+
+document.getElementById("hero1").textContent = "Bienvenidos a Kyugard.";
+document.getElementById("hero2").textContent = "Una revolución del pensamiento.";
+
+document.getElementById("epic1").textContent = "Cada época tiene su revolución.";
+document.getElementById("epic2").textContent = "Esta es la nuestra.";
+
+document.getElementById("def1").textContent = "Kyugard no es una ideología.";
+document.getElementById("def2").textContent = "Es una forma de pensar y mejorar las decisiones colectivas.";
+document.getElementById("def3").textContent = "Una revolución del pensamiento no implica cambiar el poder.";
+document.getElementById("def4").textContent = "Implica cambiar la forma en que lo comprendemos.";
+
+document.getElementById("diff1").textContent = "Todos pensamos diferente, y eso no es un problema.";
+document.getElementById("diff2").textContent = "Es lo que nos permite construir algo mejor.";
+
+document.getElementById("sys1").textContent = "Kyugard comienza como pensamiento.";
+document.getElementById("sys2").textContent = "Y se convierte en sistema.";
+
+document.getElementById("course1").textContent = "Si querés entender Kyugard, este es el primer paso.";
+document.getElementById("course2").textContent = "Comenzá por sus fundamentos.";
+
+document.getElementById("patreon1").textContent = "Kyugard no se construye solo.";
+document.getElementById("patreon2").textContent = "Se construye con quienes deciden pensar diferente.";
+
+document.getElementById("langBtn").textContent = "ENGLISH";
+
+} else {
+
+document.getElementById("hero1").textContent = "Welcome to Kyugard.";
+document.getElementById("hero2").textContent = "A revolution of thought.";
+
+document.getElementById("epic1").textContent = "Every era has its revolution.";
+document.getElementById("epic2").textContent = "This is ours.";
+
+document.getElementById("def1").textContent = "Kyugard is not an ideology.";
+document.getElementById("def2").textContent = "It is a way of thinking that improves collective decisions.";
+document.getElementById("def3").textContent = "A revolution of thought does not change power.";
+document.getElementById("def4").textContent = "It changes how we understand it.";
+
+document.getElementById("diff1").textContent = "We all think differently, and that is not a problem.";
+document.getElementById("diff2").textContent = "It is what allows us to build something better.";
+
+document.getElementById("sys1").textContent = "Kyugard begins as thought.";
+document.getElementById("sys2").textContent = "And becomes a system.";
+
+document.getElementById("course1").textContent = "If you want to understand Kyugard, this is the first step.";
+document.getElementById("course2").textContent = "Start with its foundations.";
+
+document.getElementById("patreon1").textContent = "Kyugard is not built alone.";
+document.getElementById("patreon2").textContent = "It is built by those who choose to think differently.";
+
+document.getElementById("langBtn").textContent = "ESPAÑOL";
+}
+}
+
+applyLanguage(currentLang);
+</script>
+
+</body>
+</html>
