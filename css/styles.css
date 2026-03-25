@@ -50,6 +50,11 @@ button {
   gap: 20px;
 }
 
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
 .logo {
   width: min(300px, 48vw);
   min-width: 180px;
