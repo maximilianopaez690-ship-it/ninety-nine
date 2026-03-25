@@ -171,6 +171,7 @@ function applyTranslations() {
 
   const btn = document.getElementById("lang-btn");
   if (btn) btn.textContent = currentLang === "es" ? "English" : "Español";
+
   document.documentElement.lang = currentLang;
 }
 
