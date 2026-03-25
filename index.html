@@ -1,124 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kyugard</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/site.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      color: white;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid white;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 100px;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    .start {
+      margin-top: 30px;
+      padding: 12px 25px;
+      border-radius: 10px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      display: inline-block;
+    }
+  </style>
 </head>
-<body data-page="home">
-  <main class="page">
 
-    <section class="hero">
-      <header class="header">
-        <a href="./index.html" class="logo-link">
-          <img src="./assets/logo.png" alt="Kyugard" class="logo" />
-        </a>
+<body>
 
-        <nav class="top-nav">
-          <a href="./info.html" class="nav-link" data-i18n="navInfo">Info</a>
-          <button id="lang-btn" class="lang-btn" type="button">English</button>
-        </nav>
-      </header>
+<header class="header">
+  <img src="./assets/logo.png" class="logo">
 
-      <div class="hero-content">
-        <p class="hero-kicker" data-i18n="heroKicker"></p>
-        <h1 class="hero-title" data-i18n="heroTitle"></h1>
-        <p class="hero-subtitle" data-i18n="heroSubtitle"></p>
-        <a href="./modules.html" class="hero-cta" data-i18n="start"></a>
-      </div>
-    </section>
+  <div class="nav">
+    <a href="./info.html">Info</a>
+    <button class="btn" onclick="toggleLang()">English</button>
+  </div>
+</header>
 
-    <section class="content">
-      <article class="card">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="block1Line1"></p>
-            <p class="card-sub" data-i18n="block1Line2"></p>
-          </div>
-        </div>
-      </article>
+<section class="hero">
+  <p id="kicker">Cada época tiene su revolución.<br>Esta es la nuestra.</p>
+  <h1>Kyugard.</h1>
+  <p id="sub">Una revolución del pensamiento.</p>
 
-      <article class="card card-manifest">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="manifest1"></p>
-            <p class="card-sub" data-i18n="manifest2"></p>
-            <p class="card-emphasis" data-i18n="manifest3"></p>
-            <p class="card-sub" data-i18n="manifest4"></p>
-            <p class="card-sub" data-i18n="manifest5"></p>
-            <p class="card-sub" data-i18n="manifest6"></p>
-            <p class="card-break" data-i18n="manifest7"></p>
-            <p class="card-sub" data-i18n="manifest8"></p>
-            <p class="card-sub" data-i18n="manifest9"></p>
-            <p class="card-sub" data-i18n="manifest10"></p>
-            <p class="card-sub card-last" data-i18n="manifest11"></p>
-          </div>
-        </div>
-      </article>
+  <a href="./modules.html" class="start" id="startBtn">Comenzar</a>
+</section>
 
-      <article class="card">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="idea1"></p>
-            <p class="card-sub" data-i18n="idea2"></p>
-            <p class="card-emphasis" data-i18n="idea3"></p>
-            <p class="card-break card-break-soft" data-i18n="idea4"></p>
-            <p class="card-sub card-last" data-i18n="idea5"></p>
-          </div>
-        </div>
-      </article>
+<script>
+let lang = localStorage.getItem("lang") || "es";
 
-      <article class="card card-media-layout">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="course1"></p>
-            <p class="card-sub" data-i18n="course2"></p>
-            <a href="./modules.html" class="card-button" data-i18n="start"></a>
-          </div>
-          <div class="card-media">
-            <img src="./assets/ballot-box.png" alt="">
-          </div>
-        </div>
-      </article>
+function applyLang() {
+  if (lang === "en") {
+    document.getElementById("kicker").innerHTML = "Every era has its revolution.<br>This is ours.";
+    document.getElementById("sub").innerText = "A revolution of thought.";
+    document.getElementById("startBtn").innerText = "Start";
+  } else {
+    document.getElementById("kicker").innerHTML = "Cada época tiene su revolución.<br>Esta es la nuestra.";
+    document.getElementById("sub").innerText = "Una revolución del pensamiento.";
+    document.getElementById("startBtn").innerText = "Comenzar";
+  }
+}
 
-      <article class="card">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="wake1"></p>
-            <p class="card-sub" data-i18n="wake2"></p>
-          </div>
-        </div>
-      </article>
+function toggleLang() {
+  lang = lang === "es" ? "en" : "es";
+  localStorage.setItem("lang", lang);
+  applyLang();
+}
 
-      <article class="card card-media-layout">
-        <div class="card-inner">
-          <div class="dot"></div>
-          <div class="card-text">
-            <p class="card-main" data-i18n="support1"></p>
-            <p class="card-sub" data-i18n="support2"></p>
-            <a href="https://www.patreon.com/" target="_blank" rel="noopener noreferrer" class="card-button" data-i18n="patreon"></a>
-          </div>
-          <div class="card-media">
-            <img src="./assets/handshake.png" alt="">
-          </div>
-        </div>
-      </article>
-    </section>
+applyLang();
+</script>
 
-    <footer class="footer">
-      <p>© Kyugard 2026</p>
-    </footer>
-  </main>
-
-  <script src="./js/site.js"></script>
 </body>
 </html>
