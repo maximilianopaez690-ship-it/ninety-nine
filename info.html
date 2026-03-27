@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyugard | Origen y propósito</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #e9e9e9;
+      color: #111;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header {
+      background-color: #000;
+      color: #fff;
+      padding: 16px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo {
+      width: 170px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .lang-btn {
+      border: 1.5px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      padding: 10px 16px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 85px 20px 95px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .card {
+      background-color: #efefef;
+      border-radius: 16px;
+      padding: 24px 22px;
+      margin-bottom: 16px;
+    }
+
+    .card h2,
+    .card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .card p {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #444;
+      margin-bottom: 16px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 16px;
+      padding: 24px 16px 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo-link" id="logoLink">
+      <img src="assets/logo.png" alt="Kyugard" class="logo" id="siteLogo" />
+    </a>
+
+    <nav class="nav">
+      <a href="modules.html" id="courseLink">Curso</a>
+      <a href="index.html" class="lang-btn" id="langToggle">English</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Kyugard.</h1>
+    <p>Origen y propósito.</p>
+  </section>
+
+  <main class="content">
+    <section class="card">
+      <h2>• Fundación</h2>
+      <p>22 de marzo de 2026.</p>
+      <p>12:00 hs (mediodía).</p>
+    </section>
+
+    <section class="card">
+      <h2>• Creado por</h2>
+      <p>Adrien Polito.</p>
+    </section>
+
+    <section class="card">
+      <h2>• Kyugard es una revolución del pensamiento.</h2>
+      <p>Nace de la idea de que la democracia todavía puede evolucionar.</p>
+      <p>No como una ruptura ciega, sino como una transformación consciente.</p>
+    </section>
+
+    <section class="card">
+      <h2>• Kyugard entiende que la democracia no es perfecta.</h2>
+      <h3>Es gris.</h3>
+      <p>Y solo cuando entendemos eso, podemos empezar a transformarla.</p>
+    </section>
+
+    <section class="card">
+      <h2>• Su propósito es claro:</h2>
+      <p>Impulsar una evolución de la democracia.</p>
+      <p>Una evolución en la que las formas tradicionales de representación puedan ser superadas por algo mejor.</p>
+    </section>
+
+    <section class="card">
+      <h2>• ¿Cómo?</h2>
+      <p>A través del pensamiento, la comprensión y una vía pacífica.</p>
+      <p>Kyugard no propone destruir. Propone evolucionar.</p>
+    </section>
+
+    <section class="card">
+      <h2>• Kyugard no nace para adaptarse al presente.</h2>
+      <p>Nace para transformarlo.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © Kyugard 2026
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const currentLang = params.get("lang") || "es";
+
+    const logoLink = document.getElementById("logoLink");
+    const courseLink = document.getElementById("courseLink");
+    const langToggle = document.getElementById("langToggle");
+
+    function withLang(url, lang) {
+      return `${url}?lang=${lang}`;
+    }
+
+    logoLink.href = withLang("index.html", currentLang);
+    courseLink.href = withLang("modules.html", currentLang);
+
+    if (currentLang === "es") {
+      langToggle.textContent = "English";
+      langToggle.href = withLang("index.html", "en");
+      document.documentElement.lang = "es";
+    } else {
+      langToggle.textContent = "Español";
+      langToggle.href = withLang("index.html", "es");
+      document.documentElement.lang = "en";
+    }
+  </script>
+
+</body>
+</html>
