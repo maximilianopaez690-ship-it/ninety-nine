@@ -6,6 +6,7 @@ const translations = {
     start: "Comenzar",
     patreon: "Patreon",
     openModule: "Abrir",
+    openPdf: "Abrir",
 
     heroKicker: "Cada época tiene su revolución.<br>Esta es la nuestra.",
     heroTitle: "Kyugard.",
@@ -63,20 +64,38 @@ const translations = {
     closing1: "Kyugard no nace para adaptarse al presente.",
     closing2: "Nace para transformarlo.",
 
-    modulesHeroTitle: "Curso Kyugard.",
-    modulesHeroSub: "El primer paso para comprender su evolución.",
-    modulesIntro1: "Este no es un curso tradicional.",
-    modulesIntro2: "Es una introducción a una nueva forma de entender la democracia.",
-    module1Title: "Módulo 1 — Introducción",
-    module1Text: "Qué es Kyugard y por qué nace.",
-    module2Title: "Módulo 2 — Pensamiento",
-    module2Text: "Pensar diferente no es un problema. Es una herramienta.",
-    module3Title: "Módulo 3 — Democracia",
-    module3Text: "La democracia no es perfecta. Y puede evolucionar.",
-    module4Title: "Módulo 4 — Sistema",
-    module4Text: "Cómo podría funcionar una nueva forma de gobernarnos.",
-    module5Title: "Módulo 5 — Vía pacífica",
-    module5Text: "El cambio no requiere violencia. Requiere comprensión."
+    coursePageTitle: "Curso Kyugard.",
+    coursePageSubtitle: "De lo oculto a lo visible.",
+
+    stagesEsTitle: "Etapas en español",
+    stagesEsText: "Comprendé el proceso completo de transformación.",
+
+    stage1Step: "Etapa 1",
+    stage1Title: "Despertar",
+    stage1Text: "La ruptura de la certeza.<br>Nada es claro.",
+
+    stage2Step: "Etapa 2",
+    stage2Title: "Entender",
+    stage2Text: "La transición.<br>Empezás a ver.",
+
+    stage3Step: "Etapa 3",
+    stage3Title: "Transformar",
+    stage3Text: "La claridad.<br>Comprendés.",
+
+    stagesEnTitle: "Stages in English",
+    stagesEnText: "Understand the full transformation process.",
+
+    enStage1Step: "Stage 1",
+    enStage1Title: "Awaken",
+    enStage1Text: "The rupture of certainty.<br>Nothing is clear.",
+
+    enStage2Step: "Stage 2",
+    enStage2Title: "Understand",
+    enStage2Text: "The transition.<br>You begin to see.",
+
+    enStage3Step: "Stage 3",
+    enStage3Title: "Transform",
+    enStage3Text: "Clarity.<br>You understand."
   },
 
   en: {
@@ -86,6 +105,7 @@ const translations = {
     start: "Start",
     patreon: "Patreon",
     openModule: "Open",
+    openPdf: "Open",
 
     heroKicker: "Every era has its revolution.<br>This is ours.",
     heroTitle: "Kyugard.",
@@ -143,20 +163,38 @@ const translations = {
     closing1: "Kyugard is not born to adapt to the present.",
     closing2: "It is born to transform it.",
 
-    modulesHeroTitle: "Kyugard Course.",
-    modulesHeroSub: "The first step to understand its evolution.",
-    modulesIntro1: "This is not a traditional course.",
-    modulesIntro2: "It is an introduction to a new way of understanding democracy.",
-    module1Title: "Module 1 — Introduction",
-    module1Text: "What Kyugard is and why it is born.",
-    module2Title: "Module 2 — Thought",
-    module2Text: "Thinking differently is not a problem. It is a tool.",
-    module3Title: "Module 3 — Democracy",
-    module3Text: "Democracy is not perfect. And it can evolve.",
-    module4Title: "Module 4 — System",
-    module4Text: "How a new way of governing ourselves could work.",
-    module5Title: "Module 5 — Peaceful path",
-    module5Text: "Change does not require violence. It requires understanding."
+    coursePageTitle: "Kyugard Course.",
+    coursePageSubtitle: "From the hidden to the visible.",
+
+    stagesEsTitle: "Stages in Spanish",
+    stagesEsText: "Understand the full transformation process.",
+
+    stage1Step: "Stage 1",
+    stage1Title: "Awaken",
+    stage1Text: "The rupture of certainty.<br>Nothing is clear.",
+
+    stage2Step: "Stage 2",
+    stage2Title: "Understand",
+    stage2Text: "The transition.<br>You begin to see.",
+
+    stage3Step: "Stage 3",
+    stage3Title: "Transform",
+    stage3Text: "Clarity.<br>You understand.",
+
+    stagesEnTitle: "Stages in English",
+    stagesEnText: "Understand the full transformation process.",
+
+    enStage1Step: "Stage 1",
+    enStage1Title: "Awaken",
+    enStage1Text: "The rupture of certainty.<br>Nothing is clear.",
+
+    enStage2Step: "Stage 2",
+    enStage2Title: "Understand",
+    enStage2Text: "The transition.<br>You begin to see.",
+
+    enStage3Step: "Stage 3",
+    enStage3Title: "Transform",
+    enStage3Text: "Clarity.<br>You understand."
   }
 };
 
@@ -166,11 +204,16 @@ function applyTranslations() {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     const value = translations[currentLang]?.[key] ?? translations.es[key] ?? "";
-    if (value) el.innerHTML = value;
+
+    if (value) {
+      el.innerHTML = value;
+    }
   });
 
   const btn = document.getElementById("lang-btn");
-  if (btn) btn.textContent = currentLang === "es" ? "English" : "Español";
+  if (btn) {
+    btn.textContent = currentLang === "es" ? "English" : "Español";
+  }
 
   document.documentElement.lang = currentLang;
 }
@@ -183,6 +226,9 @@ function toggleLanguage() {
 
 document.addEventListener("DOMContentLoaded", () => {
   applyTranslations();
+
   const btn = document.getElementById("lang-btn");
-  if (btn) btn.addEventListener("click", toggleLanguage);
+  if (btn) {
+    btn.addEventListener("click", toggleLanguage);
+  }
 });
